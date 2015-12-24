@@ -15,7 +15,6 @@ public class ConnectionDB
         Context contexto = new InitialContext();
         DataSource resource = (DataSource) contexto.lookup("jdbc/mysqlLocal");
         conecction = resource.getConnection();
-        conecction.setSchema("modulo4");
     }
     public Connection getConnection()
     {
