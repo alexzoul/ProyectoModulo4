@@ -21,7 +21,6 @@ USE `proyecto_final` ;
 CREATE TABLE IF NOT EXISTS `proyecto_final`.`role` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `type` VARCHAR(45) NOT NULL,
-  `status` TINYINT(1) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -34,6 +33,8 @@ CREATE TABLE IF NOT EXISTS `proyecto_final`.`user` (
   `name` VARCHAR(45) NOT NULL,
   `paternal_name` VARCHAR(45) NOT NULL,
   `maternal_name` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(250) NOT NULL,
+  `password` VARCHAR(32) NOT NULL,
   `role_id` INT NOT NULL,
   `status` TINYINT(1) NOT NULL,
   PRIMARY KEY (`id`),
@@ -52,10 +53,13 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `proyecto_final`.`book` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(100) NOT NULL,
-  `description` VARCHAR(450) NOT NULL,
+  `author` VARCHAR(250) NOT NULL,
+  `editorial` VARCHAR(300) NOT NULL,
+  `year` INT NOT NULL,
+  `description` MEDIUMTEXT NOT NULL,
   `image` VARCHAR(100) NOT NULL,
+  `pages` INT NOT NULL,
   `price` DECIMAL(10,2) NOT NULL,
-  `status` TINYINT(1) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -66,7 +70,6 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `proyecto_final`.`summary` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `type` VARCHAR(100) NOT NULL,
-  `status` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
