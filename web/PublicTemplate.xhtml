@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputScript library="default" name="js/jquery2.1.4.min.js"/>
+        <h:outputScript library="default" name="js/bootstrap.min.js"/>
+        <h:outputStylesheet library="default" name="css/bootstrap.min.css"/>
+        <h:outputStylesheet library="default" name="css/bootstrap-theme.min.css"/>
+        <h:outputStylesheet library="default" name="css/styles.css"/>
+        <title>Tienda de Libros</title>
+    </h:head>
+    <h:body>
+        <div class="container" id="main_container">
+            <div id="top" class="top">
+                <ui:insert name="top">
+                    <ui:include src="./public/components/header.xhtml" />
+                </ui:insert>
+            </div>
+            <div class="row" id="content_container">
+                <div id="content">
+                    <ui:insert name="content">
+                        Override for your content
+                    </ui:insert>
+                </div>
+            </div>
+        </div>
+    </h:body>
+
+</html>

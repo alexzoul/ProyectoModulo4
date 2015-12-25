@@ -86,15 +86,15 @@ CREATE TABLE IF NOT EXISTS `proyecto_final`.`office` (
   `neighborhood` VARCHAR(250) NOT NULL,
   `city` VARCHAR(250) NOT NULL,
   `state` VARCHAR(150) NOT NULL,
-  `zip_code` VARCHAR(5) NOT NULL,
+  `zip_code` INT(5) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `proyecto_final`.`order`
+-- Table `proyecto_final`.`requisition`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `proyecto_final`.`order` (
+CREATE TABLE IF NOT EXISTS `proyecto_final`.`requisition` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `date` DATETIME NOT NULL,
   `summary_id` INT NOT NULL,
@@ -124,22 +124,22 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `proyecto_final`.`book_has_order`
+-- Table `proyecto_final`.`book_has_requisition`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `proyecto_final`.`book_has_order` (
+CREATE TABLE IF NOT EXISTS `proyecto_final`.`book_has_requisition` (
   `book_id` INT NOT NULL,
-  `order_id` INT NOT NULL,
-  PRIMARY KEY (`book_id`, `order_id`),
-  INDEX `fk_book_has_order_order1_idx` (`order_id` ASC),
-  INDEX `fk_book_has_order_book1_idx` (`book_id` ASC),
-  CONSTRAINT `fk_book_has_order_book1`
+  `requisition_id` INT NOT NULL,
+  PRIMARY KEY (`book_id`, `requisition_id`),
+  INDEX `fk_book_has_requisition_requisition1_idx` (`requisition_id` ASC),
+  INDEX `fk_book_has_requisition_book1_idx` (`book_id` ASC),
+  CONSTRAINT `fk_book_has_requisition_book1`
     FOREIGN KEY (`book_id`)
     REFERENCES `proyecto_final`.`book` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_book_has_order_order1`
-    FOREIGN KEY (`order_id`)
-    REFERENCES `proyecto_final`.`order` (`id`)
+  CONSTRAINT `fk_book_has_requisition_requisition1`
+    FOREIGN KEY (`requisition_id`)
+    REFERENCES `proyecto_final`.`requisition` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

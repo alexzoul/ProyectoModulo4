@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:body>
+        <nav class="navbar navbar-inverse" 
+             role="navigation">
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-toggle="collapse" 
+                        type="button" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Desplegar navegación</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    Logotipo
+                </a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="#">
+                            <span class="glyphicon glyphicon-home"></span>
+                            &nbsp;Inicio
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="#">
+                            <span class="glyphicon glyphicon-globe"></span>
+                            &nbsp;Sucursales
+                        </a>
+                    </li>
+                    <li class="active dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-earphone">
+                            </span>&nbsp;Contáctanos <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a>
+                                    <span class="glyphicon glyphicon-phone-alt">
+                                    </span>&nbsp;Teléfono: 1234567890
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a>
+                                    <span class="glyphicon glyphicon-envelope">
+                                    </span>&nbsp;Email: prueba@prueba.com
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a>
+                                    <span class="glyphicon glyphicon-info-sign">
+                                    </span>&nbsp;Ayuda
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a href="#">
+                            <span class="glyphicon glyphicon-user">
+                            </span>&nbsp;Mi Cuenta
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="#">
+                            <span class="glyphicon glyphicon-shopping-cart">
+                            </span>&nbsp;Mi Carrito (0)
+                        </a>
+                    </li>
+                </ul>
+                <h:form styleClass="navbar-form navbar-left" role="search">
+                    <div class="input-group">
+                        <h:inputText styleClass="form-control" />
+                        <span class="input-group-btn">
+                            <h:commandLink class="btn btn-primary">
+                                <span class="glyphicon glyphicon-search">
+                                </span>&nbsp;Buscar
+                            </h:commandLink>
+                        </span>
+                    </div>
+                </h:form>
+            </div>
+        </nav>
+    </h:body>
+</html>
