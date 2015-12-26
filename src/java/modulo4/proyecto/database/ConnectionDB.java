@@ -20,7 +20,7 @@ public class ConnectionDB
     {
         return conecction;
     }
-    public void cerrarConexion() throws SQLException
+    public void closeConecction() throws SQLException
     {
         conecction.close();
     }

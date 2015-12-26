@@ -1,34 +1,47 @@
 package modulo4.proyecto.bean;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import modulo4.proyecto.dao.TestDAO;
+import javax.faces.bean.ViewScoped;
+import modulo4.proyecto.dao.BookDAO;
+
 
 @ManagedBean
-@RequestScoped
-public class HomeBean 
+@ViewScoped
+public class HomeBean implements Serializable
 {
-    public HomeBean() 
-    {
+    private ArrayList books;
+    private String findText;
+    
+    public HomeBean() {
     }
     
     @PostConstruct
-    public void iniciar()
-    {
-        try 
-        {
-            TestDAO test = new TestDAO();
-            test.consulta();
-        }
-        catch(Exception ex)
-        {
-            ex.printStackTrace();
-        }
+    public void init() {
+        BookDAO bookDAO = new BookDAO();
+        books = bookDAO.findAll();
     }
     
-    public void saluda()
-    {
-        System.out.println("Hola mundo");    
+    public void findBook() {
+        BookDAO bookDAO = new BookDAO();
+        books = bookDAO.findText(findText);
+    }
+
+    public ArrayList getBooks() {
+        return books;
+    }
+
+    public void setBooks(ArrayList books) {
+        this.books = books;
+    }
+
+    public String getFindText() {
+        return findText;
+    }
+
+    public void setFindText(String findText) {
+        this.findText = findText;
     }
 }
