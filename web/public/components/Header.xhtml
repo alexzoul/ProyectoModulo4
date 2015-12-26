@@ -59,19 +59,31 @@
                             </ul>
                         </li>
                         <li class="active">
-                            <h:commandLink action="#{navbarBean.myAccount()}"> 
+                            <h:commandLink rendered="#{navbarBean.session == false}" action="/public/Login.jsf"> 
+                                <span class="glyphicon glyphicon-user">
+                                </span>&nbsp;Iniciar Session
+                            </h:commandLink>
+                        </li>
+                        <li class="active">
+                            <h:commandLink rendered="#{navbarBean.session == false}" action="/public/Register.jsf"> 
+                                <span class="glyphicon glyphicon-pencil">
+                                </span>&nbsp;Registro
+                            </h:commandLink>
+                        </li>
+                        <li class="active">
+                            <h:commandLink rendered="#{navbarBean.session == true}" action="/public/MyAccount.jsf"> 
                                 <span class="glyphicon glyphicon-user">
                                 </span>&nbsp;Mi Cuenta
                             </h:commandLink>
                         </li>
                         <li class="active">
-                            <h:commandLink action="#{navbarBean.myCar()}"> 
+                            <h:commandLink  rendered="#{navbarBean.session == true}" action="/public/MyCar.jsf"> 
                                 <span class="glyphicon glyphicon-shopping-cart">
                                 </span>&nbsp;Mi Carrito (0)
                             </h:commandLink>
                         </li>
                         <li class="active">
-                            <h:commandLink action="#{navbarBean.closeSession()}"> 
+                            <h:commandLink action="#{loginBean.closeSession()}" rendered="#{navbarBean.session == true}"> 
                                 <span class="glyphicon glyphicon-off">
                                 </span>&nbsp;Salir
                             </h:commandLink>

@@ -1,5 +1,7 @@
 package modulo4.proyecto.model;
 
+import java.sql.Date;
+
 public class User {
     private int id;
     private String name;
@@ -7,6 +9,7 @@ public class User {
     private String maternal_name;
     private String email;
     private String password;
+    private Date register_date;
     private Role role;
     private int status;
     
@@ -14,13 +17,15 @@ public class User {
     }
     
     public User(int id, String name, String paternal_name, String maternal_name,
-                String email, String password, Role role, int status) {
+                String email, String password, Date register_date, Role role, 
+                int status) {
         this.id = id;
         this.name = name;
         this.paternal_name = paternal_name;
         this.maternal_name = maternal_name;
         this.email = email;
         this.password = password;
+        this.register_date = register_date;
         this.role = role;
         this.status = status;
     }
@@ -71,6 +76,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Date getRegister_date() {
+        return register_date;
+    }
+
+    public void setRegister_date(Date register_date) {
+        this.register_date = register_date;
     }
 
     public Role getRole() {

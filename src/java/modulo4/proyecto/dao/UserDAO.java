@@ -43,4 +43,31 @@ public class UserDAO
         }
         return null;
     }    
+    
+    public int insert(User user) 
+    {
+        int result = 0;
+        String query = "INSERT INTO user (name, paternal_name, maternal_name, "
+                        + " email, password, role_id, status, register_date) "
+                                        + " VALUES (?,?,?,?,?,2,1,NOW());";
+        
+        try
+        {
+            currentConnection = new ConnectionDB();
+            PreparedStatement pstm = currentConnection.getConnection().prepareStatement(query);
+            pstm.setString(1, user.getName());
+            pstm.setString(2, user.getPaternal_name());
+            pstm.setString(3, user.getMaternal_name());
+            pstm.setString(4, user.getEmail());
+            pstm.setString(5, user.getPassword());
+            result = pstm.executeUpdate();
+            pstm.close();
+            currentConnection.closeConecction();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

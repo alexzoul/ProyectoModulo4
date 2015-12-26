@@ -39,4 +39,14 @@ body
     font-weight: bold;
     color: red;
 }
+.error_message
+{
+    color: red;
+    padding: 5px;
+    font-size: 12px;
+}
+.register_label 
+{
+    margin-top: 5px;
+}
     

@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS `proyecto_final`.`user` (
   `email` VARCHAR(250) NOT NULL,
   `password` VARCHAR(32) NOT NULL,
   `role_id` INT NOT NULL,
+  `register_date` DATETIME NOT NULL,
   `status` TINYINT(1) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_user_role_idx` (`role_id` ASC),
@@ -165,8 +166,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `proyecto_final`;
-INSERT INTO `proyecto_final`.`user` (`id`, `name`, `paternal_name`, `maternal_name`, `email`, `password`, `role_id`, `status`) VALUES (1, 'Admin', 'Admin', 'Admin', 'admin@admin.com', 'admin', 1, 1);
-INSERT INTO `proyecto_final`.`user` (`id`, `name`, `paternal_name`, `maternal_name`, `email`, `password`, `role_id`, `status`) VALUES (2, 'Alejandro', 'Villanueva', 'Molina', 'ale@ale.ale', 'ale', 2, 1);
+INSERT INTO `proyecto_final`.`user` (`id`, `name`, `paternal_name`, `maternal_name`, `email`, `password`, `role_id`, `register_date`, `status`) VALUES (1, 'Admin', 'Admin', 'Admin', 'admin@admin.com', 'admin', 1, DEFAULT, 1);
+INSERT INTO `proyecto_final`.`user` (`id`, `name`, `paternal_name`, `maternal_name`, `email`, `password`, `role_id`, `register_date`, `status`) VALUES (2, 'Alejandro', 'Villanueva', 'Molina', 'ale@ale.ale', 'ale', 2, DEFAULT, 1);
 
 COMMIT;
 

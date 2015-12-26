@@ -1,6 +1,7 @@
 package modulo4.proyecto.bean;
 
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -10,36 +11,28 @@ import javax.servlet.http.HttpSession;
 @RequestScoped
 public class NavbarBean implements Serializable
 {
-    public NavbarBean () {
+    private boolean session;
+    
+    @PostConstruct
+    public void init() {
+        this.session = validateSession();
     }
     
-    public String myAccount()
-    {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-        
-        if (session.getAttribute("id") != null) 
-        {
-            return "/public/MyAccount.jsf";
-        }
-        return "/public/Login.jsf";
+    public NavbarBean () {
+        this.session = false;
     }
-    public String myCar()
-    {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
         
-        if (session.getAttribute("id") != null) 
-        {
-            return "/public/MyCar.jsf";
-        }
-        return "/public/Login.jsf";
-    }
-    public String closeSession()
-    {
+    public boolean validateSession() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-        session.invalidate();
-        return "/public/Home.jsf";
+        HttpSession httpSession = (HttpSession) facesContext.getExternalContext().getSession(true);
+        return httpSession.getAttribute("id") != null;
+    }
+
+    public boolean isSession() {
+        return session;
+    }
+
+    public void setSession(boolean session) {
+        this.session = session;
     }
 }

@@ -43,7 +43,7 @@ public class LoginBean implements Serializable
         this.error = error;
     }
     
-    public String authenticate()
+    public String initSession()
     {
         UserDAO userDAO = new UserDAO();
         User user = userDAO.validateUser(email, password);
@@ -58,11 +58,16 @@ public class LoginBean implements Serializable
             FacesContext facesContext = FacesContext.getCurrentInstance();
             HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
             session.setAttribute("id", user.getId());
-            session.setAttribute("name", user.getName());
-            session.setAttribute("paternal_name", user.getPaternal_name());
-            session.setAttribute("maternal_name", user.getMaternal_name());
+            session.setAttribute("name", user.getName() + " " + user.getPaternal_name());
             session.setAttribute("email", user.getEmail());
-            return "/public/MyAccount.jsf";
+            return "/public/MyAccount.jsf?faces-redirect=true";
         }
+    }
+    
+    public String closeSession() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        session.invalidate();
+        return "/public/Home.jsf?faces-redirect=true";
     }
 }
