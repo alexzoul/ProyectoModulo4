@@ -166,6 +166,7 @@ COMMIT;
 START TRANSACTION;
 USE `proyecto_final`;
 INSERT INTO `proyecto_final`.`user` (`id`, `name`, `paternal_name`, `maternal_name`, `email`, `password`, `role_id`, `status`) VALUES (1, 'Admin', 'Admin', 'Admin', 'admin@admin.com', 'admin', 1, 1);
+INSERT INTO `proyecto_final`.`user` (`id`, `name`, `paternal_name`, `maternal_name`, `email`, `password`, `role_id`, `status`) VALUES (2, 'Alejandro', 'Villanueva', 'Molina', 'ale@ale.ale', 'ale', 2, 1);
 
 COMMIT;
 

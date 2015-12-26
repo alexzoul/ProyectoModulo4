@@ -4,28 +4,61 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>Home</title>
-    </h:head>
     <h:body>
         <ui:composition template="./../PublicTemplate.xhtml">
             <ui:define name="content">
-                #{homeBean.iniciar()}
-                <h:dataTable id="table1" value="#{homeBean.libros}" var="item" 
-                             border="1">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Titulo" />
-                        </f:facet>
-                        <h:outputText value="#{item.title}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Autor" />
-                        </f:facet>
-                        <h:outputText value="#{item.author}" />
-                    </h:column>
-                </h:dataTable>
+                <div class="panel panel-danger" id="books_container">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <p id="book-catalog">Catalogo de Libros</p>
+                            </div>
+                            <div class="col-xs-4 col-xs-offset-4">
+                                <h:form>
+                                    <div class="input-group">
+                                        <h:inputText styleClass="form-control input-sm" value="#{homeBean.findText}"  />
+                                        <span class="input-group-btn">
+                                            <h:commandLink class="btn btn-danger btn-sm" action="#{homeBean.findBook()}">
+                                                <span class="glyphicon glyphicon-search">
+                                                </span>&nbsp;Buscar
+                                            </h:commandLink>
+                                        </span>
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                    <h:dataTable value="#{homeBean.books}" 
+                                 var="item" 
+                                 styleClass="table table-hover table-bordered">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Titulo" />
+                            </f:facet>
+                            <h:outputText value="#{item.author}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Autor" />
+                            </f:facet>
+                            <h:outputText value="#{item.title}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Imagen" />
+                            </f:facet>
+                            <h:graphicImage library="default" name="/imagenes/#{item.image}" styleClass="img-thumbnail img-book"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Ver" />
+                            </f:facet>
+                            <h:form>
+                                <h:commandButton value="Detalles" />
+                            </h:form>
+                        </h:column>
+                    </h:dataTable>
+                </div>
             </ui:define>
         </ui:composition>
     </h:body>

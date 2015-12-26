@@ -1,8 +1,10 @@
 package modulo4.proyecto.model;
 
+import java.sql.Date;
+
 public class Requisition {
     private int id;
-    private String datetime;
+    private Date datetime;
     private Summary summary;
     private User user;
     private Office office;
@@ -11,7 +13,7 @@ public class Requisition {
     public Requisition () {
     }
     
-    public Requisition (int id, String datetime, Summary summary, User user,
+    public Requisition (int id, Date datetime, Summary summary, User user,
                         Office office, int status) {
         this.id = id;
         this.datetime = datetime;
@@ -29,11 +31,11 @@ public class Requisition {
         this.id = id;
     }
 
-    public String getDatetime() {
+    public Date getDatetime() {
         return datetime;
     }
 
-    public void setDatetime(String datetime) {
+    public void setDatetime(Date datetime) {
         this.datetime = datetime;
     }
 
