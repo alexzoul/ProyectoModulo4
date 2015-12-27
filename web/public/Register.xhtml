@@ -8,9 +8,9 @@
         <ui:composition template="./../PublicTemplate.xhtml">
             <ui:define name="content">
                 <div class="row">
-                    <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
-                        <div id="login_container">
-                            <div class="panel panel-danger">
+                    <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
+                        <div id="register_container">
+                            <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <center>
                                         <h3 class="panel-title">Registro</h3>
@@ -59,6 +59,7 @@
                                         <h:inputSecret value="#{registerBean.password}"
                                                      styleClass="form-control"
                                                      id="password"/>
+                                        <br/>
                                         <h:outputLabel value="Repetir Contraseña:" styleClass="register_label"/>
                                         <h:inputSecret value="#{registerBean.password_confirm}"
                                                      styleClass="form-control"
@@ -66,15 +67,23 @@
                                         <h:message for="password_confirm" styleClass="error_message"/>
                                         <br/>
                                         <br/>
-                                        <center>
-                                            <h:commandButton value="Limpiar" 
-                                                             styleClass="btn btn-default"
-                                                             type="reset"/>
-                                            <h:commandButton value="Enviar"
-                                                             styleClass="btn btn-danger"
-                                                             style="margin-left: 50px;"
-                                                             action="#{registerBean.registerUser()}"/>
-                                        </center>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <center>
+                                                    <h:commandButton value="Limpiar" 
+                                                        styleClass="btn btn-default"
+                                                        type="reset"/>
+                                                </center>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <center>
+                                                    <h:commandButton value="Registrarme"
+                                                        styleClass="btn btn-primary"
+                                                        style="margin-left: 50px;"
+                                                        action="#{registerBean.registerUser()}"/>
+                                                </center>
+                                            </div>
+                                        </div>
                                     </h:form>
                                 </div>
                             </div>

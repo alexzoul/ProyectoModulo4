@@ -4,7 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:body>
         <h:form>
-            <nav class="navbar navbar-inverse" 
+            <nav class="navbar navbar-inverse navbar-fixed-top" 
                  role="navigation">
                 <div class="navbar-header">
                     <button class="navbar-toggle" data-toggle="collapse" 
@@ -59,31 +59,31 @@
                             </ul>
                         </li>
                         <li class="active">
-                            <h:commandLink rendered="#{navbarBean.session == false}" action="/public/Login.jsf?faces-redirect=true"> 
+                            <h:commandLink rendered="#{sessionBean.session == false}" action="/public/Login.jsf?faces-redirect=true"> 
                                 <span class="glyphicon glyphicon-user">
                                 </span>&nbsp;Iniciar Session
                             </h:commandLink>
                         </li>
                         <li class="active">
-                            <h:commandLink rendered="#{navbarBean.session == false}" action="/public/Register.jsf?faces-redirect=true"> 
+                            <h:commandLink rendered="#{sessionBean.session == false}" action="/public/Register.jsf?faces-redirect=true"> 
                                 <span class="glyphicon glyphicon-pencil">
                                 </span>&nbsp;Registro
                             </h:commandLink>
                         </li>
                         <li class="active">
-                            <h:commandLink rendered="#{navbarBean.session == true}" action="/public/MyAccount.jsf?faces-redirect=true"> 
+                            <h:commandLink rendered="#{sessionBean.session == true}" action="/public/MyAccount.jsf?faces-redirect=true"> 
                                 <span class="glyphicon glyphicon-user">
                                 </span>&nbsp;Mi Cuenta
                             </h:commandLink>
                         </li>
                         <li class="active">
-                            <h:commandLink  rendered="#{navbarBean.session == true}" action="/public/MyCar.jsf?faces-redirect=true"> 
+                            <h:commandLink  rendered="#{sessionBean.session == true}" action="/public/MyCar.jsf?faces-redirect=true"> 
                                 <span class="glyphicon glyphicon-shopping-cart">
-                                </span>&nbsp;Mi Carrito (0)
+                                </span>&nbsp;Mi Carrito (#{dataSessionBean.listBooks.size()})
                             </h:commandLink>
                         </li>
                         <li class="active">
-                            <h:commandLink action="#{loginBean.closeSession()}" rendered="#{navbarBean.session == true}"> 
+                            <h:commandLink action="#{sessionBean.closeSession()}" rendered="#{sessionBean.session == true}"> 
                                 <span class="glyphicon glyphicon-off">
                                 </span>&nbsp;Salir
                             </h:commandLink>

@@ -1,6 +1,7 @@
 package modulo4.proyecto.bean;
 
 import java.io.Serializable;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -14,7 +15,6 @@ public class LoginBean implements Serializable
 {
     private String email;
     private String password;
-    private boolean error = false;
 
     public LoginBean() {
     }
@@ -34,14 +34,6 @@ public class LoginBean implements Serializable
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public boolean isError() {
-        return error;
-    }
-
-    public void setError(boolean error) {
-        this.error = error;
-    }
     
     public String initSession()
     {
@@ -50,24 +42,17 @@ public class LoginBean implements Serializable
         
         if(user == null)
         {
-            error = true;
-            return "/public/Login.jsf";
+            FacesMessage message = new FacesMessage();
+            message.setDetail("Correo y/o Contraseña incorrectos");
+            message.setSeverity(FacesMessage.SEVERITY_ERROR);
+            FacesContext.getCurrentInstance().addMessage("login_form:password",  message);
+            return null;
         }
         else
         {
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-            session.setAttribute("id", user.getId());
-            session.setAttribute("name", user.getName() + " " + user.getPaternal_name());
-            session.setAttribute("email", user.getEmail());
+            SessionBean sessionBean = new SessionBean();
+            sessionBean.initSession(user);
             return "/public/MyAccount.jsf?faces-redirect=true";
         }
-    }
-    
-    public String closeSession() {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-        session.invalidate();
-        return "/public/Home.jsf?faces-redirect=true";
     }
 }

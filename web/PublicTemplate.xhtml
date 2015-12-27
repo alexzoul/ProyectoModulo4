@@ -5,26 +5,21 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
         <h:outputScript library="default" name="js/jquery2.1.4.min.js"/>
         <h:outputScript library="default" name="js/bootstrap.min.js"/>
         <h:outputStylesheet library="default" name="css/bootstrap.min.css"/>
         <h:outputStylesheet library="default" name="css/bootstrap-theme.min.css"/>
         <h:outputStylesheet library="default" name="css/styles.css"/>
-        <title>Tienda de Libros</title>
     </h:head>
     <h:body>
         <div class="container" id="main_container">
-            <div id="top" class="top">
-                <ui:insert name="top">
-                    <ui:include src="./public/components/Header.xhtml" />
-                </ui:insert>
-            </div>
+            <ui:insert name="top">
+                <ui:include src="./public/components/Navbar.xhtml" />
+            </ui:insert>
             <div class="row" id="content_container">
-                <div id="content">
-                    <ui:insert name="content">
-                        Override for your content
-                    </ui:insert>
-                </div>
+                <ui:insert name="content">
+                </ui:insert>
             </div>
         </div>
     </h:body>
