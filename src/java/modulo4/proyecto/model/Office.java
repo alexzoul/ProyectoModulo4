@@ -10,14 +10,14 @@ public class Office
     private String neighborhood;
     private String city;
     private String state;
-    private int zip_code;
+    private String zip_code;
     
     public Office() {
     }
     
     public Office(int id, String name, String street, String int_number,
                   String ext_number, String neighborhood, String city,
-                  String state, int zip_code) {
+                  String state, String zip_code) {
         this.id = id;
         this.name = name;
         this.street = street;
@@ -93,11 +93,11 @@ public class Office
         this.state = state;
     }
 
-    public int getZip_code() {
+    public String getZip_code() {
         return zip_code;
     }
 
-    public void setZip_code(int zip_code) {
+    public void setZip_code(String zip_code) {
         this.zip_code = zip_code;
     }        
 }

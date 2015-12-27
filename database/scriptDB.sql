@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `proyecto_final`.`office` (
   `neighborhood` VARCHAR(250) NOT NULL,
   `city` VARCHAR(250) NOT NULL,
   `state` VARCHAR(150) NOT NULL,
-  `zip_code` INT(5) NOT NULL,
+  `zip_code` INT(5) ZEROFILL NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
