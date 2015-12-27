@@ -1,4 +1,4 @@
-package modulo4.proyecto.bean;
+package modulo4.proyecto.service;
 
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -10,11 +10,11 @@ import modulo4.proyecto.model.User;
 
 @ManagedBean
 @RequestScoped
-public class SessionBean implements Serializable
+public class SessionService implements Serializable
 {
     private boolean session;
   
-    public SessionBean () {
+    public SessionService () {
         this.session = false;
     }
     @PostConstruct

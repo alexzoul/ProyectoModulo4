@@ -1,5 +1,6 @@
 package modulo4.proyecto.bean;
 
+import modulo4.proyecto.service.SessionService;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -19,7 +20,7 @@ public class MyAccountBean implements Serializable
     @PostConstruct
     public void init () 
     {
-        SessionBean sessionBean = new SessionBean();
+        SessionService sessionBean = new SessionService();
         int idSession = sessionBean.getIdSession();
         if (idSession != 0)
         {

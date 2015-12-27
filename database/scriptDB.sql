@@ -97,6 +97,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_final`.`requisition` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `total` DECIMAL(12,2) NOT NULL,
   `date` DATETIME NOT NULL,
   `summary_id` INT NOT NULL,
   `user_id` INT NOT NULL,
@@ -194,6 +195,16 @@ START TRANSACTION;
 USE `proyecto_final`;
 INSERT INTO `proyecto_final`.`summary` (`id`, `type`) VALUES (1, 'Pendiente');
 INSERT INTO `proyecto_final`.`summary` (`id`, `type`) VALUES (2, 'Entregado');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `proyecto_final`.`office`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `proyecto_final`;
+INSERT INTO `proyecto_final`.`office` (`id`, `name`, `street`, `int_number`, `ext_number`, `neighborhood`, `city`, `state`, `zip_code`) VALUES (1, 'Insurgentes Sur', 'Av. de los Insurgentes Sur', '10-A', '319', 'Hipódromo', 'Cuauhtémoc', 'Ciudad de México', 06100);
 
 COMMIT;
 

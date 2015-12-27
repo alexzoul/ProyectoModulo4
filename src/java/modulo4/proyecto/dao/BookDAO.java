@@ -13,7 +13,7 @@ public class BookDAO
     
     public ArrayList<Book> findAll () {
         ArrayList<Book> books = new ArrayList<Book> ();
-        String query = "SELECT * FROM book";
+        String query = "SELECT * FROM book ";
         
         try 
         {

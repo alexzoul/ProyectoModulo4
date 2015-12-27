@@ -1,5 +1,6 @@
 package modulo4.proyecto.bean;
 
+import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -9,7 +10,7 @@ import modulo4.proyecto.model.User;
 
 @ManagedBean
 @ViewScoped
-public class RegisterBean 
+public class RegisterBean implements Serializable
 {
     private String name;
     private String paternal_name;

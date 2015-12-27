@@ -13,7 +13,7 @@ public class UserDAO
     {
         String query = "SELECT * FROM user "
                     + " WHERE email = ? AND password = ? "
-                    + " AND status = 1";
+                    + " AND status = 1 ";
         try
         {
             currentConnection = new ConnectionDB();
@@ -49,7 +49,7 @@ public class UserDAO
         int result = 0;
         String query = "INSERT INTO user (name, paternal_name, maternal_name, "
                         + " email, password, role_id, status, register_date) "
-                                        + " VALUES (?,?,?,?,?,2,1,NOW());";
+                                        + " VALUES (?,?,?,?,?,2,1,NOW()) ";
         
         try
         {
@@ -73,7 +73,7 @@ public class UserDAO
     
     public User findById (int id)
     {
-        String query = "SELECT * FROM user WHERE id = ?";
+        String query = "SELECT * FROM user WHERE id = ? ";
         User user = null;
         try
         {

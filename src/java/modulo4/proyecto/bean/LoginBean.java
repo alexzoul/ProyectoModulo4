@@ -1,11 +1,11 @@
 package modulo4.proyecto.bean;
 
+import modulo4.proyecto.service.SessionService;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import modulo4.proyecto.dao.UserDAO;
 import modulo4.proyecto.model.User;
 
@@ -50,7 +50,7 @@ public class LoginBean implements Serializable
         }
         else
         {
-            SessionBean sessionBean = new SessionBean();
+            SessionService sessionBean = new SessionService();
             sessionBean.initSession(user);
             return "/public/MyAccount.jsf?faces-redirect=true";
         }
