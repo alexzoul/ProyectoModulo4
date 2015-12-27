@@ -74,4 +74,34 @@ public class BookDAO
         }
         return books;
     }
+    
+    public Book findById (int id) 
+    {
+        String query = "SELECT * FROM book WHERE id = ? ";
+        
+        try 
+        {
+            currentConnection = new ConnectionDB();
+            PreparedStatement pstm = currentConnection.getConnection().prepareStatement(query);
+            pstm.setInt(1, id);
+            ResultSet rst = pstm.executeQuery();
+            if(rst.next())
+            {
+                return new Book(rst.getInt("id"), 
+                        rst.getString("title"), 
+                        rst.getString("author"), 
+                        rst.getString("editorial"), 
+                        rst.getInt("year"),
+                        rst.getString("description"), 
+                        rst.getString("image"), 
+                        rst.getInt("pages"),
+                        rst.getFloat("price"));
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

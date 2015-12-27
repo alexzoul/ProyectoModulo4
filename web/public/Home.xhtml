@@ -54,7 +54,10 @@
                                 <h:outputText value="Ver" />
                             </f:facet>
                             <h:form>
-                                <h:commandButton value="Detalles" />
+                                <h:commandLink value="submit" 
+                                               action="/public/BookDetail.jsf?faces-redirect=true&amp;includeViewParams=true">
+                                    <f:param name="id" value="#{item.id}"/>
+                                </h:commandLink> 
                             </h:form>
                         </h:column>
                     </h:dataTable>

@@ -14,18 +14,18 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <h:commandLink value="Logotipo" action="/public/Home.jsf" class="navbar-brand"/> 
+                    <h:commandLink value="Logotipo" action="/public/Home.jsf?faces-redirect=true" class="navbar-brand"/> 
                 </div>
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <h:commandLink action="/public/Home.jsf"> 
+                            <h:commandLink action="/public/Home.jsf?faces-redirect=true"> 
                                 <span class="glyphicon glyphicon-home"></span>
                                 &nbsp;Inicio
                             </h:commandLink>
                         </li>
                         <li class="active">
-                            <h:commandLink action="/public/Office.jsf"> 
+                            <h:commandLink action="/public/Office.jsf?faces-redirect=true"> 
                                 <span class="glyphicon glyphicon-globe"></span>
                                 &nbsp;Sucursales
                             </h:commandLink>
@@ -59,25 +59,25 @@
                             </ul>
                         </li>
                         <li class="active">
-                            <h:commandLink rendered="#{navbarBean.session == false}" action="/public/Login.jsf"> 
+                            <h:commandLink rendered="#{navbarBean.session == false}" action="/public/Login.jsf?faces-redirect=true"> 
                                 <span class="glyphicon glyphicon-user">
                                 </span>&nbsp;Iniciar Session
                             </h:commandLink>
                         </li>
                         <li class="active">
-                            <h:commandLink rendered="#{navbarBean.session == false}" action="/public/Register.jsf"> 
+                            <h:commandLink rendered="#{navbarBean.session == false}" action="/public/Register.jsf?faces-redirect=true"> 
                                 <span class="glyphicon glyphicon-pencil">
                                 </span>&nbsp;Registro
                             </h:commandLink>
                         </li>
                         <li class="active">
-                            <h:commandLink rendered="#{navbarBean.session == true}" action="/public/MyAccount.jsf"> 
+                            <h:commandLink rendered="#{navbarBean.session == true}" action="/public/MyAccount.jsf?faces-redirect=true"> 
                                 <span class="glyphicon glyphicon-user">
                                 </span>&nbsp;Mi Cuenta
                             </h:commandLink>
                         </li>
                         <li class="active">
-                            <h:commandLink  rendered="#{navbarBean.session == true}" action="/public/MyCar.jsf"> 
+                            <h:commandLink  rendered="#{navbarBean.session == true}" action="/public/MyCar.jsf?faces-redirect=true"> 
                                 <span class="glyphicon glyphicon-shopping-cart">
                                 </span>&nbsp;Mi Carrito (0)
                             </h:commandLink>

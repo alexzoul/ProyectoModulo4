@@ -23,7 +23,12 @@ body
 #books_container
 {
     margin-top: 30px;
-}   
+}  
+#detail_book_container
+{
+    margin: 0;
+    padding: 20px 50px;
+}
 .img-book
 {
     height: 50px;
@@ -48,5 +53,46 @@ body
 .register_label 
 {
     margin-top: 5px;
+}
+.img_detail_book
+{
+    width: 100%;
+    padding: 5px;
+}
+.title_detail_book
+{
+    font-size: 30px;
+    color: #eb9316;
+    margin: 0;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+#img_detail_container 
+{
+    margin-bottom: 20px;
+}
+.info_detail_book 
+{
+    font-size: 16px;
+    margin-left: 10px;
+}
+.add_detail_book
+{
+    color: #333;
+    background: #eb9316;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.description_detail_book 
+{
+    background: #ddd;
+    border-radius: 3px;
+    padding: 10px 15px; 
+    font-size: 16px;
+    text-align: justify;
 }
     
