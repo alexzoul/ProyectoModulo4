@@ -10,14 +10,12 @@ import modulo4.proyecto.model.Book;
 import modulo4.proyecto.model.Office;
 import modulo4.proyecto.model.Requisition;
 import modulo4.proyecto.model.Summary;
-import modulo4.proyecto.model.User;
-
 
 public class RequisitionDAO 
 {
     private ConnectionDB currentConnection;
     
-    public int insert(float total, User user, Office office, ArrayList<Book> listBooks) 
+    public int insert(float total, int user_id, int office_id, ArrayList<Book> listBooks) 
     {
         int result = 0;
         String query = "INSERT INTO requisition (total, date, summary_id, "
@@ -28,8 +26,8 @@ public class RequisitionDAO
             currentConnection = new ConnectionDB();
             PreparedStatement pstm = currentConnection.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pstm.setFloat(1, total);
-            pstm.setInt(2, user.getId());
-            pstm.setInt(3, office.getId());
+            pstm.setInt(2, user_id);
+            pstm.setInt(3, office_id);
             
             if(pstm.executeUpdate() != 0)
             {

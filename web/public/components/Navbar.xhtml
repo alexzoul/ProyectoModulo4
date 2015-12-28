@@ -76,16 +76,16 @@
                                 </span>&nbsp;Mi Cuenta
                             </h:commandLink>
                         </li>
-                        <li id="li_myrequisitions">
-                            <h:commandLink  rendered="#{sessionService.session == true}" action="/public/MyRequisitions.jsf?faces-redirect=true"> 
-                                <span class="glyphicon glyphicon-book">
-                                </span>&nbsp;Mis Compras
-                            </h:commandLink>
-                        </li>
                         <li id="li_mycar">
                             <h:commandLink  rendered="#{sessionService.session == true}" action="/public/MyCar.jsf?faces-redirect=true"> 
                                 <span class="glyphicon glyphicon-shopping-cart">
                                 </span>&nbsp;Mi Carrito (#{myCarBean.listBooks.size()})
+                            </h:commandLink>
+                        </li>
+                        <li id="li_myrequisitions">
+                            <h:commandLink  rendered="#{sessionService.session == true}" action="/public/MyRequisitions.jsf?faces-redirect=true"> 
+                                <span class="glyphicon glyphicon-book">
+                                </span>&nbsp;Mis Compras
                             </h:commandLink>
                         </li>
                         <li>

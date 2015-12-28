@@ -1,5 +1,6 @@
 package modulo4.proyecto.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -9,7 +10,7 @@ import modulo4.proyecto.model.Office;
 
 @ManagedBean
 @RequestScoped
-public class OfficeBean 
+public class OfficeBean implements Serializable
 {
     private ArrayList<Office> listOffice;
     private int row;

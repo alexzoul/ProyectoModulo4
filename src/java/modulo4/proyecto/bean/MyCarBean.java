@@ -5,68 +5,37 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import modulo4.proyecto.dao.BookDAO;
 import modulo4.proyecto.dao.RequisitionDAO;
 import modulo4.proyecto.model.Book;
 import modulo4.proyecto.model.Office;
-import modulo4.proyecto.model.User;
+import modulo4.proyecto.service.OfficeService;
 
 @ManagedBean
 @SessionScoped
 public class MyCarBean implements Serializable
 {
-    private ArrayList<Book> listBooks;
+    @ManagedProperty("#{serviceOffice}")
+    private OfficeService serviceOffice;
     private ArrayList<Office> listOffices;
+    private ArrayList<Book> listBooks;
+    private Office currentOffice;
     private Float total;
     private Integer row;
+    
     public MyCarBean () {    
     }
     
     @PostConstruct
     public void init()
     {
-        System.out.println("Inicio");
         cleanVariables();
-        this.listBooks = new ArrayList<>();
+        this.listBooks = new ArrayList<Book>();
+        this.listOffices = serviceOffice.getListOffice();
     }
-    
-    public ArrayList<Book> getListBooks() 
-    {
-        return listBooks;
-    }
-
-    public void setListBooks(ArrayList<Book> listBooks) 
-    {
-        this.listBooks = listBooks;
-    }
-
-    public Float getTotal() {
-        return total;
-    }
-
-    public void setTotal(Float total) {
-        this.total = total;
-    }
-
-    public ArrayList<Office> getListOffices() {
-        return listOffices;
-    }
-
-    public void setListOffices(ArrayList<Office> listOffices) {
-        this.listOffices = listOffices;
-    }
-
-    public Integer getRow() {
-        ++this.row;
-        return row;
-    }
-
-    public void setRow(Integer row) {
-        this.row = row;
-    }
-    
-    
+ 
     public void addListBooks (Book book)
     {
         listBooks.add(book);
@@ -119,20 +88,64 @@ public class MyCarBean implements Serializable
         int idSession = sessionBean.getIdSession();
         if(idSession != 0)
         {
-            User user = new User();
-            user.setId(idSession);
-            Office office = new Office();
-            office.setId(1);
             RequisitionDAO requisitionDAO = new RequisitionDAO();
-            if(requisitionDAO.insert(total, user, office, listBooks) != 0)
+            if(requisitionDAO.insert(total, idSession, currentOffice.getId(), listBooks) != 0)
             {
                 listBooks.clear();
                 cleanVariables();
-                
                 return "/public/MyRequisitions.jsf?faces-redirect=true";
             }
         }
         return "/public/Login.jsf?faces-redirect=true";
     }
-            
+          
+
+    public Integer getRow() {
+        ++this.row;
+        return row;
+    }
+
+    public void setRow(Integer row) {
+        this.row = row;
+    }
+
+    public Float getTotal() {
+        return total;
+    }
+
+    public void setTotal(Float total) {
+        this.total = total;
+    }
+
+    public ArrayList<Book> getListBooks() {
+        return listBooks;
+    }
+
+    public void setListBooks(ArrayList<Book> listBooks) {
+        this.listBooks = listBooks;
+    }
+
+    public ArrayList<Office> getListOffices() {
+        return listOffices;
+    }
+
+    public void setListOffices(ArrayList<Office> listOffices) {
+        this.listOffices = listOffices;
+    }
+
+    public OfficeService getServiceOffice() {
+        return serviceOffice;
+    }
+
+    public void setServiceOffice(OfficeService serviceOffice) {
+        this.serviceOffice = serviceOffice;
+    }
+
+    public Office getCurrentOffice() {
+        return currentOffice;
+    }
+
+    public void setCurrentOffice(Office currentOffice) {
+        this.currentOffice = currentOffice;
+    }
 }

@@ -205,6 +205,7 @@ COMMIT;
 START TRANSACTION;
 USE `proyecto_final`;
 INSERT INTO `proyecto_final`.`office` (`id`, `name`, `street`, `int_number`, `ext_number`, `neighborhood`, `city`, `state`, `zip_code`) VALUES (1, 'Insurgentes Sur', 'Av. de los Insurgentes Sur', '10-A', '319', 'Hipódromo', 'Cuauhtémoc', 'Ciudad de México', 06100);
+INSERT INTO `proyecto_final`.`office` (`id`, `name`, `street`, `int_number`, `ext_number`, `neighborhood`, `city`, `state`, `zip_code`) VALUES (DEFAULT, 'Polanco', 'Av. Ejercito Nacional', '15-B', '843', 'Granada', 'Miguel Hidalgo', 'Ciudad de México', 11520);
 
 COMMIT;
 

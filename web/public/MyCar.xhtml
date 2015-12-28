@@ -74,16 +74,30 @@
                             </h:dataTable>
                             <br/>
                             <h:outputText value="Total: #{myCarBean.total}" />
-                            
-                            <h:selectOneMenu>
-                                
-                            </h:selectOneMenu>
-                            
-                            <h:form>
-                                <h:commandLink action="#{myCarBean.buyBooks()}">
-                                    Comprar
-                                </h:commandLink>
-                            </h:form>
+                            <br/>
+                            <div class="col-xs-4 col-xs-offset-4">
+                                <center>
+                                    <h:form>
+                                        <div class="input-group">
+                                            <h:selectOneMenu 
+                                                styleClass="form-control input-sm" 
+                                                converter="converterOffice"
+                                                value="#{myCarBean.currentOffice}">
+                                                <f:selectItems value="#{myCarBean.listOffices}"  
+                                                               var="item" 
+                                                               itemValue="#{item}"
+                                                               itemLabel="#{item.name}"/>
+                                            </h:selectOneMenu>
+                                            <span class="input-group-btn">
+                                                <h:commandLink class="btn btn-primary btn-sm" action="#{myCarBean.buyBooks()}">
+                                                    <span class="glyphicon glyphicon-usd">
+                                                    </span>&nbsp;Comprar
+                                                </h:commandLink>
+                                            </span>
+                                        </div>
+                                    </h:form>
+                                </center>
+                            </div>
                         </div>
                     </div>
                 </div>
