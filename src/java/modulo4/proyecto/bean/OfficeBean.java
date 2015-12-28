@@ -13,7 +13,7 @@ import modulo4.proyecto.model.Office;
 public class OfficeBean implements Serializable
 {
     private ArrayList<Office> listOffice;
-    private int row;
+    private Integer row;
     
     public OfficeBean() {
     }
@@ -34,12 +34,12 @@ public class OfficeBean implements Serializable
         this.listOffice = listOffice;
     }
 
-    public int getRow() {
+    public Integer getRow() {
         ++this.row;
         return row;
     }
 
-    public void setRow(int row) {
+    public void setRow(Integer row) {
         this.row = row;
     }
 }

@@ -14,7 +14,7 @@ import modulo4.proyecto.model.Requisition;
 public class MyRequisitionsBean implements Serializable
 {
     private ArrayList<Requisition> listRequisition;
-    private int row;
+    private Integer row;
     
     public MyRequisitionsBean () {
     }
@@ -43,12 +43,12 @@ public class MyRequisitionsBean implements Serializable
         this.listRequisition = listRequisition;
     }
 
-    public int getRow() {
+    public Integer getRow() {
         ++this.row;
         return row;
     }
 
-    public void setRow(int row) {
+    public void setRow(Integer row) {
         this.row = row;
     }
     
