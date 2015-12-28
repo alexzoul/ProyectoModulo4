@@ -10,8 +10,8 @@ public class BookHasRequisitonDAO
     public int insert (int  id_book, int id_requisition)
     {
         int result = 0;
-        String query = "INSERT INTO book_has_requisition (book_id, requisition_id) "
-                        + " VALUES (?,?) ";
+        String query = "INSERT INTO book_has_requisition (date, book_id, requisition_id) "
+                        + " VALUES (NOW(),?,?) ";
         
         try
         {

@@ -12,7 +12,7 @@ import modulo4.proyecto.model.User;
 @RequestScoped
 public class SessionService implements Serializable
 {
-    private boolean session;
+    private Boolean session;
   
     public SessionService () {
         this.session = false;
@@ -22,15 +22,15 @@ public class SessionService implements Serializable
         this.session = checkSession();
     }
        
-    public boolean isSession() {
+    public Boolean getSession() {
         return session;
     }
 
-    public void setSession(boolean session) {
+    public void setSession(Boolean session) {
         this.session = session;
     }
 
-    public boolean checkSession() 
+    public Boolean checkSession() 
     {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession httpSession = (HttpSession) facesContext.getExternalContext().getSession(true);

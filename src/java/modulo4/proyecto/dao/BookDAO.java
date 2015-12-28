@@ -54,7 +54,6 @@ public class BookDAO
             ResultSet rst = pstm.executeQuery();
             while(rst.next())
             {
-                System.out.println(rst.getInt("id"));
                 books.add(new Book( rst.getInt("id"), 
                                     rst.getString("title"),
                                     rst.getString("author"),

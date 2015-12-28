@@ -21,7 +21,6 @@ public class OfficeService implements Serializable
     @PostConstruct
     public void init()
     {
-        System.out.println("Inicio Servicio");
         OfficeDAO officeDAO = new OfficeDAO();
         listOffice = officeDAO.findAll();
     }

@@ -42,7 +42,6 @@ public class OfficeConverter implements Converter
                         "Libro no valido"));
             }
         }
-        System.out.println(value);
         return new Office();
     }
 
