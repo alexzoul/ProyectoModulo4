@@ -140,4 +140,57 @@ public class RequisitionDAO
         }
         return result;
     }
+    
+    public Requisition findById (int requisition_id, int user_id) 
+    {   
+        Requisition requisition = new Requisition();
+        
+        String query = "SELECT r.id, "
+                + " r.total, "
+                + " r.date, "
+                + " r.user_id, "
+                + " s.type AS summary_type, "
+                + " o.name AS office_name "
+                + " FROM requisition AS r "
+                + " INNER JOIN summary AS s "
+                + " ON r.summary_id = s.id "
+                + " INNER JOIN office AS o "
+                + " ON r.office_id = o.id "
+                + " WHERE r.id = ? "
+                + " AND r.user_id = ? "
+                + " AND r.status = 1 ";
+        
+        try 
+        {
+            currentConnection = new ConnectionDB();
+            PreparedStatement pstm = currentConnection.getConnection().prepareStatement(query);
+            pstm.setInt(1, requisition_id);
+            pstm.setInt(2, user_id);
+            ResultSet rst = pstm.executeQuery();
+            
+            if(rst.next())
+            {
+                Summary summary = new Summary();
+                summary.setType(rst.getString("summary_type"));
+                
+                Office office = new Office();
+                office.setName(rst.getString("office_name"));
+                
+                requisition.setId(rst.getInt("id"));
+                requisition.setTotal(rst.getFloat("total"));
+                requisition.setDate(rst.getDate("date"));
+                requisition.setTime(rst.getTime("date"));
+                requisition.setSummary(summary);
+                requisition.setOffice(office);
+            }
+            rst.close();
+            currentConnection.closeConecction();
+            return requisition;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

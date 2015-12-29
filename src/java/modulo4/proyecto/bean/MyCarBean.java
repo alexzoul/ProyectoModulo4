@@ -84,18 +84,25 @@ public class MyCarBean implements Serializable
     
     public String buyBooks()
     {
-        SessionService sessionBean = new SessionService();
-        
-        int idSession = sessionBean.getIdSession();
-        if(idSession != 0)
+        if(listBooks.size() > 0)
         {
-            RequisitionDAO requisitionDAO = new RequisitionDAO();
-            if(requisitionDAO.insert(total, idSession, currentOffice.getId(), listBooks) != 0)
+            SessionService sessionBean = new SessionService();
+
+            int idSession = sessionBean.getIdSession();
+            if(idSession != 0)
             {
-                listBooks.clear();
-                cleanVariables();
-                return "/public/MyRequisitions.jsf?faces-redirect=true";
+                RequisitionDAO requisitionDAO = new RequisitionDAO();
+                if(requisitionDAO.insert(total, idSession, currentOffice.getId(), listBooks) != 0)
+                {
+                    listBooks.clear();
+                    cleanVariables();
+                    return "/public/MyRequisitions.jsf?faces-redirect=true";
+                }
             }
+        }
+        else
+        {
+            return null;
         }
         return "/public/Login.jsf?faces-redirect=true";
     }

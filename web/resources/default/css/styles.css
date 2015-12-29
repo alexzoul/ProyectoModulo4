@@ -123,4 +123,16 @@ body
 {
     padding: 10px 5px !important;
 }
-   
+#table_requisition_detail
+{
+    margin-top: 20px;
+}
+.img_book_requisition
+{
+    height: 60px;
+}
+#table_requisition_detail td p
+{
+    padding: 20px;
+    margin: 0;
+}

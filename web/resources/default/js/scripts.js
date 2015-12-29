@@ -2,8 +2,11 @@ $( document ).ready(function()
 {
     var path = window.location.pathname;
     var idElement = getIdNavbarElement(path);
-    var element = document.querySelector(idElement);
-    element.className = "active";
+    if(idElement !== null)
+    {
+        var element = document.querySelector(idElement);
+        element.className = "active";
+    }
 });
 
 function getIdNavbarElement(path)
@@ -32,6 +35,7 @@ function getIdNavbarElement(path)
             return '#li_mycar';
             break;
         default:
+            return null;
             break; 
     }
 }
