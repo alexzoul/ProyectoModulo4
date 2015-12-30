@@ -1,5 +1,6 @@
 package modulo4.proyecto.admin.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -10,7 +11,7 @@ import modulo4.proyecto.service.SessionService;
 
 @ManagedBean
 @RequestScoped
-public class AdminBooksBean 
+public class AdminBooksBean implements Serializable
 {
     private ArrayList<Book> listBooks;
     private Integer row;

@@ -1,14 +1,10 @@
 package modulo4.proyecto.admin.bean;
 
 import java.io.Serializable;
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 import modulo4.proyecto.dao.UserDAO;
 import modulo4.proyecto.model.User;
 import modulo4.proyecto.service.SessionService;
