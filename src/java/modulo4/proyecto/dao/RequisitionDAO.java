@@ -10,6 +10,7 @@ import modulo4.proyecto.model.Book;
 import modulo4.proyecto.model.Office;
 import modulo4.proyecto.model.Requisition;
 import modulo4.proyecto.model.Summary;
+import modulo4.proyecto.model.User;
 
 public class RequisitionDAO 
 {
@@ -126,7 +127,7 @@ public class RequisitionDAO
             PreparedStatement pstm = currentConnection.getConnection().prepareStatement(query);
             pstm.setInt(1, id);
             
-            if(pstm.executeUpdate() != 0)
+            if(pstm.executeUpdate() == 1)
             {
                 result = true;
             }
@@ -186,6 +187,75 @@ public class RequisitionDAO
             rst.close();
             currentConnection.closeConecction();
             return requisition;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public ArrayList<Requisition> findAll () 
+    {
+        ArrayList<Requisition> listRequisitions = new ArrayList<Requisition>();
+        
+        String query = "SELECT r.id, "
+                + " r.total, "
+                + " r.date, "
+                + " u.name AS user_name, "
+                + " u.paternal_name AS user_paternal_name, "
+                + " u.maternal_name AS user_maternal_name, "
+                + " u.email AS user_email, "
+                + " s.type AS summary_type, "
+                + " o.name AS office_name "
+                + " FROM requisition AS r "
+                + " INNER JOIN user AS u "
+                + " ON r.user_id = u.id "
+                + " INNER JOIN summary AS s "
+                + " ON r.summary_id = s.id "
+                + " INNER JOIN office AS o "
+                + " ON r.office_id = o.id "
+                + " AND r.status = 1 "
+                + " ORDER BY r.date DESC";
+        
+        try 
+        {
+            currentConnection = new ConnectionDB();
+            Statement stm = currentConnection.getConnection().createStatement();
+            ResultSet rst = stm.executeQuery(query);
+            
+            while(rst.next())
+            {
+                Summary summary = new Summary();
+                summary.setType(rst.getString("summary_type"));
+                
+                Office office = new Office();
+                office.setName(rst.getString("office_name"));
+                
+                User user = new User();
+                user.setName(rst.getString("user_name"));
+                user.setPaternal_name(rst.getString("user_paternal_name"));
+                user.setMaternal_name(rst.getString("user_maternal_name"));
+                user.setEmail(rst.getString("user_email"));
+                
+                Requisition requisition = new Requisition();
+                requisition.setId(rst.getInt("id"));
+                requisition.setTotal(rst.getFloat("total"));
+                requisition.setDate(rst.getDate("date"));
+                requisition.setTime(rst.getTime("date"));
+                requisition.setSummary(summary);
+                requisition.setOffice(office);
+                requisition.setUser(user);
+                
+                BookHasRequisitonDAO bookHasRequisitonDAO = new BookHasRequisitonDAO();
+                
+                requisition.setBooks(bookHasRequisitonDAO.findByIdRequisition(rst.getInt("id")));
+                
+                listRequisitions.add(requisition);
+            }
+            rst.close();
+            currentConnection.closeConecction();
+            return listRequisitions;
         }
         catch (Exception e)
         {

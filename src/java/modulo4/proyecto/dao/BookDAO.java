@@ -13,7 +13,7 @@ public class BookDAO
     
     public ArrayList<Book> findAll () {
         ArrayList<Book> books = new ArrayList<Book> ();
-        String query = "SELECT * FROM book ";
+        String query = "SELECT * FROM book ORDER BY title, author, editorial DESC";
         
         try 
         {
@@ -102,5 +102,46 @@ public class BookDAO
             e.printStackTrace();
         }
         return null;
+    }
+    
+    public boolean updateById (Book book)
+    {
+        boolean result = false;
+        String query = "UPDATE book "
+                        + " SET title = ?, "
+                        + " author = ?, "
+                        + " editorial = ?, "
+                        + " year = ?, "
+                        + " description = ?, "
+                        + " pages = ?, "
+                        + " price = ? "
+                        + " WHERE id = ? ";
+     
+        try
+        {
+            currentConnection = new ConnectionDB();    
+            PreparedStatement pstm = currentConnection.getConnection().prepareStatement(query);
+            pstm.setString(1, book.getTitle());
+            pstm.setString(2, book.getAuthor());
+            pstm.setString(3, book.getEditorial());
+            pstm.setInt(4, book.getYear());
+            pstm.setString(5, book.getDescription());
+            pstm.setInt(6, book.getPages());
+            pstm.setFloat(7, book.getPrice());
+            pstm.setInt(8, book.getId());
+            
+            if(pstm.executeUpdate() == 1)
+            {
+                result = true;
+            }
+            
+            pstm.close();
+            currentConnection.closeConecction();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

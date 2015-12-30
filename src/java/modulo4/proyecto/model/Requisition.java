@@ -2,6 +2,7 @@ package modulo4.proyecto.model;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 
 public class Requisition {
     private int id;
@@ -12,6 +13,7 @@ public class Requisition {
     private User user;
     private Office office;
     private int status;
+    private ArrayList<Book> books;
     
     public Requisition () {
     }
@@ -89,5 +91,13 @@ public class Requisition {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public ArrayList<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(ArrayList<Book> books) {
+        this.books = books;
     }
 }

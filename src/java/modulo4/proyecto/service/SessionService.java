@@ -4,7 +4,9 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import modulo4.proyecto.model.User;
 
@@ -30,7 +32,7 @@ public class SessionService implements Serializable
         this.session = session;
     }
 
-    public Boolean checkSession() 
+    public boolean checkSession() 
     {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession httpSession = (HttpSession) facesContext.getExternalContext().getSession(true);
@@ -63,7 +65,53 @@ public class SessionService implements Serializable
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession currentSession = (HttpSession) facesContext.getExternalContext().getSession(true);
         currentSession.setAttribute("id", user.getId());
-        currentSession.setAttribute("name", user.getName() + " " + user.getPaternal_name());
-        currentSession.setAttribute("email", user.getEmail());
     }
+    
+    public void initSessionAdmin (User admin)
+    {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession currentSession = (HttpSession) facesContext.getExternalContext().getSession(true);
+        currentSession.setAttribute("adminId", admin.getId());
+    }
+    
+    public void checkSessionAdmin() 
+    {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession httpSession = (HttpSession) facesContext.getExternalContext().getSession(true);
+        
+        if(httpSession.getAttribute("adminId") == null)
+        {
+            try
+            {
+                ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+                String ctxPath = ((ServletContext) externalContext.getContext()).getContextPath();
+                externalContext.redirect(ctxPath + "/private/Login.jsf");
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    public String closeSessionAdmin() 
+    {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession currentSession = (HttpSession) facesContext.getExternalContext().getSession(true);
+        currentSession.invalidate();
+        return "/private/Login.jsf?faces-redirect=true";
+    }
+    
+    public int getAdminIdSession() 
+    {
+        int idSession = 0;
+        
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession httpSession = (HttpSession) facesContext.getExternalContext().getSession(true);
+        if(httpSession.getAttribute("adminId") != null)
+        {
+            idSession = Integer.parseInt(httpSession.getAttribute("adminId").toString());
+        }
+        return idSession;
+    } 
 }
