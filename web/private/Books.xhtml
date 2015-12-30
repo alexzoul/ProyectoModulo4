@@ -5,24 +5,33 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:body>
-        <ui:composition template="./../PublicTemplate.xhtml">
+        <ui:composition template="./../PrivateTemplate.xhtml">
             <ui:define name="content">
-                <div class="panel panel-default" id="books_container">
+               <div class="panel panel-default" id="books_container">
                     <div class="panel-heading">
-                        <b><span class="glyphicon glyphicon-shopping-cart">
-                        </span>&nbsp;Mi Carrito</b>
+                        <b><span class="glyphicon glyphicon-book">
+                        </span>&nbsp;Books</b>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <h:dataTable value="#{myCarBean.listBooks}" 
+                            <h:dataTable value="#{adminBooksBean.listBooks}" 
                                 var="item" 
                                 styleClass="table table-hover table-condensed table-responsive"
-                                id="table_mycar">
+                                id="table_admin_books">
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="#" />
                                     </f:facet>
-                                    <h:outputText value="#{myCarBean.row}" />
+                                    <h:outputText value="#{adminBooksBean.row}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="" />
+                                    </f:facet>
+                                    <h:graphicImage 
+                                        library="default" 
+                                        name="/imagenes/#{item.image}" 
+                                        styleClass="img-thumbnail img_book_requisition"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
@@ -36,7 +45,6 @@
                                     </f:facet>
                                     <h:outputText value="#{item.author}" />
                                 </h:column>
-
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Editorial" />
@@ -51,7 +59,7 @@
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Páginas" />
+                                        <h:outputText value="Paginas" />
                                     </f:facet>
                                     <h:outputText value="#{item.pages}" />
                                 </h:column>
@@ -59,50 +67,25 @@
                                     <f:facet name="header">
                                         <h:outputText value="Precio" />
                                     </f:facet>
-                                    <h:outputText value="#{item.price}" />
+                                    <h:outputFormat value="$ #{item.price}"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Borrar" />
+                                        <h:outputText value="Editar" />
                                     </f:facet>
                                     <h:form>
-                                        <h:commandLink action="#{myCarBean.removeBook(item)}"> 
-                                            &nbsp;<span class="glyphicon glyphicon-trash"></span>
+                                        <h:commandLink> 
+                                            &nbsp;<span class="glyphicon glyphicon-pencil"></span>
                                         </h:commandLink>
                                     </h:form>
                                 </h:column>
                             </h:dataTable>
-                            <br/>
-                            <h:outputText value="Total: #{myCarBean.total}" />
-                            <br/>
-                            <div class="col-xs-4 col-xs-offset-4">
-                                <center>
-                                    <h:form>
-                                        <div class="input-group">
-                                            <h:selectOneMenu 
-                                                styleClass="form-control input-sm" 
-                                                converter="converterOffice"
-                                                value="#{myCarBean.currentOffice}">
-                                                <f:selectItems value="#{myCarBean.listOffices}"  
-                                                               var="item" 
-                                                               itemValue="#{item}"
-                                                               itemLabel="#{item.name}"/>
-                                            </h:selectOneMenu>
-                                            <span class="input-group-btn">
-                                                <h:commandLink class="btn btn-primary btn-sm" action="#{myCarBean.buyBooks()}">
-                                                    <span class="glyphicon glyphicon-usd">
-                                                    </span>&nbsp;Comprar
-                                                </h:commandLink>
-                                            </span>
-                                        </div>
-                                    </h:form>
-                                </center>
-                            </div>
                         </div>
                     </div>
-                </div>
+               </div>
             </ui:define>
         </ui:composition>
     </h:body>
 </html>
+
 

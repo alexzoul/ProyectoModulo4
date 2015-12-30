@@ -1,24 +1,24 @@
-package modulo4.proyecto.bean;
+package modulo4.proyecto.admin.bean;
 
-import modulo4.proyecto.service.SessionService;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import modulo4.proyecto.dao.UserDAO;
 import modulo4.proyecto.model.User;
+import modulo4.proyecto.service.SessionService;
 
 @ManagedBean
-@RequestScoped
-public class LoginBean implements Serializable
+@SessionScoped
+public class AdminLoginBean implements Serializable
 {
     private String email;
     private String password;
-
-    public LoginBean() {
-    }
     
+    public AdminLoginBean() {
+    }
+
     public String getEmail() {
         return email;
     }
@@ -35,12 +35,17 @@ public class LoginBean implements Serializable
         this.password = password;
     }
     
-    public String initSession()
-    {
+    public String initSession() {
         UserDAO userDAO = new UserDAO();
-        User user = userDAO.validateUser(email, password);
+        User admin = userDAO.validateAdmin(email, password);
         
-        if(user == null)
+        if(admin != null)
+        {
+            SessionService sessionBean = new SessionService();
+            sessionBean.initSessionAdmin(admin);
+            return "/private/Home.jsf?faces-redirect=true";
+        }
+        else
         {
             FacesMessage message = new FacesMessage();
             message.setDetail("Correo y/o Contraseña incorrectos");
@@ -48,11 +53,7 @@ public class LoginBean implements Serializable
             FacesContext.getCurrentInstance().addMessage("login_form:password",  message);
             return null;
         }
-        else
-        {
-            SessionService sessionBean = new SessionService();
-            sessionBean.initSession(user);
-            return "/public/MyAccount.jsf?faces-redirect=true";
-        }
+        
     }
+    
 }

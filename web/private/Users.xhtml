@@ -5,16 +5,16 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:body>
-        <ui:composition template="./../PublicTemplate.xhtml">
+        <ui:composition template="./../PrivateTemplate.xhtml">
             <ui:define name="content">
                <div class="panel panel-default" id="books_container">
                     <div class="panel-heading">
-                        <b><span class="glyphicon glyphicon-globe">
-                        </span>&nbsp;Sucursales</b>
+                        <b><span class="glyphicon glyphicon-user">
+                        </span>&nbsp;Usuarios</b>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <h:dataTable value="#{officeBean.listOffice}" 
+                            <h:dataTable value="#{adminUsersBean.listUser}" 
                                 var="item" 
                                 styleClass="table table-hover table-condensed table-responsive"
                                 id="table_myrequisitions">
@@ -22,7 +22,7 @@
                                     <f:facet name="header">
                                         <h:outputText value="#" />
                                     </f:facet>
-                                    <h:outputText value="#{officeBean.row}" />
+                                    <h:outputText value="#{adminUsersBean.row}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
@@ -32,45 +32,43 @@
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Calle" />
+                                        <h:outputText value="Apellido Paterno" />
                                     </f:facet>
-                                    <h:outputText value="#{item.street}" />
+                                    <h:outputText value="#{item.paternal_name}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="No. Int" />
+                                        <h:outputText value="Apellido Materno" />
                                     </f:facet>
-                                    <h:outputText value="#{item.int_number}" />
+                                    <h:outputText value="#{item.maternal_name}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="No. Ext" />
+                                        <h:outputText value="Correo" />
                                     </f:facet>
-                                    <h:outputText value="#{item.ext_number}" />
+                                    <h:outputText value="#{item.email}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Colonia/Municipio" />
+                                        <h:outputText value="Fecha de Registro" />
                                     </f:facet>
-                                    <h:outputText value="#{item.neighborhood}" />
+                                    <h:outputText value="#{item.register_date}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Delegación" />
+                                        <h:outputText value="Hora de Registro" />
                                     </f:facet>
-                                    <h:outputText value="#{item.city}" />
+                                    <h:outputText value="#{item.register_time}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Estado" />
+                                        <h:outputText value="Borrar" />
                                     </f:facet>
-                                    <h:outputText value="#{item.state}" />
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Código Postal" />
-                                    </f:facet>
-                                    <h:outputText value="#{item.zip_code}" />
+                                    <h:form>
+                                        <h:commandLink action="#{adminUsersBean.delete(item.id)}"> 
+                                            &nbsp;<span class="glyphicon glyphicon-trash"></span>
+                                        </h:commandLink>
+                                    </h:form>
                                 </h:column>
                             </h:dataTable>
                         </div>

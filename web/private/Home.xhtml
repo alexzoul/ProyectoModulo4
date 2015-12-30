@@ -4,9 +4,10 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:body>
-        <ui:composition template="./../PublicTemplate.xhtml">
+        <ui:composition template="./../PrivateTemplate.xhtml">
             <ui:define name="content">
-                #{myAccountBean.user.email}
+                #{adminHomeBean.init()}
+                bienvenido
             </ui:define>
         </ui:composition>
     </h:body>

@@ -9,12 +9,12 @@
             <ui:define name="content">
                <div class="panel panel-default" id="books_container">
                     <div class="panel-heading">
-                        <b><span class="glyphicon glyphicon-globe">
-                        </span>&nbsp;Sucursales</b>
+                        <b><span class="glyphicon glyphicon-book">
+                        </span>&nbsp;Mis Compras</b>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <h:dataTable value="#{officeBean.listOffice}" 
+                            <h:dataTable value="#{myRequisitionsBean.listRequisition}" 
                                 var="item" 
                                 styleClass="table table-hover table-condensed table-responsive"
                                 id="table_myrequisitions">
@@ -22,55 +22,64 @@
                                     <f:facet name="header">
                                         <h:outputText value="#" />
                                     </f:facet>
-                                    <h:outputText value="#{officeBean.row}" />
+                                    <h:outputText value="#{myRequisitionsBean.row}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Nombre" />
+                                        <h:outputText value="Sucursal" />
                                     </f:facet>
-                                    <h:outputText value="#{item.name}" />
+                                    <h:outputText value="#{item.office.name}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Calle" />
+                                        <h:outputText value="Fecha" />
                                     </f:facet>
-                                    <h:outputText value="#{item.street}" />
+                                    <h:outputText value="#{item.date}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="No. Int" />
+                                        <h:outputText value="Hora" />
                                     </f:facet>
-                                    <h:outputText value="#{item.int_number}" />
+                                    <h:outputText value="#{item.time}" />
                                 </h:column>
+
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="No. Ext" />
+                                        <h:outputText value="Total" />
                                     </f:facet>
-                                    <h:outputText value="#{item.ext_number}" />
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Colonia/Municipio" />
-                                    </f:facet>
-                                    <h:outputText value="#{item.neighborhood}" />
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Delegación" />
-                                    </f:facet>
-                                    <h:outputText value="#{item.city}" />
+                                    <h:outputText value="$ #{item.total}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Estado" />
                                     </f:facet>
-                                    <h:outputText value="#{item.state}" />
+                                    
+                                    <h:outputText value="#{item.summary.type}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Código Postal" />
+                                        <h:outputText value="Detalles" />
                                     </f:facet>
-                                    <h:outputText value="#{item.zip_code}" />
+                                    <h:form>
+                                        <h:commandLink 
+                                            action="/public/RequisitionDetail.jsf?faces-redirect=true&amp;includeViewParams=true">
+                                            <f:param name="id" value="#{item.id}"/>
+                                            <span class="glyphicon glyphicon-shopping-cart">
+                                            </span>
+                                        </h:commandLink> 
+                                    </h:form>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Eliminar" />
+                                    </f:facet>
+                                    <h:form>
+                                        <h:commandLink 
+                                            action="#{myRequisitionsBean.delete(item.id)}">
+                                            <span class="glyphicon glyphicon-trash">
+                                            </span>
+                                        </h:commandLink> 
+                                    </h:form>
                                 </h:column>
                             </h:dataTable>
                         </div>

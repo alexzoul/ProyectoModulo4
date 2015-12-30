@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `proyecto_final`.`office` (
   `neighborhood` VARCHAR(250) NOT NULL,
   `city` VARCHAR(250) NOT NULL,
   `state` VARCHAR(150) NOT NULL,
-  `zip_code` INT(5) NOT NULL,
+  `zip_code` INT(5) ZEROFILL NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -97,6 +97,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_final`.`requisition` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `total` DECIMAL(12,2) NOT NULL,
   `date` DATETIME NOT NULL,
   `summary_id` INT NOT NULL,
   `user_id` INT NOT NULL,
@@ -128,11 +129,13 @@ ENGINE = InnoDB;
 -- Table `proyecto_final`.`book_has_requisition`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_final`.`book_has_requisition` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `date` DATETIME NOT NULL,
   `book_id` INT NOT NULL,
   `requisition_id` INT NOT NULL,
-  PRIMARY KEY (`book_id`, `requisition_id`),
   INDEX `fk_book_has_requisition_requisition1_idx` (`requisition_id` ASC),
   INDEX `fk_book_has_requisition_book1_idx` (`book_id` ASC),
+  PRIMARY KEY (`id`),
   CONSTRAINT `fk_book_has_requisition_book1`
     FOREIGN KEY (`book_id`)
     REFERENCES `proyecto_final`.`book` (`id`)
@@ -194,6 +197,17 @@ START TRANSACTION;
 USE `proyecto_final`;
 INSERT INTO `proyecto_final`.`summary` (`id`, `type`) VALUES (1, 'Pendiente');
 INSERT INTO `proyecto_final`.`summary` (`id`, `type`) VALUES (2, 'Entregado');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `proyecto_final`.`office`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `proyecto_final`;
+INSERT INTO `proyecto_final`.`office` (`id`, `name`, `street`, `int_number`, `ext_number`, `neighborhood`, `city`, `state`, `zip_code`) VALUES (1, 'Insurgentes Sur', 'Av. de los Insurgentes Sur', '10-A', '319', 'Hipódromo', 'Cuauhtémoc', 'Ciudad de México', 06100);
+INSERT INTO `proyecto_final`.`office` (`id`, `name`, `street`, `int_number`, `ext_number`, `neighborhood`, `city`, `state`, `zip_code`) VALUES (DEFAULT, 'Polanco', 'Av. Ejercito Nacional', '15-B', '843', 'Granada', 'Miguel Hidalgo', 'Ciudad de México', 11520);
 
 COMMIT;
 

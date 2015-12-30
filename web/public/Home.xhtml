@@ -3,22 +3,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:body>
         <ui:composition template="./../PublicTemplate.xhtml">
             <ui:define name="content">
-                <div class="panel panel-danger" id="books_container">
+                <div class="panel panel-collapse panel-default" id="books_container">
                     <div class="panel-heading">
                         <div class="row">
-                            <div class="col-xs-4">
-                                <p id="book-catalog">Catalogo de Libros</p>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <p id="p_book_catalog">Biblioteca de Libros</p>
                             </div>
-                            <div class="col-xs-4 col-xs-offset-4">
+                            <div class="col-lg-5 col-lg-offset-3 col-md-5 col-md-offset-3 col-sm-6">
                                 <h:form>
                                     <div class="input-group">
                                         <h:inputText styleClass="form-control input-sm" value="#{homeBean.findText}"  />
                                         <span class="input-group-btn">
-                                            <h:commandLink class="btn btn-danger btn-sm" action="#{homeBean.findBook()}">
+                                            <h:commandLink class="btn btn-primary btn-sm" action="#{homeBean.findBook()}">
                                                 <span class="glyphicon glyphicon-search">
                                                 </span>&nbsp;Buscar
                                             </h:commandLink>
@@ -28,36 +29,33 @@
                             </div>
                         </div>
                     </div>
-                    <h:dataTable value="#{homeBean.books}" 
-                                 var="item" 
-                                 styleClass="table table-hover table-bordered">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Titulo" />
-                            </f:facet>
-                            <h:outputText value="#{item.author}" />
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Autor" />
-                            </f:facet>
-                            <h:outputText value="#{item.title}" />
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Imagen" />
-                            </f:facet>
-                            <h:graphicImage library="default" name="/imagenes/#{item.image}" styleClass="img-thumbnail img-book"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Ver" />
-                            </f:facet>
-                            <h:form>
-                                <h:commandButton value="Detalles" />
-                            </h:form>
-                        </h:column>
-                    </h:dataTable>
+                    <div class="panel-body">
+                        <c:forEach var="item" items="#{homeBean.books}">
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <center>
+                                    <div class="row">
+                                        <h:form>
+                                            <div class="img_book_container">
+                                                <div class="row">
+                                                    <h:commandLink 
+                                                        action="/public/BookDetail.jsf?faces-redirect=true&amp;includeViewParams=true">
+                                                        <f:param name="id" value="#{item.id}"/>
+                                                        <h:graphicImage 
+                                                            library="default" 
+                                                            name="/imagenes/#{item.image}" 
+                                                            styleClass="img-thumbnail img-book"/>
+                                                    </h:commandLink> 
+                                                </div>
+                                                <div class="row title_book_catalog">
+                                                    #{item.title}
+                                                </div>
+                                            </div>
+                                        </h:form>
+                                    </div>
+                                </center>
+                            </div>
+                        </c:forEach>
+                    </div>
                 </div>
             </ui:define>
         </ui:composition>

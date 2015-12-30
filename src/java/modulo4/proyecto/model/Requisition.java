@@ -1,22 +1,28 @@
 package modulo4.proyecto.model;
 
 import java.sql.Date;
+import java.sql.Time;
+import java.util.ArrayList;
 
 public class Requisition {
     private int id;
-    private Date datetime;
+    private float total;
+    private Date date;
+    private Time time;
     private Summary summary;
     private User user;
     private Office office;
     private int status;
+    private ArrayList<Book> books;
     
     public Requisition () {
     }
     
-    public Requisition (int id, Date datetime, Summary summary, User user,
+    public Requisition (int id, float total, Date date, Summary summary, User user,
                         Office office, int status) {
         this.id = id;
-        this.datetime = datetime;
+        this.total = total;
+        this.date = date;
         this.summary = summary;
         this.user = user;
         this.office = office;
@@ -31,12 +37,28 @@ public class Requisition {
         this.id = id;
     }
 
-    public Date getDatetime() {
-        return datetime;
+    public float getTotal() {
+        return total;
     }
 
-    public void setDatetime(Date datetime) {
-        this.datetime = datetime;
+    public void setTotal(float total) {
+        this.total = total;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
     }
 
     public Summary getSummary() {
@@ -69,5 +91,13 @@ public class Requisition {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public ArrayList<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(ArrayList<Book> books) {
+        this.books = books;
     }
 }

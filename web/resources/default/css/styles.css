@@ -4,35 +4,51 @@ body
 }
 #main_container
 {
-    padding-top: 20px;
+    margin-top: 50px;
 }
 #content_container
 {
-    margin-top: -20px;
-    margin-left: 30px;
-    margin-right: 30px;
     background: #f0f0f0;
     padding: 10px 30px;
     border-radius: 0 0 5px 5px;
 }
 #login_container
 {
-    margin-top: 100px;
+    margin-top: 50px;
     margin-bottom: 100px;
+}
+#register_container
+{
+    margin-top: 30px;
 }
 #books_container
 {
     margin-top: 30px;
-}   
+}  
+#detail_book_container
+{
+    margin: 0;
+    padding: 20px 50px;
+}
 .img-book
 {
-    height: 50px;
+    height: 250px;
+    margin: 10px;
 }
-#book-catalog
+.img_book_container
+{
+    background: #eee;
+    margin: 10px;
+    padding: 10px 0; 
+    border-radius: 5px;
+    height: 350px;
+}
+#p_book_catalog
 {
     font-weight: bold;
-    font-size: 16px;
-    margin-top: 0px;
+    font-size: 18px;
+    margin-top: 2px;
+    margin-bottom: 0;
 }
 .login_fail
 {
@@ -49,4 +65,83 @@ body
 {
     margin-top: 5px;
 }
-    
+.img_detail_book
+{
+    width: 100%;
+    padding: 5px;
+}
+.title_detail_book
+{
+    font-size: 30px;
+    color: #eb9316;
+    margin: 0;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+#img_detail_container 
+{
+    margin-bottom: 20px;
+}
+.info_detail_book 
+{
+    font-size: 16px;
+    margin-left: 10px;
+}
+.add_detail_book
+{
+    color: #333;
+    background: #eb9316;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.description_detail_book 
+{
+    background: #ddd;
+    border-radius: 3px;
+    padding: 10px 15px; 
+    font-size: 16px;
+    text-align: justify;
+}
+.title_book_catalog
+{
+    background: #eb9316;
+    margin: 0 20px;
+    border-radius: 5px;
+    padding: 5px;
+    font-weight: 500;
+    margin: 0 30px;
+}
+#table_mycar td
+{
+    padding: 10px 5px !important;
+}
+#table_myrequisitions td
+{
+    padding: 10px 5px !important;
+}
+#table_requisition_detail
+{
+    margin-top: 20px;
+}
+.img_book_requisition
+{
+    height: 60px;
+}
+#table_requisition_detail td
+{
+    vertical-align:middle
+}
+#table_admin_sales td
+{
+    vertical-align:middle;
+    padding: 10px 5px !important;
+}
+#table_admin_books td
+{
+    vertical-align:middle;
+    padding: 10px 5px !important;
+}
