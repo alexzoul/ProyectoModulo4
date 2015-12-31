@@ -5,12 +5,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import modulo4.proyecto.dao.RequisitionDAO;
 import modulo4.proyecto.model.Requisition;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class MyRequisitionsBean implements Serializable
 {
     private ArrayList<Requisition> listRequisition;

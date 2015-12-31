@@ -12,12 +12,25 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-6">
-                                <p id="p_book_catalog">Libros Mas Vendidos</p>
+                                <p id="p_book_catalog">Catalogo de Libros</p>
+                            </div>
+                            <div class="col-lg-5 col-lg-offset-3 col-md-5 col-md-offset-3 col-sm-6">
+                                <h:form>
+                                    <div class="input-group">
+                                        <h:inputText styleClass="form-control input-sm" value="#{bookCatalog.findText}"  />
+                                        <span class="input-group-btn">
+                                            <h:commandLink class="btn btn-primary btn-sm" action="#{bookCatalog.findBook()}">
+                                                <span class="glyphicon glyphicon-search">
+                                                </span>&nbsp;Buscar
+                                            </h:commandLink>
+                                        </span>
+                                    </div>
+                                </h:form>
                             </div>
                         </div>
                     </div>
                     <div class="panel-body">
-                        <c:forEach var="item" items="#{homeBean.listBooks}">
+                        <c:forEach var="item" items="#{bookCatalog.listBooks}">
                             <div class="col-lg-3 col-md-4 col-sm-6">
                                 <center>
                                     <div class="row">

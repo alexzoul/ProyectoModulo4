@@ -16,6 +16,9 @@ function getIdNavbarElement(path)
         case '/ProyectoModulo4/public/Home.jsf':
             return '#li_home';
             break;
+        case '/ProyectoModulo4/public/BookCatalog.jsf':
+            return '#li_book_catalog';
+            break;
         case '/ProyectoModulo4/public/Office.jsf':
             return '#li_office';
             break;

@@ -20,12 +20,14 @@
                                         <h:outputLabel value="Correo:"/>
                                         <h:inputText value="#{loginBean.email}"
                                                      styleClass="form-control"
-                                                     id="email"/>
+                                                     id="email"
+                                                     maxlength="250"/>
                                         <br/>
                                         <h:outputLabel value="Contraseña:"/>
                                         <h:inputSecret value="#{loginBean.password}"
                                                      styleClass="form-control"
-                                                     id="password"/>
+                                                     id="password"
+                                                     maxlength="32"/>
                                         <h:message for="password" styleClass="error_message"/>
                                         <br/>
                                         <center>

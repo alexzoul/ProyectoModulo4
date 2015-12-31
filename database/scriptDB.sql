@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `proyecto_final`.`user` (
   `name` VARCHAR(45) NOT NULL,
   `paternal_name` VARCHAR(45) NOT NULL,
   `maternal_name` VARCHAR(45) NOT NULL,
+  `phone_number` VARCHAR(10) NOT NULL,
   `email` VARCHAR(250) NOT NULL,
   `password` VARCHAR(32) NOT NULL,
   `role_id` INT NOT NULL,
@@ -169,8 +170,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `proyecto_final`;
-INSERT INTO `proyecto_final`.`user` (`id`, `name`, `paternal_name`, `maternal_name`, `email`, `password`, `role_id`, `register_date`, `status`) VALUES (1, 'Admin', 'Admin', 'Admin', 'admin@admin.com', 'admin', 1, DEFAULT, 1);
-INSERT INTO `proyecto_final`.`user` (`id`, `name`, `paternal_name`, `maternal_name`, `email`, `password`, `role_id`, `register_date`, `status`) VALUES (2, 'Alejandro', 'Villanueva', 'Molina', 'ale@ale.ale', 'ale', 2, DEFAULT, 1);
+INSERT INTO `proyecto_final`.`user` (`id`, `name`, `paternal_name`, `maternal_name`, `phone_number`, `email`, `password`, `role_id`, `register_date`, `status`) VALUES (1, 'Admin', 'Admin', 'Admin', '0123456789', 'admin@admin.com', 'admin', 1, DEFAULT, 1);
+INSERT INTO `proyecto_final`.`user` (`id`, `name`, `paternal_name`, `maternal_name`, `phone_number`, `email`, `password`, `role_id`, `register_date`, `status`) VALUES (2, 'Alejandro', 'Villanueva', 'Molina', '5544663377', 'ale@ale.ale', 'ale', 2, DEFAULT, 1);
 
 COMMIT;
 

@@ -2,7 +2,6 @@ package modulo4.proyecto.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import modulo4.proyecto.database.ConnectionDB;
 import modulo4.proyecto.model.User;
@@ -13,15 +12,26 @@ public class UserDAO
     
     public User validateUser (String email, String password)
     {
-        String query = "SELECT * FROM user "
-                    + " WHERE email = ? AND password = ? "
-                    + " AND status = 1 ";
+        String query = "SELECT u.id, "
+                + " u.email, "
+                + " u.password, "
+                + " u.name, "
+                + " u.paternal_name, "
+                + " u.maternal_name "
+                + " FROM user AS u "
+                + " INNER JOIN role AS r "
+                + " ON r.id = u.role_id "
+                + " WHERE u.email = ? "
+                + " AND u.password = ? "
+                + " AND r.type = ? "
+                + " AND u.status = 1 ";
         try
         {
             currentConnection = new ConnectionDB();
             PreparedStatement pstm = currentConnection.getConnection().prepareStatement(query);
             pstm.setString(1, email);
             pstm.setString(2, password);
+            pstm.setString(3, "Cliente");
             ResultSet rst = pstm.executeQuery();
             
             if(rst.next())
@@ -50,8 +60,8 @@ public class UserDAO
     {
         int result = 0;
         String query = "INSERT INTO user (name, paternal_name, maternal_name, "
-                        + " email, password, role_id, status, register_date) "
-                                        + " VALUES (?,?,?,?,?,2,1,NOW()) ";
+                        + " email, phone_number, password, role_id, status, register_date) "
+                                        + " VALUES (?,?,?,?,?,?,2,1,NOW()) ";
         
         try
         {
@@ -61,7 +71,8 @@ public class UserDAO
             pstm.setString(2, user.getPaternal_name());
             pstm.setString(3, user.getMaternal_name());
             pstm.setString(4, user.getEmail());
-            pstm.setString(5, user.getPassword());
+            pstm.setString(5, user.getPhone_number());
+            pstm.setString(6, user.getPassword());
             result = pstm.executeUpdate();
             pstm.close();
             currentConnection.closeConecction();
@@ -199,6 +210,33 @@ public class UserDAO
             pstm.setInt(1, id);
             
             if(pstm.executeUpdate() == 1)
+            {
+                result = true;
+            }
+            
+            pstm.close();
+            currentConnection.closeConecction();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    
+    public boolean checkEmail (String email)
+    {
+        boolean result = false;
+        String query = "SELECT email FROM user WHERE email = ? ";
+     
+        try
+        {
+            currentConnection = new ConnectionDB();    
+            PreparedStatement pstm = currentConnection.getConnection().prepareStatement(query);
+            pstm.setString(1, email);
+            ResultSet rst = pstm.executeQuery();
+            
+            if(rst.next())
             {
                 result = true;
             }

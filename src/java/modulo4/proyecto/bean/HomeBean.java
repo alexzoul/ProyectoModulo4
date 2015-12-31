@@ -5,43 +5,29 @@ import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import modulo4.proyecto.dao.BookDAO;
 
+import modulo4.proyecto.dao.BookHasRequisitonDAO;
 
 @ManagedBean
 @ViewScoped
 public class HomeBean implements Serializable
 {
-    private ArrayList books;
-    private String findText;
+    private ArrayList listBooks;
     
     public HomeBean() {
     }
     
     @PostConstruct
     public void init() {
-        BookDAO bookDAO = new BookDAO();
-        books = bookDAO.findAll();
-    }
-    
-    public void findBook() {
-        BookDAO bookDAO = new BookDAO();
-        books = bookDAO.findText(findText);
+        BookHasRequisitonDAO bookHasRequisitonDAO = new BookHasRequisitonDAO();
+        listBooks = bookHasRequisitonDAO.findMoreSales();
     }
 
-    public ArrayList getBooks() {
-        return books;
+    public ArrayList getListBooks() {
+        return listBooks;
     }
 
-    public void setBooks(ArrayList books) {
-        this.books = books;
-    }
-
-    public String getFindText() {
-        return findText;
-    }
-
-    public void setFindText(String findText) {
-        this.findText = findText;
+    public void setListBooks(ArrayList listBooks) {
+        this.listBooks = listBooks;
     }
 }

@@ -3,7 +3,8 @@ package modulo4.proyecto.bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+
 import javax.faces.context.FacesContext;
 import modulo4.proyecto.dao.BookHasRequisitonDAO;
 import modulo4.proyecto.dao.RequisitionDAO;
@@ -12,7 +13,7 @@ import modulo4.proyecto.model.Requisition;
 import modulo4.proyecto.service.SessionService;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class RequisitionDetail implements Serializable
 {   
     private String id;
