@@ -7,7 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import modulo4.proyecto.dao.UserDAO;
 import modulo4.proyecto.model.User;
-import modulo4.proyecto.service.SessionService;
+import modulo4.proyecto.session.SessionBean;
 
 @ManagedBean
 @RequestScoped
@@ -18,8 +18,8 @@ public class AdminUsersBean implements Serializable
     
     public AdminUsersBean() 
     {
-        SessionService sessionService = new SessionService();
-        sessionService.checkSessionAdmin();
+        SessionBean sessionService = new SessionBean();
+        sessionService.checkSession("Administrador");
     }
     
     @PostConstruct

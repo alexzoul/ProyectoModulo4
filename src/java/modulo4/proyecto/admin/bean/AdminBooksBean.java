@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import modulo4.proyecto.dao.BookDAO;
 import modulo4.proyecto.model.Book;
-import modulo4.proyecto.service.SessionService;
+import modulo4.proyecto.session.SessionBean;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class AdminBooksBean implements Serializable
 {
     private ArrayList<Book> listBooks;
@@ -18,8 +18,8 @@ public class AdminBooksBean implements Serializable
     
     public AdminBooksBean() 
     {
-        SessionService sessionService = new SessionService();
-        sessionService.checkSessionAdmin();
+        SessionBean sessionService = new SessionBean();
+        sessionService.checkSession("Administrador");
     }
     
     @PostConstruct

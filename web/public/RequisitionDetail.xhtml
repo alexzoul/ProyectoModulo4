@@ -53,16 +53,10 @@
                                     <f:facet name="header">
                                         <h:outputText value="Imagen" />
                                     </f:facet>
-                                    <h:form>
-                                        <h:commandLink 
-                                            action="/public/BookDetail.jsf?faces-redirect=true&amp;includeViewParams=true">
-                                            <f:param name="id" value="#{item.id}"/>
-                                            <h:graphicImage 
-                                                library="default" 
-                                                name="/imagenes/#{item.image}" 
-                                                styleClass="img-thumbnail img_book_requisition"/>
-                                        </h:commandLink> 
-                                    </h:form>
+                                    <h:graphicImage 
+                                        library="default" 
+                                        name="/imagenes/#{item.image}" 
+                                        styleClass="img-thumbnail img_book_requisition"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">

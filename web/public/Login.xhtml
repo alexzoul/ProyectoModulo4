@@ -12,7 +12,10 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <center>
-                                        <h3 class="panel-title">Iniciar Sesión</h3>
+                                        <p>
+                                            <span class="glyphicon glyphicon-user">
+                                            </span>&nbsp;Iniciar Session
+                                        </p>
                                     </center>
                                 </div>
                                 <div class="panel-body">
@@ -20,23 +23,25 @@
                                         <h:outputLabel value="Correo:"/>
                                         <h:inputText value="#{loginBean.email}"
                                                      styleClass="form-control"
-                                                     id="email"/>
+                                                     id="email"
+                                                     maxlength="250"/>
                                         <br/>
                                         <h:outputLabel value="Contraseña:"/>
                                         <h:inputSecret value="#{loginBean.password}"
                                                      styleClass="form-control"
-                                                     id="password"/>
-                                        <h:message for="password" styleClass="error_message"/>
-                                        <br/>
+                                                     id="password"
+                                                     maxlength="32"/>
                                         <center>
-                                            <h:commandButton value="Limpiar" 
-                                                             styleClass="btn btn-default"
-                                                             type="reset"/>
-                                            <h:commandButton value="Enviar"
-                                                             styleClass="btn btn-primary"
-                                                             style="margin-left: 100px;"
-                                                             action="#{loginBean.initSession()}"/>
+                                            <div class="row error_message_login">
+                                                <h:message for="password" styleClass="alert alert-danger text_error_message"/>
+                                            </div>
                                         </center>
+                                        <br/>
+                                        <br/>
+                                        <h:commandButton value="Ingresar"
+                                                         styleClass="btn btn-default button-right"
+                                                         style="margin-left: 100px;"
+                                                         action="#{loginBean.initSession()}"/>
                                     </h:form>
                                 </div>
                             </div>

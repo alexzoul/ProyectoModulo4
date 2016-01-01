@@ -67,16 +67,17 @@
                                     <f:facet name="header">
                                         <h:outputText value="Precio" />
                                     </f:facet>
-                                    <h:outputFormat value="$ #{item.price}"/>
+                                    <h:outputFormat value="$#{item.price}"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Editar" />
                                     </f:facet>
                                     <h:form>
-                                        <h:commandLink> 
-                                            &nbsp;<span class="glyphicon glyphicon-pencil"></span>
-                                        </h:commandLink>
+                                        <h:commandLink action="/private/BookEdit.jsf?faces-redirect=true&amp;includeViewParams=true">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                            <f:param name="id" value="#{item.id}"/>
+                                        </h:commandLink> 
                                     </h:form>
                                 </h:column>
                             </h:dataTable>

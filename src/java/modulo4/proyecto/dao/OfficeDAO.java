@@ -12,7 +12,7 @@ public class OfficeDAO
     
     public ArrayList<Office> findAll () {
         ArrayList<Office> listOffices = new ArrayList<Office> ();
-        String query = "SELECT * FROM office ";
+        String query = "SELECT * FROM office ORDER BY name ASC";
         
         try 
         {

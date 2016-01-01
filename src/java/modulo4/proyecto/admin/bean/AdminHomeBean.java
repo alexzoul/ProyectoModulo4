@@ -6,7 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import modulo4.proyecto.model.User;
-import modulo4.proyecto.service.SessionService;
+import modulo4.proyecto.session.SessionBean;
 
 @ManagedBean
 @RequestScoped
@@ -14,9 +14,10 @@ public class AdminHomeBean implements Serializable
 {
     private ArrayList<User> listUser;
 
-    public AdminHomeBean() {
-        SessionService sessionService = new SessionService();
-        sessionService.checkSessionAdmin();
+    public AdminHomeBean() 
+    {
+        SessionBean sessionService = new SessionBean();
+        sessionService.checkSession("Administrador");
     }
     
     @PostConstruct

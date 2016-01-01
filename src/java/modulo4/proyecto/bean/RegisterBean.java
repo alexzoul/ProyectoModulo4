@@ -16,8 +16,8 @@ public class RegisterBean implements Serializable
     private String paternal_name;
     private String maternal_name;
     private String email;
+    private String phone_number;
     private String password;
-    private String password_confirm;
     
     public RegisterBean() {
     }
@@ -54,6 +54,14 @@ public class RegisterBean implements Serializable
         this.email = email;
     }
 
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -61,38 +69,22 @@ public class RegisterBean implements Serializable
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getPassword_confirm() {
-        return password_confirm;
-    }
-
-    public void setPassword_confirm(String password_confirm) {
-        this.password_confirm = password_confirm;
-    }
     
-    public boolean matchPasswords() {
-        if (!password.equals(password_confirm))
+    public String registerUser () 
+    {
+        User user = new User();
+        
+        user.setName(name);
+        user.setPaternal_name(paternal_name);
+        user.setMaternal_name(maternal_name);
+        user.setEmail(email);
+        user.setPhone_number(phone_number);
+        user.setPassword(password);
+        
+        UserDAO userDAO = new UserDAO();
+
+        if(userDAO.checkEmail(email) == false)
         {
-            FacesMessage message = new FacesMessage();
-            message.setDetail("Los passwords no coinciden");
-            message.setSeverity(FacesMessage.SEVERITY_ERROR);
-            FacesContext.getCurrentInstance().addMessage("register_form:password_confirm",  message);
-            return false;
-        }
-        return true;
-    }
-    
-    public String registerUser () {
-        if(matchPasswords()) {
-            User user = new User();
-            
-            user.setName(name);
-            user.setPaternal_name(paternal_name);
-            user.setMaternal_name(maternal_name);
-            user.setEmail(email);
-            user.setPassword(password);
-            
-            UserDAO userDAO = new UserDAO();
             if(userDAO.insert(user) == 1)
             {
                 LoginBean login = new LoginBean();
@@ -100,7 +92,18 @@ public class RegisterBean implements Serializable
                 login.setPassword(password);
                 return login.initSession();
             }
+            else
+            {
+                return "error";
+            }
         }
-        return null;
+        else
+        {
+            FacesMessage message = new FacesMessage();
+            message.setDetail("El correo ya se encuentra registrado");
+            message.setSeverity(FacesMessage.SEVERITY_ERROR);
+            FacesContext.getCurrentInstance().addMessage("register_form:email",  message);
+            return null;
+        }
     }
 }

@@ -8,19 +8,32 @@
     <h:body>
         <ui:composition template="./../PublicTemplate.xhtml">
             <ui:define name="content">
-                <div class="panel" id="books_container">
+                <div class="panel panel-collapse panel-default" id="books_container">
                     <div class="panel-heading">
                         <div class="row">
-                            <p>
-                                <span class="glyphicon glyphicon-stats"></span>&nbsp;
-                                Libros Mas Vendidos
-                                <span class="glyphicon glyphicon-stats"></span>&nbsp;
-                            </p>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <p id="p_book_catalog">
+                                    <span class="glyphicon glyphicon-book"></span>&nbsp;Catálogo de Libros
+                                </p>
+                            </div>
+                            <div class="col-lg-5 col-lg-offset-3 col-md-5 col-md-offset-3 col-sm-6">
+                                <h:form>
+                                    <div class="input-group">
+                                        <h:inputText styleClass="form-control input-sm" value="#{bookCatalog.findText}" maxlength="50"/>
+                                        <span class="input-group-btn">
+                                            <h:commandButton 
+                                                class="btn btn-default btn-sm" 
+                                                action="#{bookCatalog.findBook()}"
+                                                value="Buscar"/>
+                                        </span>
+                                    </div>
+                                </h:form>
+                            </div>
                         </div>
                     </div>
                     <div class="panel-body">
-                        <c:forEach var="item" items="#{homeBean.listBooks}">
-                            <div class="col-lg-3 col-md-4 col-sm-6 book_container_catalog">
+                        <c:forEach var="item" items="#{bookCatalog.listBooks}">
+                            <div class="col-lg-3 col-md-4 col-sm-6">
                                 <center>
                                     <div class="row">
                                         <h:form>

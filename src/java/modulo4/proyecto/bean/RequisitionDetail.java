@@ -2,17 +2,19 @@ package modulo4.proyecto.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+
 import javax.faces.context.FacesContext;
 import modulo4.proyecto.dao.BookHasRequisitonDAO;
 import modulo4.proyecto.dao.RequisitionDAO;
 import modulo4.proyecto.model.Book;
 import modulo4.proyecto.model.Requisition;
-import modulo4.proyecto.service.SessionService;
+import modulo4.proyecto.session.SessionBean;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class RequisitionDetail implements Serializable
 {   
     private String id;
@@ -22,27 +24,32 @@ public class RequisitionDetail implements Serializable
     
     public RequisitionDetail () 
     {
+        SessionBean sessionService = new SessionBean();
+        sessionService.checkSession("Cliente");
+    }  
+    
+    @PostConstruct
+    public void init ()
+    {   
+        SessionBean sessionService = new SessionBean();
+        int idUser = sessionService.getIdSession("Cliente");
         row = 0;
-        SessionService sessionService = new SessionService();
-        int id_user = sessionService.getIdSession();
         
-        if(id_user != 0)
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        id = (String) facesContext.getExternalContext().getRequestParameterMap().get("id");
+        
+        if(id != null)
         {
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            id = (String) facesContext.getExternalContext().getRequestParameterMap().get("id");
-            if(id != null)
-            {
-                RequisitionDAO requisitionDAO = new RequisitionDAO();
-                currentRequisition = requisitionDAO.findById(Integer.parseInt(id), id_user);
+            RequisitionDAO requisitionDAO = new RequisitionDAO();
+            currentRequisition = requisitionDAO.findById(Integer.parseInt(id), idUser);
 
-                if(currentRequisition != null)
-                {
-                    BookHasRequisitonDAO bookHasRequisitonDAO = new BookHasRequisitonDAO();
-                    listBooks = bookHasRequisitonDAO.findByIdRequisition(currentRequisition.getId());
-                }
+            if(currentRequisition != null)
+            {
+                BookHasRequisitonDAO bookHasRequisitonDAO = new BookHasRequisitonDAO();
+                listBooks = bookHasRequisitonDAO.findByIdRequisition(currentRequisition.getId());
             }
         }
-    }  
+    }
 
 
     public String getId() {

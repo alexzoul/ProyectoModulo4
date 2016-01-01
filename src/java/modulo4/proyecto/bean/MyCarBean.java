@@ -1,6 +1,6 @@
 package modulo4.proyecto.bean;
 
-import modulo4.proyecto.service.SessionService;
+import modulo4.proyecto.session.SessionBean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
@@ -25,7 +25,9 @@ public class MyCarBean implements Serializable
     private Float total;
     private Integer row;
     
-    public MyCarBean () {    
+    public MyCarBean () 
+    {  
+        
     }
     
     @PostConstruct
@@ -66,15 +68,15 @@ public class MyCarBean implements Serializable
     
     public String addBook(int id) 
     {
-        SessionService sessionBean = new SessionService();
+        SessionBean sessionService = new SessionBean();
 
-        if (sessionBean.checkSession()) 
+        if (sessionService.getIdSession("Cliente") != 0) 
         {
             BookDAO bookDAO = new BookDAO();
             Book book = bookDAO.findById(id);
             cleanVariables();
             addListBooks(book);
-            return "/public/MyCar.jsf?faces-redirect=true";
+            return "/public/BookCatalog.jsf?faces-redirect=true";
         }
         else 
         {
@@ -86,25 +88,29 @@ public class MyCarBean implements Serializable
     {
         if(listBooks.size() > 0)
         {
-            SessionService sessionBean = new SessionService();
-
-            int idSession = sessionBean.getIdSession();
-            if(idSession != 0)
+            SessionBean sessionService = new SessionBean();
+            int id = sessionService.getIdSession("Cliente");
+            
+            if(id != 0)
             {
                 RequisitionDAO requisitionDAO = new RequisitionDAO();
-                if(requisitionDAO.insert(total, idSession, currentOffice.getId(), listBooks) != 0)
+                if(requisitionDAO.insert(total, id, currentOffice.getId(), listBooks) != 0)
                 {
                     listBooks.clear();
                     cleanVariables();
                     return "/public/MyRequisitions.jsf?faces-redirect=true";
                 }
+                return "error";
+            }
+            else 
+            {
+                return "/public/Login.jsf?faces-redirect=true";
             }
         }
         else
         {
             return null;
         }
-        return "/public/Login.jsf?faces-redirect=true";
     }
           
 
