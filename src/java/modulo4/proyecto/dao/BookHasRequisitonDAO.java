@@ -14,8 +14,8 @@ public class BookHasRequisitonDAO
     public int insert (int id_book, int id_requisition)
     {
         int result = 0;
-        String query = "INSERT INTO book_has_requisition (date, book_id, requisition_id) "
-                        + " VALUES (NOW(),?,?) ";
+        String query = "INSERT INTO book_has_requisition (book_id, requisition_id) "
+                        + " VALUES (?,?) ";
         
         try
         {
@@ -102,7 +102,8 @@ public class BookHasRequisitonDAO
                 + " ON r.id = bhr.requisition_id "
                 + " WHERE r.status = 1 "
                 + " GROUP BY bhr.book_id "
-                + " ORDER BY sales DESC; ";
+                + " ORDER BY sales DESC "
+                + " LIMIT 12; ";
         try
         {
             currentConnection = new ConnectionDB();

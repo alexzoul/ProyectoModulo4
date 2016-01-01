@@ -12,17 +12,19 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-6">
-                                <p id="p_book_catalog">Catalogo de Libros</p>
+                                <p id="p_book_catalog">
+                                    <span class="glyphicon glyphicon-book"></span>&nbsp;Catálogo de Libros
+                                </p>
                             </div>
                             <div class="col-lg-5 col-lg-offset-3 col-md-5 col-md-offset-3 col-sm-6">
                                 <h:form>
                                     <div class="input-group">
-                                        <h:inputText styleClass="form-control input-sm" value="#{bookCatalog.findText}"  />
+                                        <h:inputText styleClass="form-control input-sm" value="#{bookCatalog.findText}" maxlength="50"/>
                                         <span class="input-group-btn">
-                                            <h:commandLink class="btn btn-primary btn-sm" action="#{bookCatalog.findBook()}">
-                                                <span class="glyphicon glyphicon-search">
-                                                </span>&nbsp;Buscar
-                                            </h:commandLink>
+                                            <h:commandButton 
+                                                class="btn btn-default btn-sm" 
+                                                action="#{bookCatalog.findBook()}"
+                                                value="Buscar"/>
                                         </span>
                                     </div>
                                 </h:form>
@@ -35,21 +37,20 @@
                                 <center>
                                     <div class="row">
                                         <h:form>
-                                            <div class="img_book_container">
-                                                <div class="row">
-                                                    <h:commandLink 
-                                                        action="/public/BookDetail.jsf?faces-redirect=true&amp;includeViewParams=true">
+                                            <h:commandLink action="/public/BookDetail.jsf?faces-redirect=true&amp;includeViewParams=true">
+                                                <div class="img_book_container">
+                                                    <div class="row">
                                                         <f:param name="id" value="#{item.id}"/>
                                                         <h:graphicImage 
                                                             library="default" 
                                                             name="/imagenes/#{item.image}" 
-                                                            styleClass="img-thumbnail img-book"/>
-                                                    </h:commandLink> 
+                                                            styleClass="img-book"/>
+                                                    </div>
+                                                    <div class="row title_book_catalog">
+                                                        #{item.title}
+                                                    </div>
                                                 </div>
-                                                <div class="row title_book_catalog">
-                                                    #{item.title}
-                                                </div>
-                                            </div>
+                                            </h:commandLink> 
                                         </h:form>
                                     </div>
                                 </center>

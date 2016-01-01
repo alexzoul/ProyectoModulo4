@@ -74,7 +74,7 @@ public class MyCarBean implements Serializable
             Book book = bookDAO.findById(id);
             cleanVariables();
             addListBooks(book);
-            return "/public/MyCar.jsf?faces-redirect=true";
+            return "/public/BookCatalog.jsf?faces-redirect=true";
         }
         else 
         {

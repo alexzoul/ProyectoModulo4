@@ -13,7 +13,10 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <center>
-                                        <h3 class="panel-title">Registro</h3>
+                                        <p>
+                                            <span class="glyphicon glyphicon-pencil">
+                                            </span>&nbsp;Registro
+                                        </p>
                                     </center>
                                 </div>
                                 <div class="panel-body">
@@ -27,7 +30,9 @@
                                                      maxlength="45">
                                             <f:validator validatorId="nameValidator"/>
                                         </h:inputText>
-                                        <h:message for="name" styleClass="error_message"/>
+                                        <div class="row error_message">
+                                            <h:message for="name" styleClass="alert alert-danger text_error_message"/>
+                                        </div>
                                         <br/>
                                         <h:outputLabel value="Apellido Paterno:" styleClass="register_label"/>
                                         <h:inputText value="#{registerBean.paternal_name}"
@@ -38,7 +43,9 @@
                                                      maxlength="45">
                                             <f:validator validatorId="nameValidator"/>
                                         </h:inputText>
-                                        <h:message for="paternal_name" styleClass="error_message"/>
+                                        <div class="row error_message">
+                                            <h:message for="paternal_name" styleClass="alert alert-danger text_error_message"/>
+                                        </div>
                                         <br/>
                                         <h:outputLabel value="Apellido Materno:" styleClass="register_label"/>
                                         <h:inputText value="#{registerBean.maternal_name}"
@@ -49,7 +56,9 @@
                                                      maxlength="45">
                                             <f:validator validatorId="nameValidator"/>
                                         </h:inputText>
-                                        <h:message for="maternal_name" styleClass="error_message"/>
+                                        <div class="row error_message">
+                                            <h:message for="maternal_name" styleClass="alert alert-danger text_error_message"/>
+                                        </div>
                                         <br/>
                                         <h:outputLabel value="Correo:" styleClass="register_label"/>
                                         <h:inputText value="#{registerBean.email}"
@@ -60,7 +69,9 @@
                                                      maxlength="250">
                                             <f:validator validatorId="emailValidator"/>
                                         </h:inputText>
-                                        <h:message for="email" styleClass="error_message"/>
+                                        <div class="row error_message">
+                                            <h:message for="email" styleClass="alert alert-danger text_error_message"/>
+                                        </div>
                                         <br/>
                                         <h:outputLabel value="Telefono:" styleClass="register_label"/>
                                         <h:inputText value="#{registerBean.phone_number}"
@@ -72,7 +83,9 @@
                                                      validatorMessage="Ingrese un Telefono Valido">
                                             <f:validateRegex pattern="[0-9]{10}"/>
                                         </h:inputText>
-                                        <h:message for="phone_number" styleClass="error_message"/>
+                                        <div class="row error_message">
+                                            <h:message for="phone_number" styleClass="alert alert-danger text_error_message"/>
+                                        </div>
                                         <br/>
                                         <h:outputLabel value="Contraseña:" styleClass="register_label"/>
                                         <h:inputSecret value="#{registerBean.password}"
@@ -84,7 +97,9 @@
                                             <f:validator validatorId="matchPasswordsValidator" />
                                             <f:attribute name="password_confirm_attr" value="#{confirm_password_bind}" />
                                         </h:inputSecret>
-                                        <h:message for="password" styleClass="error_message"/>
+                                        <div class="row error_message">
+                                            <h:message for="password" styleClass="alert alert-danger text_error_message"/>
+                                        </div>
                                         <br/>
                                         <h:outputLabel value="Repetir Contraseña:" styleClass="register_label"/>
                                         <h:inputSecret styleClass="form-control"
@@ -92,26 +107,15 @@
                                                      id="password_confirm"
                                                      required="true"
                                                      requiredMessage="Este campo es requerido"/>
-                                        <h:message for="password_confirm" styleClass="error_message"/>
+                                        <div class="row error_message">
+                                            <h:message for="password_confirm" styleClass="alert alert-danger text_error_message"/>
+                                        </div>
                                         <br/>
                                         <br/>
                                         <div class="row">
-                                            <div class="col-xs-6">
-                                                <center>
-                                                    <h:commandButton value="Limpiar" 
-                                                        styleClass="btn btn-default"
-                                                        type="reset"/>
-                                                </center>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <center>
-                                                    <h:commandButton value="Registrarme"
-                                                        styleClass="btn btn-primary"
-                                                        style="margin-left: 50px;"
-                                                        action="#{registerBean.registerUser()}"
-                                                        />
-                                                </center>
-                                            </div>
+                                            <h:commandButton value="Registrarme"
+                                                styleClass="btn btn-default button-right"
+                                                action="#{registerBean.registerUser()}"/>
                                         </div>
                                     </h:form>
                                 </div>

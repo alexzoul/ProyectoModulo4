@@ -8,35 +8,36 @@
     <h:body>
         <ui:composition template="./../PublicTemplate.xhtml">
             <ui:define name="content">
-                <div class="panel panel-collapse panel-default" id="books_container">
+                <div class="panel" id="books_container">
                     <div class="panel-heading">
                         <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <p id="p_book_catalog">Libros Mas Vendidos</p>
-                            </div>
+                            <p>
+                                <span class="glyphicon glyphicon-stats"></span>&nbsp;
+                                Libros Mas Vendidos
+                                <span class="glyphicon glyphicon-stats"></span>&nbsp;
+                            </p>
                         </div>
                     </div>
                     <div class="panel-body">
                         <c:forEach var="item" items="#{homeBean.listBooks}">
-                            <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="col-lg-3 col-md-4 col-sm-6 book_container_catalog">
                                 <center>
                                     <div class="row">
                                         <h:form>
-                                            <div class="img_book_container">
-                                                <div class="row">
-                                                    <h:commandLink 
-                                                        action="/public/BookDetail.jsf?faces-redirect=true&amp;includeViewParams=true">
+                                            <h:commandLink action="/public/BookDetail.jsf?faces-redirect=true&amp;includeViewParams=true">
+                                                <div class="img_book_container">
+                                                    <div class="row">
                                                         <f:param name="id" value="#{item.id}"/>
                                                         <h:graphicImage 
                                                             library="default" 
                                                             name="/imagenes/#{item.image}" 
-                                                            styleClass="img-thumbnail img-book"/>
-                                                    </h:commandLink> 
+                                                            styleClass="img-book"/>
+                                                    </div>
+                                                    <div class="row title_book_catalog">
+                                                        #{item.title}
+                                                    </div>
                                                 </div>
-                                                <div class="row title_book_catalog">
-                                                    #{item.title}
-                                                </div>
-                                            </div>
+                                            </h:commandLink> 
                                         </h:form>
                                     </div>
                                 </center>

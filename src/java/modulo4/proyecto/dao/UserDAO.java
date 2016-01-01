@@ -102,6 +102,8 @@ public class UserDAO
                 user.setPaternal_name(rst.getString("paternal_name"));
                 user.setMaternal_name(rst.getString("maternal_name"));
                 user.setEmail(rst.getString("email"));
+                user.setPhone_number(rst.getString("phone_number"));
+                user.setRegister_time(rst.getTime("register_date"));
                 user.setRegister_date(rst.getDate("register_date"));
             }
             pstm.close();
