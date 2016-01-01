@@ -4,13 +4,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import modulo4.proyecto.database.ConnectionDB;
+import modulo4.proyecto.model.Role;
 import modulo4.proyecto.model.User;
 
 public class UserDAO 
 {
     private ConnectionDB currentConnection;
     
-    public User validateUser (String email, String password)
+    public User checkUser (String email, String password, String role_type)
     {
         String query = "SELECT u.id, "
                 + " u.email, "
@@ -31,18 +32,22 @@ public class UserDAO
             PreparedStatement pstm = currentConnection.getConnection().prepareStatement(query);
             pstm.setString(1, email);
             pstm.setString(2, password);
-            pstm.setString(3, "Cliente");
+            pstm.setString(3, role_type);
             ResultSet rst = pstm.executeQuery();
             
             if(rst.next())
             {
                 User user = new User();
+                Role role = new Role();
                 
                 user.setId(rst.getInt("id"));
                 user.setName(rst.getString("name"));
                 user.setPaternal_name(rst.getString("paternal_name"));
                 user.setMaternal_name(rst.getString("maternal_name"));
                 user.setEmail(rst.getString("email"));
+                
+                role.setType(role_type);
+                user.setRole(role);
                 
                 return user;
             }

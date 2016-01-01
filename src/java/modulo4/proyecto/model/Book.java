@@ -1,21 +1,21 @@
 package modulo4.proyecto.model;
 
 public class Book {
-    private int id;
+    private Integer id;
     private String title;
     private String author;
     private String editorial;
-    private int year;
+    private Integer year;
     private String description;
     private String image;
-    private int pages;
-    private float price;
+    private Integer pages;
+    private Float price;
     
     public Book () {
     }
     
-    public Book (int id, String title, String author, String editorial, int year, 
-                 String description, String image, int pages, float price) {
+    public Book (Integer id, String title, String author, String editorial, Integer year, 
+                 String description, String image, Integer pages, Float price) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -27,11 +27,11 @@ public class Book {
         this.price = price;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -59,11 +59,11 @@ public class Book {
         this.editorial = editorial;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 
@@ -83,19 +83,19 @@ public class Book {
         this.image = image;
     }
 
-    public int getPages() {
+    public Integer getPages() {
         return pages;
     }
 
-    public void setPages(int pages) {
+    public void setPages(Integer pages) {
         this.pages = pages;
     }
 
-    public float getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 }

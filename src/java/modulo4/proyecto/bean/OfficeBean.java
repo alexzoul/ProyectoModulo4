@@ -2,7 +2,6 @@ package modulo4.proyecto.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import modulo4.proyecto.dao.OfficeDAO;
@@ -15,11 +14,7 @@ public class OfficeBean implements Serializable
     private ArrayList<Office> listOffice;
     private Integer row;
     
-    public OfficeBean() {
-    }
-
-    @PostConstruct
-    public void init()
+    public OfficeBean() 
     {
         row = 0;
         OfficeDAO officeDAO = new OfficeDAO();

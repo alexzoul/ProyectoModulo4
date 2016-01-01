@@ -7,7 +7,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import modulo4.proyecto.dao.UserDAO;
 import modulo4.proyecto.model.User;
-import modulo4.proyecto.service.SessionService;
+import modulo4.proyecto.session.SessionBean;
 
 @ManagedBean
 @SessionScoped
@@ -35,14 +35,15 @@ public class AdminLoginBean implements Serializable
         this.password = password;
     }
     
-    public String initSession() {
+    public String initSession() 
+    {
         UserDAO userDAO = new UserDAO();
-        User admin = userDAO.validateAdmin(email, password);
+        User user = userDAO.checkUser(email, password, "Administrador");
         
-        if(admin != null)
+        if(user != null)
         {
-            SessionService sessionBean = new SessionService();
-            sessionBean.initSessionAdmin(admin);
+            SessionBean sessionBean = new SessionBean();
+            sessionBean.initSession(user);
             return "/private/Home.jsf?faces-redirect=true";
         }
         else

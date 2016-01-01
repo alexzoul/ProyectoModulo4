@@ -21,7 +21,7 @@
                         <li id="li_users">
                             <h:commandLink 
                                 action="/private/Users.jsf?faces-redirect=true"
-                                rendered="#{sessionService.getAdminIdSession() != 0}"> 
+                                rendered="#{adminNavbarBean.session == true}"> 
                                 <span class="glyphicon glyphicon-user"></span>
                                 &nbsp;Usuarios
                             </h:commandLink>
@@ -29,7 +29,7 @@
                         <li id="li_books">
                             <h:commandLink 
                                 action="/private/Books.jsf?faces-redirect=true"
-                                rendered="#{sessionService.getAdminIdSession() != 0}"> 
+                                rendered="#{adminNavbarBean.session == true}"> 
                                 <span class="glyphicon glyphicon-book"></span>
                                 &nbsp;Libros
                             </h:commandLink>
@@ -37,15 +37,15 @@
                         <li id="li_requisitions">
                             <h:commandLink 
                                 action="/private/Sales.jsf?faces-redirect=true"
-                                rendered="#{sessionService.getAdminIdSession() != 0}"> 
+                                rendered="#{adminNavbarBean.session == true}"> 
                                 <span class="glyphicon glyphicon-usd"></span>
                                 &nbsp;Ventas
                             </h:commandLink>
                         </li>
                         <li>
                             <h:commandLink 
-                                action="#{sessionService.closeSessionAdmin()}"
-                                rendered="#{sessionService.getAdminIdSession() != 0}"> 
+                                action="#{sessionBean.closeSession()}"
+                                rendered="#{adminNavbarBean.session == true}">  
                                 <span class="glyphicon glyphicon-off">
                                 </span>&nbsp;Salir
                             </h:commandLink>

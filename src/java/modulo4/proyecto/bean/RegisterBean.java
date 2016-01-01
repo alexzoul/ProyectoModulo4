@@ -70,15 +70,17 @@ public class RegisterBean implements Serializable
         this.password = password;
     }
     
-    public String registerUser () {
+    public String registerUser () 
+    {
         User user = new User();
-
+        
         user.setName(name);
         user.setPaternal_name(paternal_name);
         user.setMaternal_name(maternal_name);
         user.setEmail(email);
         user.setPhone_number(phone_number);
         user.setPassword(password);
+        
         UserDAO userDAO = new UserDAO();
 
         if(userDAO.checkEmail(email) == false)
@@ -90,6 +92,10 @@ public class RegisterBean implements Serializable
                 login.setPassword(password);
                 return login.initSession();
             }
+            else
+            {
+                return "error";
+            }
         }
         else
         {
@@ -97,8 +103,7 @@ public class RegisterBean implements Serializable
             message.setDetail("El correo ya se encuentra registrado");
             message.setSeverity(FacesMessage.SEVERITY_ERROR);
             FacesContext.getCurrentInstance().addMessage("register_form:email",  message);
+            return null;
         }
-        
-        return null;
     }
 }

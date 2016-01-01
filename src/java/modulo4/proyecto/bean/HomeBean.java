@@ -2,7 +2,6 @@ package modulo4.proyecto.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -14,11 +13,8 @@ public class HomeBean implements Serializable
 {
     private ArrayList listBooks;
     
-    public HomeBean() {
-    }
-    
-    @PostConstruct
-    public void init() {
+    public HomeBean() 
+    {
         BookHasRequisitonDAO bookHasRequisitonDAO = new BookHasRequisitonDAO();
         listBooks = bookHasRequisitonDAO.findMoreSales();
     }

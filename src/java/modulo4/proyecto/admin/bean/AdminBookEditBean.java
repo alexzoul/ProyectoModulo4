@@ -7,7 +7,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import modulo4.proyecto.dao.BookDAO;
 import modulo4.proyecto.model.Book;
-import modulo4.proyecto.service.SessionService;
+import modulo4.proyecto.session.SessionBean;
 
 @ManagedBean
 @ViewScoped
@@ -18,9 +18,10 @@ public class AdminBookEditBean implements Serializable
     
     public AdminBookEditBean() 
     {
-        SessionService sessionService = new SessionService();
-        sessionService.checkSessionAdmin();
+        SessionBean sessionService = new SessionBean();
+        sessionService.checkSession("Administrador");
     }
+
     @PostConstruct
     public void init()
     {

@@ -1,22 +1,22 @@
 package modulo4.proyecto.model;
 
 public class Summary {
-    private int id;
+    private Integer id;
     private String type;
     
     public Summary() {
     }
     
-    public Summary (int id, String type) {
+    public Summary (Integer id, String type) {
         this.id = id;
         this.type = type;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

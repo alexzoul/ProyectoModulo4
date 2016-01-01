@@ -2,7 +2,6 @@ package modulo4.proyecto.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import modulo4.proyecto.dao.BookDAO;
@@ -14,11 +13,8 @@ public class BookCatalog implements Serializable
     private ArrayList listBooks;
     private String findText;
     
-    public BookCatalog() {
-    }
-    
-    @PostConstruct
-    public void init() {
+    public BookCatalog() 
+    {
         BookDAO bookDAO = new BookDAO();
         listBooks = bookDAO.findAll();
     }

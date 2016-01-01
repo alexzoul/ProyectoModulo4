@@ -131,7 +131,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_final`.`book_has_requisition` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `date` DATETIME NOT NULL,
   `book_id` INT NOT NULL,
   `requisition_id` INT NOT NULL,
   INDEX `fk_book_has_requisition_requisition1_idx` (`requisition_id` ASC),

@@ -2,7 +2,7 @@ package modulo4.proyecto.model;
 
 public class Office 
 {
-    private int id;
+    private Integer id;
     private String name;
     private String street;
     private String int_number;
@@ -15,7 +15,7 @@ public class Office
     public Office() {
     }
     
-    public Office(int id, String name, String street, String int_number,
+    public Office(Integer id, String name, String street, String int_number,
                   String ext_number, String neighborhood, String city,
                   String state, String zip_code) {
         this.id = id;
@@ -29,11 +29,11 @@ public class Office
         this.zip_code = zip_code;        
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

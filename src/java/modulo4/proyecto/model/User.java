@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.sql.Time;
 
 public class User {
-    private int id;
+    private Integer id;
     private String name;
     private String paternal_name;
     private String maternal_name;
@@ -14,14 +14,14 @@ public class User {
     private Date register_date;
     private Time register_time;
     private Role role;
-    private int status;
+    private Integer status;
     
     public User() {        
     }
     
-    public User(int id, String name, String paternal_name, String maternal_name,
+    public User(Integer id, String name, String paternal_name, String maternal_name,
                 String email, String phone_number, String password, Date register_date, 
-                Time register_time, Role role, int status) {
+                Time register_time, Role role, Integer status) {
         this.id = id;
         this.name = name;
         this.paternal_name = paternal_name;
@@ -35,11 +35,11 @@ public class User {
         this.status = status;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -115,11 +115,11 @@ public class User {
         this.role = role;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 }

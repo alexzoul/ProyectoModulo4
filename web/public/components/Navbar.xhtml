@@ -38,37 +38,37 @@
                         </li>
                         
                         <li id="li_myaccount">
-                            <h:commandLink rendered="#{sessionService.session == true}" action="/public/MyAccount.jsf?faces-redirect=true"> 
+                            <h:commandLink rendered="#{navbarBean.session == true}" action="/public/MyAccount.jsf?faces-redirect=true"> 
                                 <span class="glyphicon glyphicon-user">
                                 </span>&nbsp;Mis Datos
                             </h:commandLink>
                         </li>
                         <li id="li_mycar">
-                            <h:commandLink  rendered="#{sessionService.session == true}" action="/public/MyCar.jsf?faces-redirect=true"> 
+                            <h:commandLink  rendered="#{navbarBean.session == true}" action="/public/MyCar.jsf?faces-redirect=true"> 
                                 <span class="glyphicon glyphicon-shopping-cart">
                                 </span>&nbsp;Mi Carrito (#{myCarBean.listBooks.size()})
                             </h:commandLink>
                         </li>
                         <li id="li_myrequisitions">
-                            <h:commandLink  rendered="#{sessionService.session == true}" action="/public/MyRequisitions.jsf?faces-redirect=true"> 
+                            <h:commandLink  rendered="#{navbarBean.session == true}" action="/public/MyRequisitions.jsf?faces-redirect=true"> 
                                 <span class="glyphicon glyphicon-book">
                                 </span>&nbsp;Mis Compras
                             </h:commandLink>
                         </li>
                         <li>
-                            <h:commandLink action="#{sessionService.closeSession()}" rendered="#{sessionService.session == true}"> 
+                            <h:commandLink action="#{session.closeSession()}" rendered="#{navbarBean.session == true}"> 
                                 <span class="glyphicon glyphicon-off">
                                 </span>&nbsp;Salir
                             </h:commandLink>
                         </li>
                         <li id="li_register">
-                            <h:commandLink rendered="#{sessionService.session == false}" action="/public/Register.jsf?faces-redirect=true"> 
+                            <h:commandLink rendered="#{navbarBean.session == false}" action="/public/Register.jsf?faces-redirect=true"> 
                                 <span class="glyphicon glyphicon-pencil">
                                 </span>&nbsp;Registro
                             </h:commandLink>
                         </li>
                         <li id="li_login">
-                            <h:commandLink rendered="#{sessionService.session == false}" action="/public/Login.jsf?faces-redirect=true"> 
+                            <h:commandLink rendered="#{navbarBean.session == false}" action="/public/Login.jsf?faces-redirect=true"> 
                                 <span class="glyphicon glyphicon-user">
                                 </span>&nbsp;Iniciar Session
                             </h:commandLink>
