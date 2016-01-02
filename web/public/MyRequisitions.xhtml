@@ -25,60 +25,64 @@
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Sucursal" />
+                                        <span class="glyphicon glyphicon-list-alt"></span>
+                                        <h:outputText value="&nbsp;Sucursal" />
                                     </f:facet>
                                     <h:outputText value="#{item.office.name}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Fecha" />
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                        <h:outputText value="&nbsp;Fecha" />
                                     </f:facet>
                                     <h:outputText value="#{item.date}">
-                                        <f:convertDateTime pattern="dd-MM-yyyy" />
+                                        <f:convertDateTime pattern="d-MM-yyyy" />
                                     </h:outputText>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Hora" />
+                                        <span class="glyphicon glyphicon-time"></span>
+                                        <h:outputText value="&nbsp;Hora" />
                                     </f:facet>
-                                    <h:outputText value="#{item.time}">
-                                        
-                                    </h:outputText>
-                                </h:column>
-
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Total" />
-                                    </f:facet>
-                                    <h:outputText value="$ #{item.total}" />
+                                    <h:outputText value="#{myRequisitionsBean.convertTime(item.time)}"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Estado" />
+                                        <span class="glyphicon glyphicon-usd"></span>
+                                        <h:outputText value="&nbsp;Total" />
                                     </f:facet>
-                                    
+                                    <h:outputText value="$#{item.total}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                        <h:outputText value="&nbsp;Estatus" />
+                                    </f:facet>
                                     <h:outputText value="#{item.summary.type}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Detalles" />
+                                        <span class="glyphicon glyphicon-list"></span>
+                                        <h:outputText value="&nbsp;Detalles" />
                                     </f:facet>
                                     <h:form>
                                         <h:commandLink action="/public/RequisitionDetail.jsf?faces-redirect=true&amp;includeViewParams=true">
                                             <f:param name="id" value="#{item.id}"/>
-                                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                                                <span class="glyphicon glyphicon-search"></span>
                                         </h:commandLink> 
                                     </h:form>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Cancelar" />
+                                        <span class="glyphicon glyphicon-remove-sign"></span>
+                                        <h:outputText value="&nbsp;Cancelar" />
                                     </f:facet>
-                                    <h:form>
-                                        <h:commandLink action="#{myRequisitionsBean.delete(item.id)}">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </h:commandLink> 
-                                    </h:form>
+                                        <h:form>
+                                            <h:commandLink action="#{myRequisitionsBean.delete(item.id)}"
+                                                           rendered="#{(4 > myRequisitionsBean.diffDaysDate(item.date, item.time))}">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </h:commandLink> 
+                                        </h:form>
                                 </h:column>
                             </h:dataTable>
                         </div>

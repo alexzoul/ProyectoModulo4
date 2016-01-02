@@ -14,7 +14,7 @@ public class BookDAO
     public ArrayList<Book> findAll () 
     {
         ArrayList<Book> books = new ArrayList<Book> ();
-        String query = "SELECT * FROM book ORDER BY title, author, editorial DESC";
+        String query = "SELECT * FROM book ORDER BY title, author, editorial ASC";
         
         try 
         {
@@ -59,7 +59,8 @@ public class BookDAO
     {
         ArrayList<Book> books = new ArrayList<Book>();
         String query = "SELECT * FROM book WHERE "
-                     + " title LIKE ? OR author LIKE ? ";
+                     + " title LIKE ? OR author LIKE ? "
+                     + "ORDER BY title, author, editorial ASC";
         
         try 
         {

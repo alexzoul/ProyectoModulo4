@@ -13,7 +13,7 @@
         <ui:composition template="./../PrivateTemplate.xhtml">
             <ui:define name="content">
                 <div class="row">
-                    <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
+                    <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
                         <div id="login_container">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -22,13 +22,16 @@
                                     </p>
                                 </div>
                                 <div class="panel-body">
-                                    <h:form id="login_form">
+                                    <h:form id="book_form">
                                         <h:outputLabel value="Titulo:"/>
                                         <h:inputText value="#{adminBookEditBean.currentBook.title}"
                                                      styleClass="form-control"
                                                      id="title"
                                                      maxlength="100"
                                                      required="true"/>
+                                        <div class="row error_message">
+                                            <h:message for="title" styleClass="alert alert-danger text_error_message"/>
+                                        </div>
                                         <br/>
                                         <h:outputLabel value="Autor:"/>
                                         <h:inputText value="#{adminBookEditBean.currentBook.author}"
@@ -36,6 +39,9 @@
                                                      id="author"
                                                      maxlength="250"
                                                      required="true"/>
+                                        <div class="row error_message">
+                                            <h:message for="author" styleClass="alert alert-danger text_error_message"/>
+                                        </div>
                                         <br/>
                                         <h:outputLabel value="Editorial:"/>
                                         <h:inputText value="#{adminBookEditBean.currentBook.editorial}"
@@ -43,33 +49,57 @@
                                                      id="editorial"
                                                      maxlength="300"
                                                      required="true"/>
+                                        <div class="row error_message">
+                                            <h:message for="editorial" styleClass="alert alert-danger text_error_message"/>
+                                        </div>
                                         <br/>
                                         <h:outputLabel value="Año:"/>
                                         <h:inputText value="#{adminBookEditBean.currentBook.year}"
                                                      styleClass="form-control"
                                                      id="year"
                                                      maxlength="4"
-                                                     required="true"/>
+                                                     required="true">
+                                            <f:validateLength maximum="12"/>
+                                            <f:validateLongRange minimum="1950" maximum="2100"/>
+                                        </h:inputText>
+                                        <div class="row error_message">
+                                            <h:message for="year" styleClass="alert alert-danger text_error_message"/>
+                                        </div>
                                         <br/>
                                         <h:outputLabel value="Paginas:"/>
                                         <h:inputText value="#{adminBookEditBean.currentBook.pages}"
                                                      styleClass="form-control"
                                                      id="pages"
                                                      maxlength="4"
-                                                     required="true"/>
+                                                     required="true"
+                                                     validatorMessage="Ingrese un número Valido">
+                                            <f:validateRegex pattern="[0-9]{4}"/>
+                                        </h:inputText>
+                                        <div class="row error_message">
+                                            <h:message for="pages" styleClass="alert alert-danger text_error_message"/>
+                                        </div>
                                         <br/>
                                         <h:outputLabel value="Precio:"/>
                                         <h:inputText value="#{adminBookEditBean.currentBook.price}"
                                                      styleClass="form-control"
                                                      id="price"
                                                      maxlength="12"
-                                                     required="true"/>
+                                                     required="true"
+                                                     validatorMessage="Ingrese un precio Valido">
+                                            <f:validateRegex pattern="[0-9.]{1,12}"/>
+                                        </h:inputText>
+                                        <div class="row error_message">
+                                            <h:message for="price" styleClass="alert alert-danger text_error_message"/>
+                                        </div>
                                         <br/>
                                         <h:outputLabel value="Descripción:"/>
                                         <h:inputTextarea value="#{adminBookEditBean.currentBook.description}"
                                                      styleClass="form-control"
                                                      id="description"
                                                      required="true"/>
+                                        <div class="row error_message">
+                                            <h:message for="description" styleClass="alert alert-danger text_error_message"/>
+                                        </div>
                                         <br/>
                                         <h:commandButton value="Guardar" styleClass="btn btn-default button-right" action="#{adminBookEditBean.update()}"/>
                                     </h:form>

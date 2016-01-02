@@ -87,7 +87,8 @@ public class RequisitionDAO
                 + " INNER JOIN office AS o "
                 + " ON r.office_id = o.id "
                 + " WHERE r.user_id = ? "
-                + " AND r.status = 1 ";
+                + " AND r.status = 1 "
+                + " ORDER BY r.date DESC";
         
         try 
         {
@@ -180,9 +181,14 @@ public class RequisitionDAO
                 + " r.total, "
                 + " r.date, "
                 + " r.user_id, "
+                + " u.name, "
+                + " u.paternal_name, "
+                + " u.maternal_name, "
                 + " s.type AS summary_type, "
                 + " o.name AS office_name "
                 + " FROM requisition AS r "
+                + " INNER JOIN user AS u "
+                + " ON r.user_id = u.id "
                 + " INNER JOIN summary AS s "
                 + " ON r.summary_id = s.id "
                 + " INNER JOIN office AS o "
@@ -201,6 +207,11 @@ public class RequisitionDAO
             
             if(rst.next())
             {
+                User user = new User();
+                user.setName(rst.getString("name"));
+                user.setPaternal_name(rst.getString("paternal_name"));
+                user.setMaternal_name(rst.getString("maternal_name"));
+                
                 Summary summary = new Summary();
                 summary.setType(rst.getString("summary_type"));
                 
@@ -211,6 +222,7 @@ public class RequisitionDAO
                 requisition.setTotal(rst.getFloat("total"));
                 requisition.setDate(rst.getDate("date"));
                 requisition.setTime(rst.getTime("date"));
+                requisition.setUser(user);
                 requisition.setSummary(summary);
                 requisition.setOffice(office);
             }

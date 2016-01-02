@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:body>
         <ui:composition template="./../PrivateTemplate.xhtml">
             <ui:define name="content">
@@ -16,7 +17,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table class="table table-hover" id="table_admin_sales">
+                            <table class="table table-hover table-condensed" id="table_admin_sales">
                                 <thead>
                                     <th><h:outputText value="#"/></th>
                                     <th><h:outputText value="Fecha"/></th>
@@ -32,7 +33,11 @@
                                     <c:forEach var="requisitions" items="#{adminSalesBean.listRequisition}">
                                         <tr>
                                             <td><h:outputText value="#{adminSalesBean.row}"/></td>
-                                            <td><h:outputText value="#{requisitions.date}"/></td>
+                                            <td>
+                                                <h:outputText value="#{requisitions.date}">
+                                                    <f:convertDateTime pattern="dd-MM-yyyy" />
+                                                </h:outputText>
+                                            </td>
                                             <td><h:outputText value="#{requisitions.time}"/></td>
                                             <td><h:outputText value="#{requisitions.office.name}"/></td>
                                             <td><h:outputText value="#{requisitions.user.name}&nbsp;#{requisitions.user.paternal_name}&nbsp;#{requisitions.user.maternal_name}"/></td>

@@ -24,11 +24,14 @@
                                         <br/>
                                         <h:outputLabel value="Contraseña:"/>
                                         <h:inputSecret value="#{adminLoginBean.password}" styleClass="form-control" id="password" maxlength="32"/>
-                                        <h:message for="password" styleClass="error_message"/>
-                                        <br/>
                                         <center>
-                                            <h:commandButton value="Enviar" styleClass="btn btn-default button-right" action="#{adminLoginBean.initSession()}"/>
+                                            <div class="row error_message_login">
+                                                <h:message for="password" styleClass="alert alert-danger text_error_message"/>
+                                            </div>
                                         </center>
+                                        <br/>
+                                        <br/>
+                                        <h:commandButton value="Ingresar" styleClass="btn btn-default button-right" style="margin-left: 100px;" action="#{adminLoginBean.initSession()}"/>
                                     </h:form>
                                 </div>
                             </div>
