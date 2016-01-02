@@ -116,7 +116,8 @@ body
 }
 #table_mycar td
 {
-    padding: 10px 5px !important;
+    padding: 15px 5px !important;
+    border-bottom: 1px solid #ddd;
 }
 #table_myrequisitions td
 {
@@ -205,10 +206,48 @@ body
     float: right;
     margin-right: 50px;
 }
+.total_mycar
+{
+    margin-bottom: 10px;
+    text-align: center;
+    color: #333;
+    background: #eb9316;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 5px;
+    width: 200px;
+    padding: 6px 15px; 
+}
+.container_total_mycar
+{
+    margin-bottom: 20px;
+}
 @media (min-width: 100px) and (max-width: 520px) {
   .panel {
     margin-left:-30px !important;
     margin-right:-30px !important;
     margin-bottom: -10px !important;
   }
+}
+.select_office
+{
+    padding: 10px !important;
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    padding: 5px;
+    height: 35px !important;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.buy_btn
+{
+    margin-top: -3px;
+    text-align: center;
+    color: #333;
+    background: #eb9316;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 2px;
+    width: 80%;
+    padding: 8px 15px; 
 }
