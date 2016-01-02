@@ -251,3 +251,8 @@ body
     width: 80%;
     padding: 8px 15px; 
 }
+.text_area_book
+{
+    max-width: 100%;
+    min-height: 150px;
+}

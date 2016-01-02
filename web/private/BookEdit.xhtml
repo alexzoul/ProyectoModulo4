@@ -59,8 +59,6 @@
                                                      id="year"
                                                      maxlength="4"
                                                      required="true">
-                                            <f:validateLength maximum="12"/>
-                                            <f:validateLongRange minimum="1950" maximum="2100"/>
                                         </h:inputText>
                                         <div class="row error_message">
                                             <h:message for="year" styleClass="alert alert-danger text_error_message"/>
@@ -71,9 +69,7 @@
                                                      styleClass="form-control"
                                                      id="pages"
                                                      maxlength="4"
-                                                     required="true"
-                                                     validatorMessage="Ingrese un número Valido">
-                                            <f:validateRegex pattern="[0-9]{4}"/>
+                                                     required="true">
                                         </h:inputText>
                                         <div class="row error_message">
                                             <h:message for="pages" styleClass="alert alert-danger text_error_message"/>
@@ -84,9 +80,7 @@
                                                      styleClass="form-control"
                                                      id="price"
                                                      maxlength="12"
-                                                     required="true"
-                                                     validatorMessage="Ingrese un precio Valido">
-                                            <f:validateRegex pattern="[0-9.]{1,12}"/>
+                                                     required="true">
                                         </h:inputText>
                                         <div class="row error_message">
                                             <h:message for="price" styleClass="alert alert-danger text_error_message"/>
@@ -94,12 +88,13 @@
                                         <br/>
                                         <h:outputLabel value="Descripción:"/>
                                         <h:inputTextarea value="#{adminBookEditBean.currentBook.description}"
-                                                     styleClass="form-control"
+                                                     styleClass="form-control text_area_book"
                                                      id="description"
                                                      required="true"/>
                                         <div class="row error_message">
                                             <h:message for="description" styleClass="alert alert-danger text_error_message"/>
                                         </div>
+                                        <br/>
                                         <br/>
                                         <h:commandButton value="Guardar" styleClass="btn btn-default button-right" action="#{adminBookEditBean.update()}"/>
                                     </h:form>
