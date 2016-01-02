@@ -51,13 +51,22 @@ public class RequisitionDAO
                     }   
                 }
             }
-            
             pstm.close();
             currentConnection.closeConecction();
         }
-        catch (Exception e)
+        catch (Exception e) 
         {
             e.printStackTrace();
+        } 
+        finally 
+        {  
+            try
+            {
+                if(currentConnection != null)
+                {
+                    currentConnection.closeConecction();
+                }
+            } catch(Exception e) {}
         }
         return result;
     }
@@ -105,13 +114,24 @@ public class RequisitionDAO
                 
                 listRequisitions.add(requisition);
             }
+            
             rst.close();
             currentConnection.closeConecction();
             return listRequisitions;
         }
-        catch (Exception e)
+        catch (Exception e) 
         {
             e.printStackTrace();
+        } 
+        finally 
+        {  
+            try
+            {
+                if(currentConnection != null)
+                {
+                    currentConnection.closeConecction();
+                }
+            } catch(Exception e) {}
         }
         return null;
     }
@@ -135,9 +155,19 @@ public class RequisitionDAO
             pstm.close();
             currentConnection.closeConecction();
         }
-        catch(Exception e)
+        catch (Exception e) 
         {
             e.printStackTrace();
+        } 
+        finally 
+        {  
+            try
+            {
+                if(currentConnection != null)
+                {
+                    currentConnection.closeConecction();
+                }
+            } catch(Exception e) {}
         }
         return result;
     }
@@ -184,13 +214,24 @@ public class RequisitionDAO
                 requisition.setSummary(summary);
                 requisition.setOffice(office);
             }
+
             rst.close();
             currentConnection.closeConecction();
             return requisition;
         }
-        catch (Exception e)
+        catch (Exception e) 
         {
             e.printStackTrace();
+        } 
+        finally 
+        {  
+            try
+            {
+                if(currentConnection != null)
+                {
+                    currentConnection.closeConecction();
+                }
+            } catch(Exception e) {}
         }
         return null;
     }
@@ -253,13 +294,24 @@ public class RequisitionDAO
                 
                 listRequisitions.add(requisition);
             }
+
             rst.close();
             currentConnection.closeConecction();
             return listRequisitions;
         }
-        catch (Exception e)
+        catch (Exception e) 
         {
             e.printStackTrace();
+        } 
+        finally 
+        {  
+            try
+            {
+                if(currentConnection != null)
+                {
+                    currentConnection.closeConecction();
+                }
+            } catch(Exception e) {}
         }
         return null;
     }

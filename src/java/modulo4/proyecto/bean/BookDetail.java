@@ -59,10 +59,7 @@ public class BookDetail implements Serializable
                 serviceBook.addBook(id);   
                 return "/public/MyCar.jsf?faces-redirect=true";
             }
-            else 
-            {
-                return "/public/Login.jsf?faces-redirect=true";
-            }
+            return "/public/Login.jsf?faces-redirect=true";
         }
         return null;
     }

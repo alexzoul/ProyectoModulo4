@@ -65,12 +65,9 @@ public class MyCarBean implements Serializable
                 serviceBook.setTotal(0.0f);
                 return "/public/MyRequisitions.jsf?faces-redirect=true";
             }
-            return "Error";
-        }
-        else
-        {
             return null;
         }
+        return null;
     }
 
     public Integer getRow() {

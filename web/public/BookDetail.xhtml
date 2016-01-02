@@ -23,8 +23,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-lg-3 col-md-4 col-sm-5">
-                                <div class="row">
+                            <div class="col-lg-offset-2 col-lg-3 col-md-4 col-sm-5">
                                     <div id="img_detail_container">
                                         <center>
                                             <c:if test="#{bookDetail.currentBook != null}">
@@ -32,10 +31,8 @@
                                             </c:if>
                                         </center>
                                     </div>
-                                </div>
                             </div>
-                            <div class="col-lg-8 col-lg-offset-1 col-md-7 col-md-offset-1 col-sm-6 col-sm-offset-1">
-                                <div class="col-xs-12">
+                            <div class="col-lg-offset-1 col-lg-4 col-md-offset-1 col-md-6 col-sm-7">
                                 <div class="row">
                                     <h3 class="title_detail_book">
                                         <h:outputText value="#{bookDetail.currentBook.title}"/>
@@ -71,30 +68,32 @@
                                         <h:outputText value="$ #{bookDetail.currentBook.price}"/>
                                     </p>
                                 </div>
-                                    <div class="row" style="margin-top: 10px; margin-bottom: 30px;">
-                                    <h:form>
-                                        <c:choose>
-                                            <c:when test="#{navbarBean.session == true}">
-                                                <h:commandLink value="Agregar&nbsp;" styleClass="add_detail_book" action="#{bookDetail.addBook(bookDetail.id)}"> 
-                                                    <span class="glyphicon glyphicon-shopping-cart"></span>
-                                                </h:commandLink>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <h:commandLink value="Iniciar Sesión&nbsp;" styleClass="add_detail_book" action="/public/Login.jsf?faces-redirect=true"/> 
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </h:form>
-                                </div>
+                                <div class="row">
+                                    <div class="container_add_detail_book">
+                                        <h:form>
+                                            <c:choose>
+                                                <c:when test="#{navbarBean.session == true}">
+                                                    <h:commandLink value="Agregar a mi Carrito&nbsp;" styleClass="add_detail_book" action="#{bookDetail.addBook(bookDetail.id)}"> 
+                                                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                                                    </h:commandLink>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <h:commandLink value="Iniciar Sesión&nbsp;" styleClass="add_detail_book" action="/public/Login.jsf?faces-redirect=true"/> 
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </h:form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="well well-sm">
-                            <p class="info_detail_book">
+                        <div class="well well-sm container_resume_detail">
+                            <p class="resume_description_detail_book">
                                 <h:outputLabel value="Resumen:"/>
                             </p>
                             <p class="description_detail_book">
                                 <h:outputText value="#{bookDetail.currentBook.description}"/>
                             </p>
+                            <br/>
                         </div>
                     </div>
                 </div>

@@ -37,7 +37,7 @@ public class AdminBooksBean implements Serializable
         {
             return "/private/Users.jsf?faces-redirect=true";
         }
-        return "error";
+        return null;
     }
     
     public ArrayList<Book> getListBooks() {

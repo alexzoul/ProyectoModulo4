@@ -1,6 +1,5 @@
 package modulo4.proyecto.session;
 
-import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
@@ -11,7 +10,7 @@ import modulo4.proyecto.model.User;
 
 @ManagedBean
 @RequestScoped
-public class SessionBean implements Serializable
+public class SessionBean
 {
     public void checkSession(String roleType) 
     {

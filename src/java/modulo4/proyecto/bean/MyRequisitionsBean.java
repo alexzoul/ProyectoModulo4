@@ -56,6 +56,6 @@ public class MyRequisitionsBean implements Serializable
         {
             return "/public/MyRequisitions.jsf?faces-redirect=true";
         }
-        return "Error";
+        return null;
     }
 }

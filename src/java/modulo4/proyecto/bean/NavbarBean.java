@@ -1,6 +1,5 @@
 package modulo4.proyecto.bean;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import modulo4.proyecto.session.SessionBean;

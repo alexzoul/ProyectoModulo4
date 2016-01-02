@@ -5,21 +5,21 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 public class Requisition {
-    private Integer id;
-    private Float total;
+    private int id;
+    private float total;
     private Date date;
     private Time time;
     private Summary summary;
     private User user;
     private Office office;
-    private Integer status;
+    private int status;
     private ArrayList<Book> books;
     
     public Requisition () {
     }
     
-    public Requisition (Integer id, Float total, Date date, Summary summary, User user,
-                        Office office, Integer status) {
+    public Requisition (int id, float total, Date date, Summary summary, User user,
+                        Office office, int status) {
         this.id = id;
         this.total = total;
         this.date = date;
@@ -29,19 +29,19 @@ public class Requisition {
         this.status = status;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Float getTotal() {
+    public float getTotal() {
         return total;
     }
 
-    public void setTotal(Float total) {
+    public void setTotal(float total) {
         this.total = total;
     }
 
@@ -85,11 +85,11 @@ public class Requisition {
         this.office = office;
     }
 
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
