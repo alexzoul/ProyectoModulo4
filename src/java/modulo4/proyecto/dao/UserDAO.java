@@ -54,9 +54,19 @@ public class UserDAO
             pstm.close();
             currentConnection.closeConecction();
         }
-        catch (Exception e)
+        catch (Exception e) 
         {
             e.printStackTrace();
+        } 
+        finally 
+        {  
+            try
+            {
+                if(currentConnection != null)
+                {
+                    currentConnection.closeConecction();
+                }
+            } catch(Exception e) {}
         }
         return null;
     }    
@@ -82,9 +92,19 @@ public class UserDAO
             pstm.close();
             currentConnection.closeConecction();
         }
-        catch (Exception e)
+        catch (Exception e) 
         {
             e.printStackTrace();
+        } 
+        finally 
+        {  
+            try
+            {
+                if(currentConnection != null)
+                {
+                    currentConnection.closeConecction();
+                }
+            } catch(Exception e) {}
         }
         return result;
     }
@@ -114,9 +134,19 @@ public class UserDAO
             pstm.close();
             currentConnection.closeConecction();
         }
-        catch (Exception e)
+        catch (Exception e) 
         {
             e.printStackTrace();
+        } 
+        finally 
+        {  
+            try
+            {
+                if(currentConnection != null)
+                {
+                    currentConnection.closeConecction();
+                }
+            } catch(Exception e) {}
         }
         return user;
     }
@@ -160,9 +190,19 @@ public class UserDAO
             pstm.close();
             currentConnection.closeConecction();
         }
-        catch (Exception e)
+        catch (Exception e) 
         {
             e.printStackTrace();
+        } 
+        finally 
+        {  
+            try
+            {
+                if(currentConnection != null)
+                {
+                    currentConnection.closeConecction();
+                }
+            } catch(Exception e) {}
         }
         return null;
     }   
@@ -199,8 +239,20 @@ public class UserDAO
             }
             pstm.close();
             currentConnection.closeConecction();
-        } catch (Exception e) {
+        }
+        catch (Exception e) 
+        {
             e.printStackTrace();
+        } 
+        finally 
+        {  
+            try
+            {
+                if(currentConnection != null)
+                {
+                    currentConnection.closeConecction();
+                }
+            } catch(Exception e) {}
         }
         return users;
     }
@@ -224,9 +276,19 @@ public class UserDAO
             pstm.close();
             currentConnection.closeConecction();
         }
-        catch(Exception e)
+        catch (Exception e) 
         {
             e.printStackTrace();
+        } 
+        finally 
+        {  
+            try
+            {
+                if(currentConnection != null)
+                {
+                    currentConnection.closeConecction();
+                }
+            } catch(Exception e) {}
         }
         return result;
     }
@@ -251,9 +313,19 @@ public class UserDAO
             pstm.close();
             currentConnection.closeConecction();
         }
-        catch(Exception e)
+        catch (Exception e) 
         {
             e.printStackTrace();
+        } 
+        finally 
+        {  
+            try
+            {
+                if(currentConnection != null)
+                {
+                    currentConnection.closeConecction();
+                }
+            } catch(Exception e) {}
         }
         return result;
     }

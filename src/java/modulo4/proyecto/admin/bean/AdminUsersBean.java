@@ -37,10 +37,7 @@ public class AdminUsersBean implements Serializable
         {
             return "/private/Users.jsf?faces-redirect=true";
         }
-        else
-        {
-            return "error";
-        }
+        return "error";
     }
 
     public ArrayList<User> getListUser() {

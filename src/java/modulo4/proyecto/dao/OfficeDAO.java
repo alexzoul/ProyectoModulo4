@@ -10,7 +10,8 @@ public class OfficeDAO
 {
     private ConnectionDB currentConnection;
     
-    public ArrayList<Office> findAll () {
+    public ArrayList<Office> findAll () 
+    {
         ArrayList<Office> listOffices = new ArrayList<Office> ();
         String query = "SELECT * FROM office ORDER BY name ASC";
         
@@ -19,6 +20,7 @@ public class OfficeDAO
             currentConnection = new ConnectionDB();
             Statement stm = currentConnection.getConnection().createStatement();
             ResultSet rst = stm.executeQuery(query);
+            
             while(rst.next())
             {
                 listOffices.add(new Office(rst.getInt("id"), 
@@ -31,10 +33,23 @@ public class OfficeDAO
                                     rst.getString("state"),
                                     rst.getString("zip_code")));
             }
+            
             stm.close();
             currentConnection.closeConecction();
-        } catch (Exception e) {
+        } 
+        catch (Exception e) 
+        {
             e.printStackTrace();
+        } 
+        finally 
+        {  
+            try
+            {
+                if(currentConnection != null)
+                {
+                    currentConnection.closeConecction();
+                }
+            } catch(Exception e) {}
         }
         return listOffices;
     }

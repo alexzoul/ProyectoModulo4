@@ -27,9 +27,19 @@ public class BookHasRequisitonDAO
             pstm.close();
             currentConnection.closeConecction();
         }
-        catch (Exception e)
+        catch (Exception e) 
         {
             e.printStackTrace();
+        } 
+        finally 
+        {  
+            try
+            {
+                if(currentConnection != null)
+                {
+                    currentConnection.closeConecction();
+                }
+            } catch(Exception e) {}
         }
         return result;
     }
@@ -74,9 +84,19 @@ public class BookHasRequisitonDAO
             currentConnection.closeConecction();
             return listBooks;
         }
-        catch(Exception e)
+        catch (Exception e) 
         {
             e.printStackTrace();
+        } 
+        finally 
+        {  
+            try
+            {
+                if(currentConnection != null)
+                {
+                    currentConnection.closeConecction();
+                }
+            } catch(Exception e) {}
         }
         return null;
     }
@@ -123,13 +143,24 @@ public class BookHasRequisitonDAO
                 book.setPrice(rst.getFloat("price"));
                 listBooks.add(book);
             }
+            
             rst.close();
             currentConnection.closeConecction();
             return listBooks;
         }
-        catch(Exception e)
+        catch (Exception e) 
         {
             e.printStackTrace();
+        } 
+        finally 
+        {  
+            try
+            {
+                if(currentConnection != null)
+                {
+                    currentConnection.closeConecction();
+                }
+            } catch(Exception e) {}
         }
         return null;
     }

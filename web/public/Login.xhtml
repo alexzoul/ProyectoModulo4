@@ -13,24 +13,18 @@
                                 <div class="panel-heading">
                                     <center>
                                         <p>
-                                            <span class="glyphicon glyphicon-user">
-                                            </span>&nbsp;Iniciar Session
+                                            <span class="glyphicon glyphicon-user"></span>
+                                            <h:outputText value="&nbsp;Iniciar Session"/>
                                         </p>
                                     </center>
                                 </div>
                                 <div class="panel-body">
                                     <h:form id="login_form">
                                         <h:outputLabel value="Correo:"/>
-                                        <h:inputText value="#{loginBean.email}"
-                                                     styleClass="form-control"
-                                                     id="email"
-                                                     maxlength="250"/>
+                                        <h:inputText value="#{loginBean.email}" styleClass="form-control" id="email" maxlength="250"/>
                                         <br/>
                                         <h:outputLabel value="Contraseña:"/>
-                                        <h:inputSecret value="#{loginBean.password}"
-                                                     styleClass="form-control"
-                                                     id="password"
-                                                     maxlength="32"/>
+                                        <h:inputSecret value="#{loginBean.password}" styleClass="form-control" id="password" maxlength="32"/>
                                         <center>
                                             <div class="row error_message_login">
                                                 <h:message for="password" styleClass="alert alert-danger text_error_message"/>
@@ -38,10 +32,7 @@
                                         </center>
                                         <br/>
                                         <br/>
-                                        <h:commandButton value="Ingresar"
-                                                         styleClass="btn btn-default button-right"
-                                                         style="margin-left: 100px;"
-                                                         action="#{loginBean.initSession()}"/>
+                                        <h:commandButton value="Ingresar" styleClass="btn btn-default button-right" style="margin-left: 100px;" action="#{loginBean.initSession()}"/>
                                     </h:form>
                                 </div>
                             </div>

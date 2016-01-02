@@ -2,7 +2,7 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value>
+        <param-value>Production</param-value>
     </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
@@ -46,4 +46,25 @@
         <extension>ico</extension>
         <mime-type>image/x-icon</mime-type>
     </mime-mapping>
+    <!-- filters -->
+    <filter>
+        <filter-name>RoutesFilter</filter-name>
+        <filter-class>modulo4.proyecto.filter.RoutesFilter</filter-class>
+        <init-param>
+            <param-name>homeURI</param-name>
+            <param-value>/ProyectoModulo4/public/Home.jsf</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>RoutesFilter</filter-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>RoutesFilter</filter-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>RoutesFilter</filter-name>
+        <url-pattern>*.js</url-pattern>
+    </filter-mapping>
 </web-app>

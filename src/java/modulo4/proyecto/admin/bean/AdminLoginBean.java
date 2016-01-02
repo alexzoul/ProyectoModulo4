@@ -44,7 +44,7 @@ public class AdminLoginBean implements Serializable
         {
             SessionBean sessionBean = new SessionBean();
             sessionBean.initSession(user);
-            return "/private/Home.jsf?faces-redirect=true";
+            return "/private/Users.jsf?faces-redirect=true";
         }
         else
         {

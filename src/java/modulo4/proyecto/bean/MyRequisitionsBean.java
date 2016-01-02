@@ -2,7 +2,11 @@ package modulo4.proyecto.bean;
 
 import modulo4.proyecto.session.SessionBean;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -56,6 +60,46 @@ public class MyRequisitionsBean implements Serializable
         {
             return "/public/MyRequisitions.jsf?faces-redirect=true";
         }
-        return "Error";
+        return null;
+    }
+    
+    public int diffDaysDate(String stringDate, String stringTime) 
+    {
+        SimpleDateFormat formatText = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        if(stringDate != "")
+        {
+            try 
+            {
+                Date date = formatText.parse(stringDate + " " + stringTime);
+                long time = date.getTime();
+                long currentTime = new Date().getTime();
+                long diffTime = currentTime - time;
+
+                int diffDays = (int) Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+                return diffDays;
+            } 
+            catch (ParseException ex) 
+            {
+                ex.printStackTrace();
+                return 0;
+            }
+        }
+        return 0;
+    }
+    
+    public String convertTime(String time)
+    {
+        try
+        {
+            DateFormat formatTime = new SimpleDateFormat("HH:mm:ss");
+            DateFormat formatTimeFinal = new SimpleDateFormat("h:mm a");
+            return formatTimeFinal.format(formatTime.parse(time)).toLowerCase();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

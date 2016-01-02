@@ -23,7 +23,7 @@ public class EmailValidator  implements Validator
         if(!match.matches())
         {
             FacesMessage message = new FacesMessage();
-            message.setSummary("No es valido el correo");
+            message.setSummary("Ingrese un correo válido");
             message.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(message);
         }   

@@ -9,15 +9,14 @@
             <ui:define name="content">
                <div class="panel panel-default" id="books_container">
                     <div class="panel-heading">
-                        <b><span class="glyphicon glyphicon-book">
-                        </span>&nbsp;Books</b>
+                        <p>
+                            <span class="glyphicon glyphicon-book"></span>
+                            <h:outputText value="&nbsp;Books"/>
+                        </p>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <h:dataTable value="#{adminBooksBean.listBooks}" 
-                                var="item" 
-                                styleClass="table table-hover table-condensed table-responsive"
-                                id="table_admin_books">
+                            <h:dataTable value="#{adminBooksBean.listBooks}" var="item" styleClass="table table-hover table-condensed table-responsive" id="table_admin_books">
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="#" />
@@ -28,10 +27,7 @@
                                     <f:facet name="header">
                                         <h:outputText value="" />
                                     </f:facet>
-                                    <h:graphicImage 
-                                        library="default" 
-                                        name="/imagenes/#{item.image}" 
-                                        styleClass="img-thumbnail img_book_requisition"/>
+                                    <h:graphicImage library="default" name="/imagenes/#{item.image}" styleClass="img-thumbnail img_book_requisition"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">

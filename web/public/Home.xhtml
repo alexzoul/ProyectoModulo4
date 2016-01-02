@@ -12,9 +12,9 @@
                     <div class="panel-heading">
                         <div class="row">
                             <p>
-                                <span class="glyphicon glyphicon-stats"></span>&nbsp;
-                                Libros Mas Vendidos
-                                <span class="glyphicon glyphicon-stats"></span>&nbsp;
+                                <span class="glyphicon glyphicon-stats"></span>
+                                <h:outputText value="&nbsp;Libros Mas Vendidos&nbsp;"/>
+                                <span class="glyphicon glyphicon-stats"></span>
                             </p>
                         </div>
                     </div>
@@ -28,13 +28,10 @@
                                                 <div class="img_book_container">
                                                     <div class="row">
                                                         <f:param name="id" value="#{item.id}"/>
-                                                        <h:graphicImage 
-                                                            library="default" 
-                                                            name="/imagenes/#{item.image}" 
-                                                            styleClass="img-book"/>
+                                                        <h:graphicImage library="default" name="/imagenes/#{item.image}" styleClass="img-book"/>
                                                     </div>
                                                     <div class="row title_book_catalog">
-                                                        #{item.title}
+                                                        <h:outputText value="#{item.title}"/>
                                                     </div>
                                                 </div>
                                             </h:commandLink> 

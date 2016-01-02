@@ -37,8 +37,7 @@ public class AdminSalesBean implements Serializable
         {
             return "/private/Sales.jsf?faces-redirect=true";
         }
-        //Falta agregar pagina de error
-        return "Error";
+        return null;
     }
     
     public ArrayList<Requisition> getListRequisition() {

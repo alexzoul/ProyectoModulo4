@@ -11,15 +11,17 @@ public class BookDAO
 {
     private ConnectionDB currentConnection;
     
-    public ArrayList<Book> findAll () {
+    public ArrayList<Book> findAll () 
+    {
         ArrayList<Book> books = new ArrayList<Book> ();
-        String query = "SELECT * FROM book ORDER BY title, author, editorial DESC";
+        String query = "SELECT * FROM book ORDER BY title, author, editorial ASC";
         
         try 
         {
             currentConnection = new ConnectionDB();
             Statement stm = currentConnection.getConnection().createStatement();
             ResultSet rst = stm.executeQuery(query);
+            
             while(rst.next())
             {
                 books.add(new Book( rst.getInt("id"), 
@@ -32,18 +34,33 @@ public class BookDAO
                                     rst.getInt("pages"),
                                     rst.getFloat("price")));
             }
+            
             stm.close();
             currentConnection.closeConecction();
-        } catch (Exception e) {
+        } 
+        catch (Exception e) 
+        {
             e.printStackTrace();
+        } 
+        finally 
+        {  
+            try
+            {
+                if(currentConnection != null)
+                {
+                    currentConnection.closeConecction();
+                }
+            } catch(Exception e) {}
         }
         return books;
     }
     
-    public ArrayList<Book> findText (String findText) {
+    public ArrayList<Book> findText (String findText) 
+    {
         ArrayList<Book> books = new ArrayList<Book>();
         String query = "SELECT * FROM book WHERE "
-                     + " title LIKE ? OR author LIKE ? ";
+                     + " title LIKE ? OR author LIKE ? "
+                     + "ORDER BY title, author, editorial ASC";
         
         try 
         {
@@ -52,6 +69,7 @@ public class BookDAO
             pstm.setString(1, "%" + findText + "%");
             pstm.setString(2, "%" + findText + "%");
             ResultSet rst = pstm.executeQuery();
+            
             while(rst.next())
             {
                 books.add(new Book( rst.getInt("id"), 
@@ -64,12 +82,23 @@ public class BookDAO
                                     rst.getInt("pages"),
                                     rst.getFloat("price")));
             }
+            
             pstm.close();
             currentConnection.closeConecction();
         }
-        catch (Exception e)
+        catch (Exception e) 
         {
             e.printStackTrace();
+        } 
+        finally 
+        {  
+            try
+            {
+                if(currentConnection != null)
+                {
+                    currentConnection.closeConecction();
+                }
+            } catch(Exception e) {}
         }
         return books;
     }
@@ -78,12 +107,14 @@ public class BookDAO
     {
         String query = "SELECT * FROM book WHERE id = ? ";
         Book book = null;
+        
         try 
         {
             currentConnection = new ConnectionDB();
             PreparedStatement pstm = currentConnection.getConnection().prepareStatement(query);
             pstm.setInt(1, id);
             ResultSet rst = pstm.executeQuery();
+            
             if(rst.next())
             {
                 book = new Book(rst.getInt("id"), 
@@ -96,12 +127,23 @@ public class BookDAO
                             rst.getInt("pages"),
                             rst.getFloat("price"));
             }
+            
             rst.close();
             currentConnection.closeConecction();
         }
-        catch (Exception e)
+        catch (Exception e) 
         {
             e.printStackTrace();
+        } 
+        finally 
+        {  
+            try
+            {
+                if(currentConnection != null)
+                {
+                    currentConnection.closeConecction();
+                }
+            } catch(Exception e) {}
         }
         return book;
     }
@@ -140,9 +182,19 @@ public class BookDAO
             pstm.close();
             currentConnection.closeConecction();
         }
-        catch(Exception e)
+        catch (Exception e) 
         {
             e.printStackTrace();
+        } 
+        finally 
+        {  
+            try
+            {
+                if(currentConnection != null)
+                {
+                    currentConnection.closeConecction();
+                }
+            } catch(Exception e) {}
         }
         return result;
     }

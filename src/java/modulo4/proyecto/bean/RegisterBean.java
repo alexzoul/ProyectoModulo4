@@ -92,10 +92,7 @@ public class RegisterBean implements Serializable
                 login.setPassword(password);
                 return login.initSession();
             }
-            else
-            {
-                return "error";
-            }
+            return null;
         }
         else
         {

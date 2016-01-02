@@ -10,16 +10,13 @@
                <div class="panel panel-default" id="books_container">
                     <div class="panel-heading">
                         <p>
-                            <span class="glyphicon glyphicon-list-alt"></span>&nbsp;
-                            Nuestras Sucursales
+                            <span class="glyphicon glyphicon-list-alt"></span>
+                            <h:outputText value="&nbsp;Nuestras Sucursales"/>
                         </p>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <h:dataTable value="#{officeBean.listOffice}" 
-                                var="item" 
-                                styleClass="table table-hover table-condensed"
-                                id="table_office">
+                            <h:dataTable value="#{officeBean.listOffice}" var="item" styleClass="table table-hover table-condensed" id="table_office">
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="#" />

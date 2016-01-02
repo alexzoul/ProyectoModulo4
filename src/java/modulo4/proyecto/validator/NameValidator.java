@@ -23,7 +23,7 @@ public class NameValidator  implements Validator
         if(!match.matches())
         {
             FacesMessage message = new FacesMessage();
-            message.setSummary("Ingrese un Nombre Valido");
+            message.setSummary("Ingrese un Nombre válido");
             message.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(message);
         }   

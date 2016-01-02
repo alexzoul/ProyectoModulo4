@@ -14,33 +14,67 @@
             <ui:define name="content">
                <div class="panel panel-default" id="books_container">
                     <div class="panel-heading">
-                        <b><span class="glyphicon glyphicon-book">
-                        </span>Detalle de Compra</b>
+                        <p>
+                            <span class="glyphicon glyphicon-book"></span>
+                            <h:outputText value="&nbsp;Detalle de Compra"/>
+                        </p>
                     </div>
                     
                     <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                <b>Fecha de Compra:</b> #{requisitionDetail.currentRequisition.date}
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                <b>Hora de Compra:</b> #{requisitionDetail.currentRequisition.time}
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                <b>Sucursal:</b> #{requisitionDetail.currentRequisition.office.name}
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                <b>Estatus:</b> #{requisitionDetail.currentRequisition.summary.type}
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                <b>Total:</b> $#{requisitionDetail.currentRequisition.total}
-                            </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-condensed table-responsive">
+                                <thead>
+                                    <th>
+                                        <span class="glyphicon glyphicon-user"></span>
+                                        <h:outputText value="&nbsp;Usuario" />
+                                    </th>
+                                    <th>
+                                        <span class="glyphicon glyphicon-list-alt"></span>
+                                        <h:outputText value="&nbsp;Sucursal" />
+                                    </th>
+                                    <th>
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                        <h:outputText value="&nbsp;Fecha" />
+                                    </th>
+                                    <th>
+                                        <span class="glyphicon glyphicon-time"></span>
+                                        <h:outputText value="&nbsp;Hora" />
+                                    </th>
+                                    <th>
+                                        <span class="glyphicon glyphicon-usd"></span>
+                                        <h:outputText value="&nbsp;Total" />
+                                    </th>
+                                    <th>
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                        <h:outputText value="&nbsp;Estatus" />
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <td>
+                                        <h:outputText value="#{requisitionDetail.currentRequisition.user.name}&nbsp;#{requisitionDetail.currentRequisition.user.paternal_name}&nbsp;#{requisitionDetail.currentRequisition.user.maternal_name} "/>
+                                    </td>
+                                    <td>
+                                        <h:outputText value="#{requisitionDetail.currentRequisition.office.name}"/>
+                                    </td>
+                                    <td>
+                                        <h:outputText value="#{requisitionDetail.currentRequisition.date}">
+                                            <f:convertDateTime pattern="d-MM-yyyy" />
+                                        </h:outputText>
+                                    </td>
+                                    <td>
+                                        <h:outputText value="#{requisitionDetail.currentRequisition.time}"/>
+                                    </td>
+                                    <td>
+                                        <h:outputText value="#{requisitionDetail.currentRequisition.total}"/>
+                                    </td>
+                                    <td>
+                                        <h:outputText value="#{requisitionDetail.currentRequisition.summary.type}"/>
+                                    </td>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="table-responsive">
-                            <h:dataTable value="#{requisitionDetail.listBooks}" 
-                                var="item" 
-                                styleClass="table table-hover table-condensed table-responsive"
-                                id="table_requisition_detail">
+                            <h:dataTable value="#{requisitionDetail.listBooks}" var="item" styleClass="table table-hover table-condensed table-responsive" id="table_requisition_detail">
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="#" />
@@ -53,10 +87,7 @@
                                     <f:facet name="header">
                                         <h:outputText value="Imagen" />
                                     </f:facet>
-                                    <h:graphicImage 
-                                        library="default" 
-                                        name="/imagenes/#{item.image}" 
-                                        styleClass="img-thumbnail img_book_requisition"/>
+                                    <h:graphicImage library="default" name="/imagenes/#{item.image}" styleClass="img-thumbnail img_book_requisition"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
@@ -87,7 +118,7 @@
                                         <h:outputText value="Precio" />
                                     </f:facet>
                                     <p>
-                                        <h:outputText value="#{item.price}" />
+                                        <h:outputText value="$#{item.price}" />
                                     </p>
                                 </h:column>
                                 <h:column>
