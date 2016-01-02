@@ -15,7 +15,7 @@ public class SessionBean implements Serializable
 {
     public void checkSession(String roleType) 
     {
-        String redirectUrl = "/public/Home.jsf";
+        String redirectUrl = "/public/Login.jsf";
         
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession httpSession = (HttpSession) facesContext.getExternalContext().getSession(true);

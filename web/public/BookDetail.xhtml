@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <f:metadata>
             <f:viewParam name="id" value="#{bookDetail.id}"/>
@@ -15,9 +16,9 @@
                 <div class="panel" id="books_container">
                     <div class="panel-heading">
                         <p>
-                            <span class="glyphicon glyphicon-bookmark"></span>&nbsp;
-                            Detalle del Libro
-                            <span class="glyphicon glyphicon-bookmark"></span>&nbsp;
+                            <span class="glyphicon glyphicon-bookmark"></span>
+                            <h:outputText value="&nbsp;Detalle del Libro"/>
+                            <span class="glyphicon glyphicon-bookmark"></span>
                         </p>
                     </div>
                     <div class="panel-body">
@@ -26,10 +27,9 @@
                                 <div class="row">
                                     <div id="img_detail_container">
                                         <center>
-                                            <h:graphicImage 
-                                                library="default" 
-                                                name="/imagenes/#{bookDetail.currentBook.image}" 
-                                                styleClass="img_detail_book"/>
+                                            <c:if test="#{bookDetail.currentBook != null}">
+                                                <h:graphicImage library="default" name="/imagenes/#{bookDetail.currentBook.image}" styleClass="img_detail_book"/>
+                                            </c:if>
                                         </center>
                                     </div>
                                 </div>
@@ -37,45 +37,52 @@
                             <div class="col-lg-8 col-lg-offset-1 col-md-7 col-md-offset-1 col-sm-6 col-sm-offset-1">
                                 <div class="col-xs-12">
                                 <div class="row">
-                                    <h3 class="title_detail_book">#{bookDetail.currentBook.title}</h3>
+                                    <h3 class="title_detail_book">
+                                        <h:outputText value="#{bookDetail.currentBook.title}"/>
+                                    </h3>
                                 </div>
                                 <div class="row">
                                     <p class="info_detail_book">
-                                        <h:outputLabel value="Autor:"/>&nbsp;
+                                        <h:outputLabel value="Autor:&nbsp;"/>
                                         <h:outputText value="#{bookDetail.currentBook.author}"/>
                                     </p>
                                 </div>
                                 <div class="row">
                                     <p class="info_detail_book">
-                                        <h:outputLabel value="Editorial:"/>&nbsp;
+                                        <h:outputLabel value="Editorial:&nbsp;"/>
                                         <h:outputText value="#{bookDetail.currentBook.editorial}"/>
                                     </p>
                                 </div>
                                 <div class="row">
                                     <p class="info_detail_book">
-                                        <h:outputLabel value="Año:"/>&nbsp;
+                                        <h:outputLabel value="Año:&nbsp;"/>
                                         <h:outputText value="#{bookDetail.currentBook.year}"/>
                                     </p>
                                 </div>
                                 <div class="row">
                                     <p class="info_detail_book">
-                                        <h:outputLabel value="Páginas:"/>&nbsp;
+                                        <h:outputLabel value="Páginas:&nbsp;"/>
                                         <h:outputText value="#{bookDetail.currentBook.pages}"/>
                                     </p>
                                 </div>
                                 <div class="row">
                                     <p class="info_detail_book">
-                                        <h:outputLabel value="Precio:"/>&nbsp;
+                                        <h:outputLabel value="Precio:&nbsp;"/>
                                         <h:outputText value="$ #{bookDetail.currentBook.price}"/>
                                     </p>
                                 </div>
                                     <div class="row" style="margin-top: 10px; margin-bottom: 30px;">
                                     <h:form>
-                                        <h:commandLink value="Agregar" 
-                                                       styleClass="add_detail_book"
-                                                       action="#{myCarBean.addBook(bookDetail.currentBook.id)}"> 
-                                            &nbsp;<span class="glyphicon glyphicon-shopping-cart"></span>
-                                        </h:commandLink>
+                                        <c:choose>
+                                            <c:when test="#{navbarBean.session == true}">
+                                                <h:commandLink value="Agregar&nbsp;" styleClass="add_detail_book" action="#{bookDetail.addBook(bookDetail.id)}"> 
+                                                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                                                </h:commandLink>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <h:commandLink value="Iniciar Sesión&nbsp;" styleClass="add_detail_book" action="/public/Login.jsf?faces-redirect=true"/> 
+                                            </c:otherwise>
+                                        </c:choose>
                                     </h:form>
                                 </div>
                                 </div>

@@ -9,15 +9,14 @@
             <ui:define name="content">
                 <div class="panel panel-default" id="books_container">
                     <div class="panel-heading">
-                        <b><span class="glyphicon glyphicon-shopping-cart">
-                        </span>&nbsp;Mi Carrito</b>
+                        <p>
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                            <h:outputText value="&nbsp;Mi Carrito"/>
+                        </p>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <h:dataTable value="#{myCarBean.listBooks}" 
-                                var="item" 
-                                styleClass="table table-hover table-condensed table-responsive"
-                                id="table_mycar">
+                            <h:dataTable value="#{myCarBean.listBooks}" var="item" styleClass="table table-hover table-condensed table-responsive" id="table_mycar">
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="#" />
@@ -67,7 +66,7 @@
                                     </f:facet>
                                     <h:form>
                                         <h:commandLink action="#{myCarBean.removeBook(item)}"> 
-                                            &nbsp;<span class="glyphicon glyphicon-trash"></span>
+                                            <span class="glyphicon glyphicon-trash"></span>
                                         </h:commandLink>
                                     </h:form>
                                 </h:column>
@@ -79,19 +78,13 @@
                                 <center>
                                     <h:form>
                                         <div class="input-group">
-                                            <h:selectOneMenu 
-                                                styleClass="form-control input-sm" 
-                                                converter="converterOffice"
-                                                value="#{myCarBean.currentOffice}">
-                                                <f:selectItems value="#{myCarBean.listOffices}"  
-                                                               var="item" 
-                                                               itemValue="#{item}"
-                                                               itemLabel="#{item.name}"/>
+                                            <h:selectOneMenu styleClass="form-control input-sm" converter="converterOffice" value="#{myCarBean.currentOffice}">
+                                                <f:selectItems value="#{myCarBean.listOffices}" var="item" itemValue="#{item}" itemLabel="#{item.name}"/>
                                             </h:selectOneMenu>
                                             <span class="input-group-btn">
                                                 <h:commandLink class="btn btn-primary btn-sm" action="#{myCarBean.buyBooks()}">
-                                                    <span class="glyphicon glyphicon-usd">
-                                                    </span>&nbsp;Comprar
+                                                    <span class="glyphicon glyphicon-usd"></span>
+                                                    <h:outputText value="&nbsp;Comprar"/>
                                                 </h:commandLink>
                                             </span>
                                         </div>

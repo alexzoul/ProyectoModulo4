@@ -14,33 +14,47 @@
             <ui:define name="content">
                <div class="panel panel-default" id="books_container">
                     <div class="panel-heading">
-                        <b><span class="glyphicon glyphicon-book">
-                        </span>Detalle de Compra</b>
+                        <p>
+                            <span class="glyphicon glyphicon-book"></span>
+                            <h:outputText value="&nbsp;Detalle de Compra"/>
+                        </p>
                     </div>
                     
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-3 col-md-4 col-sm-6">
-                                <b>Fecha de Compra:</b> #{requisitionDetail.currentRequisition.date}
+                                <b>
+                                    <h:outputText value="Fecha de Compra:"/>
+                                </b> 
+                                <h:outputText value="#{requisitionDetail.currentRequisition.date}"/>
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-6">
-                                <b>Hora de Compra:</b> #{requisitionDetail.currentRequisition.time}
+                                <b>
+                                    <h:outputText value="Hora de Compra:"/>
+                                </b> 
+                               <h:outputText value="#{requisitionDetail.currentRequisition.time}"/>
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-6">
-                                <b>Sucursal:</b> #{requisitionDetail.currentRequisition.office.name}
+                                <b>
+                                    <h:outputText value="Sucursal:"/>
+                                </b> 
+                                <h:outputText value="#{requisitionDetail.currentRequisition.office.name}"/>
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-6">
-                                <b>Estatus:</b> #{requisitionDetail.currentRequisition.summary.type}
+                                <b>
+                                    <h:outputText value="Estatus:"/>
+                                </b> 
+                                <h:outputText value="#{requisitionDetail.currentRequisition.summary.type}"/>
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-6">
-                                <b>Total:</b> $#{requisitionDetail.currentRequisition.total}
+                                <b>
+                                    <h:outputText value="Total:"/>
+                                </b> 
+                                <h:outputText value="$#{requisitionDetail.currentRequisition.total}"/>
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <h:dataTable value="#{requisitionDetail.listBooks}" 
-                                var="item" 
-                                styleClass="table table-hover table-condensed table-responsive"
-                                id="table_requisition_detail">
+                            <h:dataTable value="#{requisitionDetail.listBooks}" var="item" styleClass="table table-hover table-condensed table-responsive" id="table_requisition_detail">
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="#" />
@@ -53,10 +67,7 @@
                                     <f:facet name="header">
                                         <h:outputText value="Imagen" />
                                     </f:facet>
-                                    <h:graphicImage 
-                                        library="default" 
-                                        name="/imagenes/#{item.image}" 
-                                        styleClass="img-thumbnail img_book_requisition"/>
+                                    <h:graphicImage library="default" name="/imagenes/#{item.image}" styleClass="img-thumbnail img_book_requisition"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">

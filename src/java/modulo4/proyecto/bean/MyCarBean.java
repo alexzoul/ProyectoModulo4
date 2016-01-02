@@ -6,19 +6,23 @@ import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
-import modulo4.proyecto.dao.BookDAO;
+import javax.faces.bean.RequestScoped;
 import modulo4.proyecto.dao.RequisitionDAO;
 import modulo4.proyecto.model.Book;
 import modulo4.proyecto.model.Office;
+import modulo4.proyecto.service.BookService;
 import modulo4.proyecto.service.OfficeService;
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class MyCarBean implements Serializable
 {
     @ManagedProperty("#{serviceOffice}")
     private OfficeService serviceOffice;
+    
+    @ManagedProperty("#{serviceBook}")
+    private BookService serviceBook;
+    
     private ArrayList<Office> listOffices;
     private ArrayList<Book> listBooks;
     private Office currentOffice;
@@ -27,92 +31,47 @@ public class MyCarBean implements Serializable
     
     public MyCarBean () 
     {  
-        
+        SessionBean sessionService = new SessionBean();
+        sessionService.checkSession("Cliente");
     }
     
     @PostConstruct
     public void init()
     {
-        cleanVariables();
-        this.listBooks = new ArrayList<Book>();
-        this.listOffices = serviceOffice.getListOffice();
+        row = 0;
+        listBooks = serviceBook.getListBooks();
+        listOffices = serviceOffice.getListOffice(); 
+        total = serviceBook.getTotal();
     }
- 
-    public void addListBooks (Book book)
-    {
-        listBooks.add(book);
-        cleanVariables();
-        
-        for (int i = 0; i < listBooks.size(); i++)
-        {
-            total += listBooks.get(i).getPrice();
-        }
-    }
-    
+     
     public void removeBook (Book book)
     {
-        listBooks.remove(book);
-        cleanVariables();
-        
-        for (int i = 0; i < listBooks.size(); i++)
-        {
-            total += listBooks.get(i).getPrice();
-        }
+        serviceBook.removeBook(book);
+        total = serviceBook.getTotal();
     }
-    
-    public void cleanVariables()
-    {
-        this.row = 0;
-        this.total = 0.00f;
-    }
-    
-    public String addBook(int id) 
-    {
-        SessionBean sessionService = new SessionBean();
-
-        if (sessionService.getIdSession("Cliente") != 0) 
-        {
-            BookDAO bookDAO = new BookDAO();
-            Book book = bookDAO.findById(id);
-            cleanVariables();
-            addListBooks(book);
-            return "/public/BookCatalog.jsf?faces-redirect=true";
-        }
-        else 
-        {
-            return "/public/Login.jsf?faces-redirect=true";
-        }
-    }
-    
+     
     public String buyBooks()
     {
         if(listBooks.size() > 0)
         {
             SessionBean sessionService = new SessionBean();
+            
             int id = sessionService.getIdSession("Cliente");
             
-            if(id != 0)
+            RequisitionDAO requisitionDAO = new RequisitionDAO();
+            if(requisitionDAO.insert(total, id, currentOffice.getId(), listBooks) != 0)
             {
-                RequisitionDAO requisitionDAO = new RequisitionDAO();
-                if(requisitionDAO.insert(total, id, currentOffice.getId(), listBooks) != 0)
-                {
-                    listBooks.clear();
-                    cleanVariables();
-                    return "/public/MyRequisitions.jsf?faces-redirect=true";
-                }
-                return "error";
+                serviceBook.setListBooks(new ArrayList<Book>());
+                serviceBook.setTotal(0.0f);
+                return "/public/MyRequisitions.jsf?faces-redirect=true";
             }
-            else 
-            {
-                return "/public/Login.jsf?faces-redirect=true";
-            }
+            return "Error";
         }
         else
         {
             return null;
         }
     }
-          
 
     public Integer getRow() {
         ++this.row;
@@ -121,14 +80,6 @@ public class MyCarBean implements Serializable
 
     public void setRow(Integer row) {
         this.row = row;
-    }
-
-    public Float getTotal() {
-        return total;
-    }
-
-    public void setTotal(Float total) {
-        this.total = total;
     }
 
     public ArrayList<Book> getListBooks() {
@@ -161,5 +112,21 @@ public class MyCarBean implements Serializable
 
     public void setCurrentOffice(Office currentOffice) {
         this.currentOffice = currentOffice;
+    }
+
+    public BookService getServiceBook() {
+        return serviceBook;
+    }
+
+    public void setServiceBook(BookService serviceBook) {
+        this.serviceBook = serviceBook;
+    }
+
+    public Float getTotal() {
+        return total;
+    }
+
+    public void setTotal(Float total) {
+        this.total = total;
     }
 }

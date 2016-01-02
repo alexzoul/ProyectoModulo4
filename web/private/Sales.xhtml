@@ -9,47 +9,44 @@
             <ui:define name="content">
                <div class="panel panel-default" id="books_container">
                     <div class="panel-heading">
-                        <b><span class="glyphicon glyphicon-usd">
-                        </span>&nbsp;Ventas</b>
+                        <p>
+                            <span class="glyphicon glyphicon-usd"></span>
+                            <h:outputText value="&nbsp;Ventas"/>
+                        </p>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
                             <table class="table table-hover" id="table_admin_sales">
                                 <thead>
-                                    <th>#</th>
-                                    <th>Fecha</th>
-                                    <th>Hora</th>
-                                    <th>Sucursal</th>
-                                    <th>Cliente</th>
-                                    <th>Libros</th>
-                                    <th>Importe</th>
-                                    <th>Estatus</th>
-                                    <th>Borrar</th>
+                                    <th><h:outputText value="#"/></th>
+                                    <th><h:outputText value="Fecha"/></th>
+                                    <th><h:outputText value="Hora"/></th>
+                                    <th><h:outputText value="Sucursal"/></th>
+                                    <th><h:outputText value="Cliente"/></th>
+                                    <th><h:outputText value="Libros"/></th>
+                                    <th><h:outputText value="Importe"/></th>
+                                    <th><h:outputText value="Estatus"/></th>
+                                    <th><h:outputText value="Borrar"/></th>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="requisitions" 
-                                        items="#{adminSalesBean.listRequisition}">
+                                    <c:forEach var="requisitions" items="#{adminSalesBean.listRequisition}">
                                         <tr>
-                                            <td>#{adminSalesBean.row}</td>
-                                            <td>#{requisitions.date}</td>
-                                            <td>#{requisitions.time}</td>
-                                            <td>#{requisitions.office.name}</td>
-                                            <td>#{requisitions.user.name} 
-                                                #{requisitions.user.paternal_name}
-                                                #{requisitions.user.maternal_name}</td>
+                                            <td><h:outputText value="#{adminSalesBean.row}"/></td>
+                                            <td><h:outputText value="#{requisitions.date}"/></td>
+                                            <td><h:outputText value="#{requisitions.time}"/></td>
+                                            <td><h:outputText value="#{requisitions.office.name}"/></td>
+                                            <td><h:outputText value="#{requisitions.user.name}&nbsp;#{requisitions.user.paternal_name}&nbsp;#{requisitions.user.maternal_name}"/></td>
                                             <td>
-                                                <c:forEach var="books" 
-                                                    items="#{requisitions.books}">
-                                                    - #{books.title}    
+                                                <c:forEach var="books" items="#{requisitions.books}">
+                                                    <h:outputText value="-&nbsp;#{books.title}"/>
                                                     <br/>
                                                 </c:forEach>
                                             </td>
-                                            <td>$#{requisitions.total}</td>
-                                            <td>#{requisitions.summary.type}</td>
+                                            <td><h:outputText value="$#{requisitions.total}"/></td>
+                                            <td><h:outputText value="#{requisitions.summary.type}"/></td>
                                             <td>
                                                 <h:form>
-                                                    <h:commandLink 
-                                                        action="#{adminSalesBean.delete(requisitions.id)}">
+                                                    <h:commandLink action="#{adminSalesBean.delete(requisitions.id)}">
                                                         <span class="glyphicon glyphicon-trash"></span>
                                                     </h:commandLink> 
                                                 </h:form>

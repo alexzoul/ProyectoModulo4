@@ -13,8 +13,8 @@
                                 <div class="panel-heading">
                                     <center>
                                         <h3 class="panel-title">
-                                            <span class="glyphicon glyphicon-user">
-                                            </span>&nbsp;<h:outputLabel value="Mis Datos"/>
+                                            <span class="glyphicon glyphicon-user"></span>
+                                            <h:outputLabel value="&nbsp;Mis Datos"/>
                                         </h3>
                                     </center>
                                 </div>
@@ -24,51 +24,66 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <span class="glyphicon glyphicon-user">
-                                                        </span>&nbsp;<h:outputLabel value="Nombre:"/>
+                                                        <span class="glyphicon glyphicon-user"></span>
+                                                        <h:outputLabel value="&nbsp;Nombre:"/>
                                                     </td>
-                                                    <td><h:outputText value="#{myAccountBean.user.name}"/></td>
+                                                    <td>
+                                                        <h:outputText value="#{myAccountBean.user.name}"/>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <span class="glyphicon glyphicon-user">
-                                                        </span>&nbsp;<h:outputLabel value="Apellido Paterno:"/>
+                                                        <span class="glyphicon glyphicon-user"></span>
+                                                        <h:outputLabel value="&nbsp;Apellido Paterno:"/>
                                                     </td>
-                                                    <td><h:outputText value="#{myAccountBean.user.paternal_name}"/></td>
+                                                    <td>
+                                                        <h:outputText value="#{myAccountBean.user.paternal_name}"/>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <span class="glyphicon glyphicon-user">
-                                                        </span>&nbsp;<h:outputLabel value="Apellido Materno:"/>
+                                                        <span class="glyphicon glyphicon-user"></span>
+                                                        <h:outputLabel value="&nbsp;Apellido Materno:"/>
                                                     </td>
-                                                    <td><h:outputText value="#{myAccountBean.user.maternal_name}"/></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="glyphicon glyphicon-envelope">
-                                                        </span>&nbsp;<h:outputLabel value="Correo:"/>
+                                                    <td>
+                                                        <h:outputText value="#{myAccountBean.user.maternal_name}"/>
                                                     </td>
-                                                    <td><h:outputText value="#{myAccountBean.user.email}"/></td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <span class="glyphicon glyphicon-phone">
-                                                        </span>&nbsp;<h:outputLabel value="Telefono:"/>
+                                                        <span class="glyphicon glyphicon-envelope"></span>
+                                                        <h:outputLabel value="&nbsp;Correo:"/>
                                                     </td>
-                                                    <td><h:outputText value="#{myAccountBean.user.phone_number}"/></td>
+                                                    <td>
+                                                        <h:outputText value="#{myAccountBean.user.email}"/>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <span class="glyphicon glyphicon-calendar">
-                                                        </span>&nbsp;<h:outputLabel value="Fecha de Registro"/>
+                                                        <span class="glyphicon glyphicon-phone"></span>
+                                                        <h:outputLabel value="&nbsp;Telefono:"/>
                                                     </td>
-                                                    <td><h:outputText value="#{myAccountBean.user.register_date}"/></td>
+                                                    <td>
+                                                        <h:outputText value="#{myAccountBean.user.phone_number}"/>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <span class="glyphicon glyphicon-time">
-                                                        </span>&nbsp;<h:outputLabel value="Hora de Registro"/>
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                        <h:outputLabel value="&nbsp;Fecha de Registro"/>
                                                     </td>
-                                                    <td><h:outputText value="#{myAccountBean.user.register_time}"/></td>
+                                                    <td>
+                                                        <h:outputText value="#{myAccountBean.user.register_date}"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-time"></span>
+                                                        <h:outputLabel value="&nbsp;Hora de Registro"/>
+                                                    </td>
+                                                    <td>
+                                                        <h:outputText value="#{myAccountBean.user.register_time}"/>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>

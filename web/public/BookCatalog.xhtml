@@ -13,7 +13,8 @@
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-6">
                                 <p id="p_book_catalog">
-                                    <span class="glyphicon glyphicon-book"></span>&nbsp;Catálogo de Libros
+                                    <span class="glyphicon glyphicon-book"></span>
+                                    <h:outputText value="&nbsp;Catálogo de Libros"/>
                                 </p>
                             </div>
                             <div class="col-lg-5 col-lg-offset-3 col-md-5 col-md-offset-3 col-sm-6">
@@ -21,10 +22,7 @@
                                     <div class="input-group">
                                         <h:inputText styleClass="form-control input-sm" value="#{bookCatalog.findText}" maxlength="50"/>
                                         <span class="input-group-btn">
-                                            <h:commandButton 
-                                                class="btn btn-default btn-sm" 
-                                                action="#{bookCatalog.findBook()}"
-                                                value="Buscar"/>
+                                            <h:commandButton class="btn btn-default btn-sm" action="#{bookCatalog.findBook()}" value="Buscar"/>
                                         </span>
                                     </div>
                                 </h:form>
@@ -41,13 +39,10 @@
                                                 <div class="img_book_container">
                                                     <div class="row">
                                                         <f:param name="id" value="#{item.id}"/>
-                                                        <h:graphicImage 
-                                                            library="default" 
-                                                            name="/imagenes/#{item.image}" 
-                                                            styleClass="img-book"/>
+                                                        <h:graphicImage library="default" name="/imagenes/#{item.image}" styleClass="img-book"/>
                                                     </div>
                                                     <div class="row title_book_catalog">
-                                                        #{item.title}
+                                                        <h:outputText value="#{item.title}"/>
                                                     </div>
                                                 </div>
                                             </h:commandLink> 

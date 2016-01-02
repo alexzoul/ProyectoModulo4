@@ -9,15 +9,14 @@
             <ui:define name="content">
                <div class="panel panel-default" id="books_container">
                     <div class="panel-heading">
-                        <b><span class="glyphicon glyphicon-book">
-                        </span>&nbsp;Mis Compras</b>
+                        <p>
+                            <span class="glyphicon glyphicon-book"></span>
+                            <h:outputText value="&nbsp;Mis Compras"/>
+                        </p>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <h:dataTable value="#{myRequisitionsBean.listRequisition}" 
-                                var="item" 
-                                styleClass="table table-hover table-condensed table-responsive"
-                                id="table_myrequisitions">
+                            <h:dataTable value="#{myRequisitionsBean.listRequisition}" var="item"  styleClass="table table-hover table-condensed table-responsive" id="table_myrequisitions">
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="#" />
@@ -65,11 +64,9 @@
                                         <h:outputText value="Detalles" />
                                     </f:facet>
                                     <h:form>
-                                        <h:commandLink 
-                                            action="/public/RequisitionDetail.jsf?faces-redirect=true&amp;includeViewParams=true">
+                                        <h:commandLink action="/public/RequisitionDetail.jsf?faces-redirect=true&amp;includeViewParams=true">
                                             <f:param name="id" value="#{item.id}"/>
-                                            <span class="glyphicon glyphicon-shopping-cart">
-                                            </span>
+                                            <span class="glyphicon glyphicon-shopping-cart"></span>
                                         </h:commandLink> 
                                     </h:form>
                                 </h:column>
@@ -78,10 +75,8 @@
                                         <h:outputText value="Cancelar" />
                                     </f:facet>
                                     <h:form>
-                                        <h:commandLink 
-                                            action="#{myRequisitionsBean.delete(item.id)}">
-                                            <span class="glyphicon glyphicon-trash">
-                                            </span>
+                                        <h:commandLink action="#{myRequisitionsBean.delete(item.id)}">
+                                            <span class="glyphicon glyphicon-trash"></span>
                                         </h:commandLink> 
                                     </h:form>
                                 </h:column>
