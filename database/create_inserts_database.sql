@@ -1,0 +1,298 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema proyecto_final
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `proyecto_final` ;
+
+-- -----------------------------------------------------
+-- Schema proyecto_final
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `proyecto_final` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ;
+USE `proyecto_final` ;
+
+-- -----------------------------------------------------
+-- Table `proyecto_final`.`role`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyecto_final`.`role` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `proyecto_final`.`user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyecto_final`.`user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `paternal_name` VARCHAR(45) NOT NULL,
+  `maternal_name` VARCHAR(45) NOT NULL,
+  `phone_number` VARCHAR(10) NOT NULL,
+  `email` VARCHAR(250) NOT NULL,
+  `password` VARCHAR(32) NOT NULL,
+  `role_id` INT NOT NULL,
+  `register_date` DATETIME NOT NULL,
+  `status` TINYINT(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_user_role_idx` (`role_id` ASC),
+  CONSTRAINT `fk_user_role`
+    FOREIGN KEY (`role_id`)
+    REFERENCES `proyecto_final`.`role` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `proyecto_final`.`book`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyecto_final`.`book` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(100) NOT NULL,
+  `author` VARCHAR(250) NOT NULL,
+  `editorial` VARCHAR(300) NOT NULL,
+  `year` INT NOT NULL,
+  `description` MEDIUMTEXT NOT NULL,
+  `image` VARCHAR(100) NOT NULL,
+  `pages` INT NOT NULL,
+  `price` DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `proyecto_final`.`summary`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyecto_final`.`summary` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `proyecto_final`.`office`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyecto_final`.`office` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `street` VARCHAR(250) NOT NULL,
+  `int_number` VARCHAR(10) NOT NULL,
+  `ext_number` VARCHAR(10) NOT NULL,
+  `neighborhood` VARCHAR(250) NOT NULL,
+  `city` VARCHAR(250) NOT NULL,
+  `state` VARCHAR(150) NOT NULL,
+  `zip_code` INT(5) ZEROFILL NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `proyecto_final`.`requisition`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyecto_final`.`requisition` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `total` DECIMAL(12,2) NOT NULL,
+  `date` DATETIME NOT NULL,
+  `summary_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  `office_id` INT NOT NULL,
+  `status` TINYINT(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_order_summary1_idx` (`summary_id` ASC),
+  INDEX `fk_order_user1_idx` (`user_id` ASC),
+  INDEX `fk_order_office1_idx` (`office_id` ASC),
+  CONSTRAINT `fk_order_summary1`
+    FOREIGN KEY (`summary_id`)
+    REFERENCES `proyecto_final`.`summary` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_order_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `proyecto_final`.`user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_order_office1`
+    FOREIGN KEY (`office_id`)
+    REFERENCES `proyecto_final`.`office` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `proyecto_final`.`book_has_requisition`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyecto_final`.`book_has_requisition` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `book_id` INT NOT NULL,
+  `requisition_id` INT NOT NULL,
+  INDEX `fk_book_has_requisition_requisition1_idx` (`requisition_id` ASC),
+  INDEX `fk_book_has_requisition_book1_idx` (`book_id` ASC),
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_book_has_requisition_book1`
+    FOREIGN KEY (`book_id`)
+    REFERENCES `proyecto_final`.`book` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_book_has_requisition_requisition1`
+    FOREIGN KEY (`requisition_id`)
+    REFERENCES `proyecto_final`.`requisition` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+
+
+START TRANSACTION;
+USE `proyecto_final`;
+INSERT INTO `proyecto_final`.`role` (`id`, `type`) VALUES (1, 'Administrador');
+INSERT INTO `proyecto_final`.`role` (`id`, `type`) VALUES (2, 'Cliente');
+
+COMMIT; START TRANSACTION;
+USE `proyecto_final`;
+INSERT INTO `proyecto_final`.`user` (`id`, `name`, `paternal_name`, `maternal_name`, `phone_number`, `email`, `password`, `role_id`, `register_date`, `status`) VALUES (1, 'Admin', 'Admin', 'Admin', '0123456789', 'admin@admin.com', 'admin123', 1, '2015-12-25 12:00:00', 1);
+INSERT INTO `proyecto_final`.`user` (`id`, `name`, `paternal_name`, `maternal_name`, `phone_number`, `email`, `password`, `role_id`, `register_date`, `status`) VALUES (2, 'Alejandro', 'Villanueva', 'Molina', '5544663377', 'alex@hotmail.com', 'alex1234', 2, '2015-12-26 14:30:00', 1);
+INSERT INTO `proyecto_final`.`user` (`id`, `name`, `paternal_name`, `maternal_name`, `phone_number`, `email`, `password`, `role_id`, `register_date`, `status`) VALUES (3, 'Paola', 'Hernandez', 'Garcia', '5523645512', 'paola@hotmail.com', 'pao54321', 2, '2015-12-26 16:35:00', 1);
+INSERT INTO `proyecto_final`.`user` (`id`, `name`, `paternal_name`, `maternal_name`, `phone_number`, `email`, `password`, `role_id`, `register_date`, `status`) VALUES (4, 'Jorge', 'Garcia', 'Corrales', '5532458156', 'jorge@gmail.com', 'jorge0110', 2, '2015-12-26 18:45:00', 1);
+INSERT INTO `proyecto_final`.`user` (`id`, `name`, `paternal_name`, `maternal_name`, `phone_number`, `email`, `password`, `role_id`, `register_date`, `status`) VALUES (5, 'Luis', 'Estrada', 'Avila', '5510235845', 'luis_e@yahoo.com.mx', 'luis1992', 2, '2015-12-27 11:00:00', 1);
+INSERT INTO `proyecto_final`.`user` (`id`, `name`, `paternal_name`, `maternal_name`, `phone_number`, `email`, `password`, `role_id`, `register_date`, `status`) VALUES (6, 'Sandra', 'Soltero', 'Cortes', '5510457812', 'sandra_sc@hotmail.com', 'sandra95', 2, '2015-12-27 12:10:00', 1);
+INSERT INTO `proyecto_final`.`user` (`id`, `name`, `paternal_name`, `maternal_name`, `phone_number`, `email`, `password`, `role_id`, `register_date`, `status`) VALUES (7, 'Ivan', 'Resendis', 'Diaz', '5564983217', 'ivanresendis@gmail.com', 'ivan1212', 2, '2015-12-27 13:24:00', 1);
+INSERT INTO `proyecto_final`.`user` (`id`, `name`, `paternal_name`, `maternal_name`, `phone_number`, `email`, `password`, `role_id`, `register_date`, `status`) VALUES (8, 'Jhonatan', 'Guzman', 'Arellano', '5532658145', 'jguzman@yahoo.com.mx', 'jhon4321', 2, '2015-12-27 15:37:00', 1);
+INSERT INTO `proyecto_final`.`user` (`id`, `name`, `paternal_name`, `maternal_name`, `phone_number`, `email`, `password`, `role_id`, `register_date`, `status`) VALUES (9, 'Lorena', 'Argumedo', 'Lopez', '5585964572', 'lore_argumedo@gmail.com', 'lorena1234', 2, '2015-12-28 16:48:00', 1);
+INSERT INTO `proyecto_final`.`user` (`id`, `name`, `paternal_name`, `maternal_name`, `phone_number`, `email`, `password`, `role_id`, `register_date`, `status`) VALUES (10, 'Alan', 'Hernandez', 'Hernandez', '5513467985', 'alan_hernandez@yahoo.com.mx', 'alan1991', 2, '2015-12-29 22:05:00', 1);
+INSERT INTO `proyecto_final`.`user` (`id`, `name`, `paternal_name`, `maternal_name`, `phone_number`, `email`, `password`, `role_id`, `register_date`, `status`) VALUES (11, 'Lizbeth', 'Arellano', 'Castillo', '5528391745', 'lizbeth_ac@gmail.com', 'liz02051994', 2, '2015-12-30 20:30:00', 1);
+
+COMMIT; 
+START TRANSACTION;
+USE `proyecto_final`;
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (1, 'C# - Curso de programación, 2ª Edición', 'Francisco Javier Ceballos Sierra', 'Alfaomega Grupo Editor', 2009, 'Programación orientada a objetos. Elementos del lenguaje. Sentencias de control. Clases de uso común. Matrices, cadenas y colecciones. Clases, espacios de nombres y estructuras. Operadores sobrecargados. Clases derivadas e interfaces. Tipos y métodos genéricos. Excepciones. Ficheros. Estructuras dinámicas. Algoritmos. Hilos. Introducción a las interfaces gráficas y aplicaciones para Internet. Ejercicios resueltos.', 'cchar_1.jpg', 820, 338.00);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (2, 'A Fondo C#', 'Tom Archer', 'McGraw-Hill', 2001, 'Esta completa obra proporciona una visión detallada de la arquitectura interna del nuevo y original lenguaje C#. Sumérjase en este vanguardista lenguaje orientado a objetos y en sus parámetros de diseño y construcción.', 'cchar_2.jpg', 400, 350.00);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (3, 'Pro C# 2010 and the .NET 4 Platform', 'Andrew Troelsen', 'Apress', 2010, 'The first edition of this book was released at the 2001 Tech-Ed conference in Atlanta, Georgia. At that time, the .NET platform was still a beta product, and in many ways, so was this book. This is not to say that the early editions of this text did not have merit—after all, the book was a 2002 Jolt Award finalist and it won the 2003 Referenceware Excellence Award. However, over the years that author Andrew Troelsen spent working with the common language runtime (CLR), he gained a much deeper understanding of the .NET platform and the subtleties of the C# programming language, and he feels that this fifth edition of the book is as close to a “final release” as he’s come yet.', 'cchar_3.jpg', 1752, 983.80);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (4, 'Programación Orientada a Objetos con C++', 'Francisco Javier Ceballos Sierra', 'Alfaomega Grupo Editor', 2009, 'La programación orientada a objetos (POO) es una de las técnicas más modernas de desarrollo que trata de disminuir el costo del software, aumentando la eficiencia y reduciendo el tiempo de espera. Por eso, donde la POO toma verdadera ventaja es en poder compartir y reutilizar el código. Sin embargo, no debe pensarse que esta forma de programación resuelve todos los problemas de una forma sencilla y rápida. Para conseguir buenos resultados, es preciso dedicar un tiempo mayor al análisis y al diseño; pero no será un tiempo perdido, ya que redundará en el empleado en la realización de aplicaciones futuras. Existen varios lenguajes que permiten escribir un programa orientado a objetos y entre ellos se encuentra C++. Se trata de un lenguaje de programación basado en el lenguaje C, estandarizado (ISO/IEC 14882:1998), ampliamente difundido, y con una biblioteca estándar C++ que lo ha convertido en un lenguaje universal, de propósito general, y ampliamente utilizado tanto en el ámbito profesional como en el educativo. Programación orientada a objetos con C++ es un libro: Totalmente actualizado al estándar ISO/IEC 14882:1998, relativo al lenguaje C++ estándar. Con ejemplos claros y sencillos, fáciles de entender, que ilustran los fundamentos de la programación C++. Que le permitirá aprender programación orientada a objetos. Que le enseñará a trabajar con estructuras dinámicas de datos, Archivos, excepciones e hilos. Y con el que aprenderá a desarrollar aplicaciones. Incluye un CD-ROM con todos los ejemplos realizados y con el software necesario para que el lector pueda reproducirlos durante el estudio.', 'cmas_1.jpg', 622, 338.00);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (5, 'C++ Como Programar', 'Harvery M. Deitel', 'Prentice Hall / Pearson', 2005, 'Una introducción completa y autorizada del código activo de DEITEL? a C++, la programación orientada a objetos (POO) y el diseño orientado a objetos (D00) con UMLM 2 C++ es uno de los lenguajes de programación orientada a objetos más populares. Esta nueva edición del libro de texto sobre C++ más utilizado en el mundo presenta una introducción a la programación de juegos con las bibliotecas Ogre. Proporciona, además, una cobertura bastante completa de la programación orientada a objetos en C++, incluyendo varios ejemplos prácticos integrados: la clase LibroCalificaciones, la clase Tiempo, la clase Empleado y el Sistema ATM opcional de DOO/UMLTM 2. En los sitios Web www.deitel.com y wsvsv.pearsoneducacion.net/deitel encontrará los ejemplos de código del libro e información para profesores, estudiantes y profesionales. Asimismo, le recomendamos que dé un vistazo a los Centros de Recursos Deitel sobre C++ en: www.deitel.com/resourcecenters.html El CD incluido en este libro contiene Microsoft Visual C++Express Edition v material adicional en español.', 'cmas_2.jpg', 1211, 572.00);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (6, 'C++', 'Jesse Liberty, Rogers Cadenhead', 'Anaya Multimedia', 2011, 'C++, diseñado con la intención de agregarle al exitoso lenguaje de programación C, mecanismos para la manipulación de objetos, sigue siendo hoy en día el lenguaje más útil y versátil utilizado en los desarrollos modernos. \n\nPara aprender C++ no necesita experiencia previa como programador. Este libro utiliza un intuitivo método paso a paso, con proyectos prácticos para reforzar el aprendizaje. Un dato interesante es que podrá acceder a detalles de la próxima versión C++0x.\n\nEncontrará las herramientas para trabajar en cualquier plataforma del mercado actual: ordenadores personales, servidores Linux y UNIX, pasando por los mainframes y los dispositivos móviles. Se adjunta un CD-ROM con el código fuente de los ejemplos y un compilador C++ e IDE para Windows, Mac y Linux.', 'cmas_3.jpg', 464, 844.37);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (7, 'Profesional CSS para diseño WEB', 'Christopher Schmitt', 'Anaya Multimedia', 2008, 'Centrado en el aspecto de las mejores prácticas del desarrollo Web, este libro refleja los cambios en los procedimientos del desarrollo con CSS (Hojas de Estilo en Cascada). Incluye ejemplos de sitios Web reales en cada capítulo y proporciona trucos CSS fácilmente asimilables y técnicas utilizadas en cada uno de los sitios específicos. Los capítulos documentan el proceso de sus diseñadores de principio a fin y proporcionan pistas sobre cómo superaron cada uno de los desafíos particulares de cada sitio, así como las formas en las que pensaron en el desarrollo de una manera diferente. Ofreciéndonos una útil visión de diseños CSS basados en estándares, proyectos a gran escala de nivel profesional, este imprescindible libro nos proporciona soluciones fáciles de comprender para los problemas comunes y nos muestra una aproximación inteligente al desarrollo efectivo de diseños Web en CSS a un nivel profesional. Con este libro aprenderá, entre otros aspectos, las mejores prácticas para el uso de XHTML con CSS, cómo diseñar el nuevo aspecto para un blog, los pros y los contras del diseño de un sitio que cuenta con millones de usuarios, así como trucos para superar algunos problemas de compatibilidad con navegadores.', 'css_1.jpg', 336, 379.00);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (8, 'Curso de CSS', 'Christopher Schmitt', 'Anaya Multimedia', 2010, 'Las hojas de estilo en cascada, o CSS, ofrecen a los diseñadores una sintaxis sencilla y estandarizada que garantiza un control exhaustivo sobre la presentación de páginas Web. CSS va más allá del diseño Web tradicional para crear y controlar el aspecto de una página Web cuando se imprime. Este libro va dirigido a diseñador es Web y desarrolladores que tienen que enfrentarse a los problemas del diseño con CSS. Este manual cubre los fundamentos básicos como el tratamiento de imágenes, elementos de página, listas, vínculos y navegación, formularios y tablas, entre otros, así como los aspectos propios de CSS que van desde la tipografía Web hasta diseños de páginas. Encontrará, además, numerosos trucos y soluciones que le serán de gran utilidad. ', 'css_2.jpg', 800, 1399.00);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (9, 'Guía Completa de CSS3', 'Antonio Navajas Ojeda', 'Autoedición', 2012, 'CSS u hojas de estilo en cascada (en inglés Cascading Style Sheets) es un lenguaje usado para definir la presentación de un documento estructurado escrito en HTML. El W3C (World Wide Web Consortium) es el encargado de formular la especificación de las hojas de estilo que servirán de estándar para los agentes de usuario o navegadores.\n\nActualmente, pese a que la especificación 2.1 se aprobó recientemente, CSS3 ha venido desarrollándose desde 1999. Esta nueva especificación viene con interesantes novedades que permitirán hacer webs más elaboradas y dinámicas, con mayor separación entre estilos y contenidos. Dará soporte a muchas necesidades de las webs actuales, sin tener que recurrir a trucos de diseñadores o lenguajes de programación.\n\nEn esta completa guía, el autor nos muestra el uso de las principales características que este lenguaje ofrece. De entre ellas, destacamos los nuevos selectores, los pseudo elementos, las pseudo clases y toda una serie de efectos estéticos que abarcan desde la tipografía a las transformaciones 3D.', 'css_3.jpg', 63, 199.90);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (10, 'Compendium HTML', 'Gunter Born', 'S.A. Marcombo', 2001, 'Esta obra le ofrecerá todos los conocimientos para el uso de HTML hasta la versión 4.0. Y no sólo eso; también encontrará temas periféricos como la programación de Scripts, gráficos, XML, incluyendo las aplicaciones correspondientes como VML y WAP/WML, HTML dinámico y diseño en la web. Las áreas temáticas del libro se han d ividido en seis partes independientes con las que podrá familiarizarse con la materia. La parte de referencia contiene informaciones de rápido acceso sobre los diferentes comandos HTML y otras funciones.El CD contiene todos los ejemplos del libro, los navegadores en las versiones actuales de Microsfot y Netscape, así com informaciones adicionales de gran utilidad, especificaciones y herramientas.', 'html_1.jpg', 976, 999.00);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (11, 'La Biblia de HTML', 'Francisco Charte Ojeda', 'Anaya Multimedia', 2004, 'Internet, y particularmente lo que conocemos como la Web, se han hecho tan omnipresentes que incluso se ha llegado a decir que lo que no aparece en ella no existe. Tener presencia en la Red es relativamente barato y sencillo, de tal manera que cualquier persona con las herramientas de diseño adecuadas puede crear una web si n muchos problemas.HTML es el lenguaje por excelencia para la creación de sitios web: conocerlo le permitirá no sólo producir documentos totalmente personales, sino también ser capaz de mejorar aquellas páginas que hubiera generado previamente con un editor HTML.Este manual se convierte en la guía de aprendizaje fundamental para todos aquellos que, con independencia de su nivel de conocimientos inicial, quieran adentrarse en la creación de sus propias páginas web, utilizando para ello el lenguaje HTML, hojas de estilo CSS, guiones en JavaScript, gráficos, páginas de servidor y otros elementos usuales. Progresivamente descubrirá otros conceptos clave, como el diseño de páginas compatibles con todos los sistemas operativos y navegadores.Incluye CD-ROM con los ejemplos desarrollados a lo largo del libro, así como diferentes herramientas que le serán de gran utilidad.', 'html_2.jpg', 1038, 1200.00);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (12, 'USERS: HTML 5: Entienda el cambio, aproveche su potencial', 'Damián De Luca', 'Autoedición', 2011, 'Adquirir el conocimiento de un nuevo lenguaje, o de una actualización importante de uno que ya conocemos, nos enfrenta a la necesidad de buscar información. En el caso de HTML5, buena parte de la información se encuentra en idioma inglés, por tal razón, contar con obras que aborden esta temática en castellano son bienvenidas para aquellos que desean aprender.\nHTML 5, Entienda el cambio, aproveche su potencial, es una obra escrita por Damián De Luca, que nos introduce en el mundo del HTML5 mostrándonos su evolución y recorriendo cada una de sus características. Partiendo de la base teórica y analizando diferentes ejemplos prácticos, el libro nos sumerge en el mundo de HTML5 para que podamos comenzar a ser parte de este cambio que se está gestando en el mundo del desarrollo Web.\nEntre los temas que se incluyen en este libro se destaca la recorrida por la evolución de los estándares web, un repaso por las novedades que incorpora HTML5, semántica, multimedia y formulario. También hay un espacio para el trabajo con estilos con CSS 2.1 y con CSS3. Un lugar especial ocupa todo lo relacionado con la interacción con las nuevas APIs, el uso de canvas, geolocalización, WebGL, almacenamiento local y muchas otras características que están revolucionando la Web.', 'html_3.jpg', 320, 349.00);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (13, 'JAVA 6: Las bases del Lenguaje y de la Programación Objeto', 'Thierry Groyssard', 'ENI', 2010, 'Este libro es un extracto del libro \\\" JAVA 6- Los fundamentos del lenguaje Java\\\" editado en la colección Recursos Informáticos de Ediciones ENI. Se dirige a un público de desarrolladores principiantes que quieren adquirir conocimientos básicos sobre el lenguaje Java, detallando la implementación de variables y estructur as de controles elementales. A continuación, le permitirá iniciarse en la programación de objetos, detallando cómo poner en marcha las clases de objetos, los atributos, los métodos.', 'java_1.jpg', 165, 179.00);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (14, 'Como Programar en JAVA', 'Harvey M. Deitel', 'Prentice Hall / Pearson', 2008, 'Una introducción completa y autorizada del código activo de Deitel a la programación orientada a objetos, con la nueva edición Java Standard Edition 6, JDBC 4, Java Server Faces y Servicios Web.¡Java es el lenguaje de programación orientada a objetos más popular, con cinco millones de desarrolladores!Esta nueva edición del libro de texto sobre Java más utilizado en el mundo emplea un método anticipado para las clases y objetos. Incluye también una cobertura completa de la programación orientada a objetos en Java, para lo cual presenta varios ejemplos prácticos integrados: la clase Tiempo, la clase Empleado, la clase LibroCalificaciones, un ejemplo práctico opcional de DOO/UML 2 con el ATM, el ejemplo práctico opcional de GUI y gráficos, un libro de direcciones controlado por base de datos: una libreta de direcciones que utiliza controles JSF habilitados para AJAX para mostrar un nombre y una dirección en un Mapa de Google, y un sistema de reservaciones de una aerolínea que utiliza servicios Web.', 'java_2.jpg', 1280, 800.00);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (15, 'JAVA 2 Curso de Programacion', 'Francisco Javier Ceballos', 'RA-MA', 2010, 'Hace pocos años quizás “Java” nos traía a la mente una taza de café. ¿Por qué una taza de café? Seguramente por las muchas que se tomaron sus creadores. De hecho la taza de café ha pasado a ser su logotipo. Hoy en día, cualquiera que haya tenido contacto con una página Web tiene otro concepto; sabe que Java es un lenguaje de programación orientado a objetos introducido por Sun Microsystems (adquirida por Oracle en 2009) cuyas características lo sitúan, junto con Microsoft Visual Studio .Net, en el producto ideal para desarrollar programas para la Web. Pero con Java, no sólo se pueden escribir programas para la Web, sino que es un lenguaje de programación orientado a objetos que también permite desarrollar aplicaciones de uso general. Por lo tanto, Java le permitirá crear programas para su uso personal, para su grupo de trabajo, para una empresa, aplicaciones distribuidas a través de Internet, aplicaciones de bases de datos, páginas Web y otras muchas cosas. Java 2 - Curso de programación es un libro: - Totalmente actualizado a las nuevas características de Java 2. - Con ejemplos claros y sencillos, fáciles de entender, que ilustran los fundamentos de la programación Java. - Que le permitirá aprender programación orientada a objetos. - Que le enseñará a trabajar con estructuras dinámicas de datos, con ficheros, con excepciones y con hilos. - Con el que aprenderá a desarrollar aplicaciones. - Y que le introducirá en el diseño de interfaces gráficas, en las tareas de agregar applets a sus páginas Web, y en poner aplicaciones denominadas servlets en un servidor a disposición de los clientes del mismo. - Todo lo expuesto tiene continuación en mi otro libro Java 2 – Interfaces gráficas y aplicaciones para Internet. Podrá descargarse de www.ra-ma.es, en la página Web correspondiente al libro, un CD-ROM con los ejemplos realizados, con los apéndices, así como el software necesario para que el lector pueda reproducirlos durante el estudio. ', 'java_3.jpg', 820, 999.99);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (16, 'JavaScript y JQuery', 'David Sawyer Mcfarland', 'Anaya Multimedia', 2012, 'JavaScript es un lenguaje de programación para interactuar con los navegadores, que proporciona a los sitios Web dinamismo e inmediatez. Todos los navegadores importantes del mercado contienen un intérprete de JavaScript.Cuando aprenda a utilizar su biblioteca jQuery, obtendrá una programación más sencilla y potente que sim plificará la manera de interactuar con los documento HTML, manejar eventos, desarrollar animaciones y agregar interacción a las páginas Web.Este libro le enseñará las bases de la programación con JavaScript. Hace énfasis en jQuery lo que le ayudará a liberarse de la complejidad de JavaScript y la naturaleza cambiante entre navegadores. Con este manual no tardará en crear páginas Web, sofisticadas y divertidas, que funcionarán como programas de escritorio, sin apenas programación.', 'javascript_1.jpg', 560, 779.00);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (17, 'Domine JavaScript', 'José López Quijado', 'RA-MA', 2010, 'En sus manos tiene un trabajo muy elaborado y con una larga trayectoria editorial, sobre lo que necesita conocer acerca de JavaScript. La presente obra está, como todos mis textos didácticos, está orientada con un enfoque eminentemente práctico. Se ha evitado, en la medida de lo posible, las disquisiciones académicas, que p ueden ser muy interesantes en altos círculos universitarios pero que, en la práctica, solo sirven para que los árboles no nos dejen ver el bosque. Este libro está orientado al lector que desea aprender a usar JavaScript, y a sacarle partido para crear sus propios documentos web, sabiendo lo qué hace, cómo lo hace y por qué lo hace. Si usted no conoce JavaScript, y desea aprender desde lo más básico, encontrará el texto muy cómodo, coloquial y amigable, sin dejar de ser exhaustivo y riguroso. Si ya conoce algo de JavaScript y desea ir más allá, podrá echar un vistazo rápido a los primeros capítulos, y en seguida alcanzará unos niveles de programación propios de un webmaster experimentado.', 'javascript_2.jpg', 706, 779.00);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (18, 'JavaScript: La guía definitiva', 'David Flanagan', 'Anaya Multimedia', 2007, 'JavaScript es el lenguaje interpretado más utilizado, principalmente en la construcción de páginas Web, con una sintaxis muy semejante a Java y a C. Pero, al contrario que Java, no se trata de un lenguaje orientado a objetos propiamente dicho, sino que éste está basado en prototipos, ya que las nuevas clases se generan clon ando las clases base (prototipos) y extendiendo su funcionalidad. Este libro es un manual de referencia para el programador, con capítulos que explican todo lo que necesita saber para obtener el máximo partido de JavaScript, así como pulir sus conocimientos y profundizar en el lenguaje. El manual le ofrece la posibilidad de analizar el entorno de la escritura de secuencia de comandos proporcionado por los exploradores web. Además, encontrará una referencia completa para el código JavaScript en la parte del cliente y analiza la herencia de las API, la API DOM de Nivel 2 y los estándares emergentes, como el objeto XMLHttpRequest.', 'javascript_3.jpg', 1168, 1799.00);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (19, 'Python para todos', 'Raúl González Duque', 'Autoedición', 2010, 'Python para todos’ es un libro sobre programación en Python escrito por Raúl González Duque. Se trata de un tutorial de Python adecuado para todos los niveles y que puedes descargar totalmente gratis.\n\nEl tutorial de Python ‘Python para todos’ se distribuye bajo licencia Creative Commons Reconocimiento 2.5 España, lo que supone que puedes distribuirlo, modificarlo, traducirlo a otros idiomas, … siempre que indiques el autor original, preferiblemente con un enlace a esta web: Tutorial de Python ‘Python para todos’', 'python_1.jpg', 160, 300.00);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (20, 'Learning Python', 'Mark Lutz', 'O Reilly & Associates', 2013, 'Get a comprehensive, in-depth introduction to the core Python language with this hands-on book. Based on author Mark Lutz\'s popular training course, this updated fifth edition will help you quickly write efficient, high-quality code with Python. It\'s an ideal way to begin, whether you\'re new to programming or a professional developer versed in other languages. Complete with quizzes, exercises, and helpful illustrations, this easy-to-follow, self-paced tutorial gets you started with both Python 2.7 and 3.3 - the latest releases in the 3.X and 2.X lines - plus all other releases in common use today. You\'ll also learn some advanced language features that recently have become more common in Python code. Explore Python\'s major built-in object types such as numbers, lists, and dictionaries Create and process objects with Python statements, and learn Python\'s general syntax model Use functions to avoid code redundancy and package code for reuse Organize statements, functions, and other tools into larger components with modules Dive into classes: Python\'s object-oriented programming tool for structuring code Write large programs with Python\'s exception-handling model and development tools Learn advanced Python tools, including decorators, descriptors, metaclasses, and Unicode processing.', 'python_2.jpg', 1600, 1299.00);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (21, 'Black Hat Python: Python Programming for Hackers and Pentesters', 'Justin Seitz', 'No Starch Press', 2014, 'When it comes to creating powerful and effective hacking tools, Python is the language of choice for most security analysts. But just how does the magic happen?\n\nIn Black Hat Python, the latest from Justin Seitz (author of the best-selling Gray Hat Python), you\'ll explore the darker side of Python\'s capabilities—writing network sniffers, manipulating packets, infecting virtual machines, creating stealthy trojans, and more. You\'ll learn how to:\n\nCreate a trojan command-and-control using GitHub\nDetect sandboxing and automate common malware tasks, like keylogging and screenshotting\nEscalate Windows privileges with creative process control\nUse offensive memory forensics tricks to retrieve password hashes and inject shellcode into a virtual machine\nExtend the popular Burp Suite web-hacking tool\nAbuse Windows COM automation to perform a man-in-the-browser attack\nExfiltrate data from a network most sneakily\nInsider techniques and creative challenges throughout show you how to extend the hacks and how to write your own exploits.\nWhen it comes to offensive security, your ability to create powerful tools on the fly is indispensable. Learn how in Black Hat Python.', 'python_3.jpg', 192, 700.00);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (22, 'Practical Ruby for System Administration', 'André Ben Hamou', 'Springer', 2007, 'Within the pages of Practical Ruby for System Administration, you\'ll learn the Ruby way to construct files, tap into clouds of data, build domain-specific languages, perform network traffic analysis, and more. Coverage places equal emphasis on fundamental Ruby concepts as well as practical how-tos. Based on author André Ben Hamou\'s own experiences working as a system administrator, this book will help you pick up practical tips on Ruby coding style, learn how to analyze and improve script performance, and make use of no-nonsense advice on scripting workflow, including testing, documentation, and version control.', 'ruby_1.jpg', 264, 795.80);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (23, 'Ruby on Rails', 'Bruce A. Tate, Curt Hibbs', 'Anaya Multimedia', 2007, 'Ruby on Rails, es una tecnología framework de aplicaciones web de código abierto escrito en el lenguaje de programación Ruby. Trata de combinar la simplicidad con la posibilidad de desarrollar aplicaciones del mundo real escribiendo menos código que con otros frameworks y con un mínimo de configuración. El lenguaje de progr amación Ruby permite la metaprogramación, de la cual Rails hace uso, lo que resulta en una sintaxis que muchos de sus usuarios encuentran muy legible. Con el libro que tiene en sus manos, ganará una imagen global de cómo se mantienen unidas las aplicaciones Rails. Verá cómo se añade de forma dinámica utilidades a todos los modelos de base de datos, llamados objetos Active Record, recorreremos el proceso de creación de un proyecto sencillo, le mostraremos las que consideramos fundamentales, las que conforman los elementos más importantes y también estudiaremos con algún detalle las migraciones y Ajax. Este libro es para desarrolladores con experiencia pero nuevos en Rails y, posiblemente, en Ruby.', 'ruby_2.jpg', 224, 429.00);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (24, 'Metaprogramming Ruby: Program Like the Ruby Pros', 'Paolo Perrota', 'Pragmatic Bookshelf', 2012, 'Everyone in the Ruby world seems to be talking about metaprogramming—how you can use it to remove duplication in your code and write elegant, beautiful programs. Now you can get in on the action as well.\n\nThis book describes metaprogramming as an essential component of Ruby. Once you understand the principles of Ruby, including the object model, scopes, and eigenclasses, you’re on your way to applying metaprogramming both in your daily work and in your fun, after-hours projects.\n\nLearning metaprogramming doesn’t have to be difficult or boring. By taking you on a Monday-through-Friday workweek adventure with a pair of programmers, Paolo Perrotta helps make mastering the art of metaprogramming both straightforward and entertaining.', 'ruby_3.jpg', 296, 672.20);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (25, 'VHDL: El Arte de Programar Sistemas Digitales', 'David G. Maxinez', 'Cecsa', 2003, 'Actualmente en nuestro ambiente familiar y de trabajo nos encontramos rodeados de un sinfín de aparatos electrónicos. Sin embargo, todos ellos tienen un punto en común: sus microcomponentes electrónicos, una aplicación directa de la microelectrónica. Por eso cada día es mayor la importancia de aprender cómo programar esos diminutos circuitos integrados. El lenguaje más poderoso para programar este tipo de aplicaciones es precisamente VHDL (VHSIC Hardware Description Language). Esta obra brinda al lector un panorama completo sobre este lenguaje de descripción de hardware, considerado como la máxima herramienta de diseño por las industrias y universidades del mundo. El texto va dirigido principalmente a estudiantes y profesionales del área de ingeniería eléctrica, electrónica y computación. En la primera parte se introduce al lector a los dispositivos lógicos programables y su campo de aplicación. En la segunda, se expone la estructura básica de este lenguaje, así como las diferentes arquitecturas empleadas en la programación. En la tercera y última parte se realiza una síntesis de los principales circuitos digitales, proporcionando al lector un panorama completo y general del potencial de VHDL. Esta obra es sumamente atractiva por la actualidad de su información y por la didáctica que presenta. Los temas se abordan de manera concisa y clara, además se da gran importancia a la parte de aplicaciones.', 'vhdl_1.jpg', 352, 349.00);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (26, 'VHDL: Lenguaje para Sintesis y Modelado de Circuitos', 'Fernando Pardo Carpio', 'RA-MA', 2008, 'Los lenguajes de descripción hardware son los pilares sobre los que se asienta la fuerte evolución que el diseño electrónico digital ha venido sufriendo durante los últimos años, por lo que el VHDL ha emergido como estándar en la industria convirtiéndose en el más utilizado hoy en día. El objetivo de este libro no es única mente el de presentar el lenguaje y su sintaxis, sino también el de introducir la metodología de trabajo inherente al lenguaje, ya que se trata del flujo de diseño actual de circuitos digitales. Además, se centra en las dos grandes áreas de aplicación del VHDL: la simulación y la síntesis automática de circuitos. - El presente manual se compone de 13 capítulos y 3 anexos, donde se incluyen los temas siguientes: - Metodología y posibilidades en la descripción del diseño electrónico. - Lenguajes de descripción hardware. - Introducción y sintaxis del lenguaje. - Estilos de descripción: estructural, flujo de datos y algorítmica. - Bibliotecas, Paquetes y Unidades. Conceptos avanzados. - Simulación y modelado. - Síntesis automática de circuitos. - VHDL en la práctica. Ejemplos y ejercicios resueltos. - VHDL, herramientas de CAD y tutoriales. - Evolución del lenguaje y el nuevo estándar VHDL 2008. La estructura y contenido de esta obra están basados en varios años de experiencia en la enseñanza del VHDL y diseño digital, por lo que el principal objetivo perseguido por los autores es su carácter didáctico y pedagógico, sin olvidar que también va dirigido a los ingenieros que actualmente empiezan a incorporar estas técnicas de diseño a su entorno laboral. En esta tercera edición se han añadido nuevos elementos del lenguaje y ejemplos para dar cobertura a los importantes cambios y mejoras introducidos en el estándar de VHDL 2008. También se han incorporado los últimos avances en dispositivos de lógica programable, pues sigue siendo un área de fuerte evolución y cambio. El libro contiene material adicional que podrá descargarse accediendo a la ficha del libro en www.ra-ma.es. Este material incluye los ejemplos desarrollados en la obra, así como software de simulación VHDL, y enlaces a las herramientas de simulación y síntesis descritas en los tutoriales del libro.', 'vhdl_2.jpg', 308, 439.00);
+INSERT INTO `proyecto_final`.`book` (`id`, `title`, `author`, `editorial`, `year`, `description`, `image`, `pages`, `price`) VALUES (27, 'VHDL: Lenguaje para Sintesis y Modelado de Circuitos. 3a Edición Actualizada', 'Fernando Pardo Carpio', 'RA-MA', 2011, 'Los lenguajes de descripción hardware son los pilares sobre los que se asienta la fuerte evolución que el diseño electrónico digital ha venido sufriendo durante los últimos años, por lo que el VHDL ha emergido como estándar en la industria convirtiéndose en el más utilizado hoy en día. El objetivo de este libro no es única mente el de presentar el lenguaje y su sintaxis, sino también el de introducir la metodología de trabajo inherente al lenguaje, ya que se trata del flujo de diseño actual de circuitos digitales. Además, se centra en las dos grandes áreas de aplicación del VHDL: la simulación y la síntesis automática de circuitos. - El presente manual se compone de 13 capítulos y 3 anexos, donde se incluyen los temas siguientes: - Metodología y posibilidades en la descripción del diseño electrónico. - Lenguajes de descripción hardware. - Introducción y sintaxis del lenguaje. - Estilos de descripción: estructural, flujo de datos y algorítmica. - Bibliotecas, Paquetes y Unidades. Conceptos avanzados. - Simulación y modelado. - Síntesis automática de circuitos. - VHDL en la práctica. Ejemplos y ejercicios resueltos. - VHDL, herramientas de CAD y tutoriales. - Evolución del lenguaje y el nuevo estándar VHDL 2008. La estructura y contenido de esta obra están basados en varios años de experiencia en la enseñanza del VHDL y diseño digital, por lo que el principal objetivo perseguido por los autores es su carácter didáctico y pedagógico, sin olvidar que también va dirigido a los ingenieros que actualmente empiezan a incorporar estas técnicas de diseño a su entorno laboral. En esta tercera edición se han añadido nuevos elementos del lenguaje y ejemplos para dar cobertura a los importantes cambios y mejoras introducidos en el estándar de VHDL 2008. También se han incorporado los últimos avances en dispositivos de lógica programable, pues sigue siendo un área de fuerte evolución y cambio. El libro contiene material adicional que podrá descargarse accediendo a la ficha del libro en www.ra-ma.es. Este material incluye los ejemplos desarrollados en la obra, así como software de simulación VHDL, y enlaces a las herramientas de simulación y síntesis descritas en los tutoriales del libro.', 'vhdl_3.jpg', 310, 479.00);
+
+COMMIT;
+
+
+ 
+START TRANSACTION;
+USE `proyecto_final`;
+INSERT INTO `proyecto_final`.`summary` (`id`, `type`) VALUES (1, 'Pendiente');
+INSERT INTO `proyecto_final`.`summary` (`id`, `type`) VALUES (2, 'Entregado');
+
+COMMIT; START TRANSACTION;
+USE `proyecto_final`;
+INSERT INTO `proyecto_final`.`office` (`id`, `name`, `street`, `int_number`, `ext_number`, `neighborhood`, `city`, `state`, `zip_code`) VALUES (1, 'Insurgentes Sur', 'Av. de los Insurgentes Sur', '10-A', '319', 'Hipódromo', 'Cuauhtémoc', 'Ciudad de México', 06100);
+INSERT INTO `proyecto_final`.`office` (`id`, `name`, `street`, `int_number`, `ext_number`, `neighborhood`, `city`, `state`, `zip_code`) VALUES (2, 'Polanco', 'Av. Ejercito Nacional', '15-B', '843', 'Granada', 'Miguel Hidalgo', 'Ciudad de México', 11520);
+INSERT INTO `proyecto_final`.`office` (`id`, `name`, `street`, `int_number`, `ext_number`, `neighborhood`, `city`, `state`, `zip_code`) VALUES (3, 'Ciudad Universitaria', 'Av Universidad', 'S/N', '3000', 'Cd. Universitaria', 'Coyoacán', 'Ciudad de México', 04510);
+INSERT INTO `proyecto_final`.`office` (`id`, `name`, `street`, `int_number`, `ext_number`, `neighborhood`, `city`, `state`, `zip_code`) VALUES (4, 'Parque Tezontle', 'Av Canal de Tezontle', '12-G', '1512', 'Alfonso Ortiz Tirado', 'Iztapalapa', 'Ciudad de México', 09020);
+INSERT INTO `proyecto_final`.`office` (`id`, `name`, `street`, `int_number`, `ext_number`, `neighborhood`, `city`, `state`, `zip_code`) VALUES (5, 'Parque Delta', 'Av. Cuauhtémoc', '24-L', '462', 'Narvarte Poniente', 'Benito Juárez', 'Ciudad de México', 03020);
+INSERT INTO `proyecto_final`.`office` (`id`, `name`, `street`, `int_number`, `ext_number`, `neighborhood`, `city`, `state`, `zip_code`) VALUES (6, 'Centro', 'Av. Francisto I. MAdero', '8-D', '5', 'Centro', 'Cuauhtémoc', 'Ciudad de México', 06000);
+INSERT INTO `proyecto_final`.`office` (`id`, `name`, `street`, `int_number`, `ext_number`, `neighborhood`, `city`, `state`, `zip_code`) VALUES (7, 'Centro Las Américas', 'Av. Central', '22-K', '1', 'Las Américas', 'Ecatepec de Morelos', 'México', 55076);
+INSERT INTO `proyecto_final`.`office` (`id`, `name`, `street`, `int_number`, `ext_number`, `neighborhood`, `city`, `state`, `zip_code`) VALUES (8, 'Perisur', 'Anillo Periférico Sur', 'S/N', '4690', 'Jardines del Pedregal de San Ángel', 'Coyoacán', 'Ciudad de México', 04500);
+INSERT INTO `proyecto_final`.`office` (`id`, `name`, `street`, `int_number`, `ext_number`, `neighborhood`, `city`, `state`, `zip_code`) VALUES (9, 'Portal Churubusco', 'Av. Río Churubusco', '6-E', '583', 'Sector Popular', 'Iztapalapa', 'Ciudad de México', 09060);
+INSERT INTO `proyecto_final`.`office` (`id`, `name`, `street`, `int_number`, `ext_number`, `neighborhood`, `city`, `state`, `zip_code`) VALUES (10, 'Galerías Coapa', 'Calzada del Hueso', 'I-51', '519', 'Acoxpa', 'Tlalpan', 'Ciudad de México', 14300);
+
+COMMIT;
+
+
+ 
+START TRANSACTION;
+USE `proyecto_final`;
+INSERT INTO `requisition` (`id`,`total`,`date`,`summary_id`,`user_id`,`office_id`,`status`) VALUES (1,1928.00,'2015-12-31 19:36:38',1,2,1,1);
+INSERT INTO `requisition` (`id`,`total`,`date`,`summary_id`,`user_id`,`office_id`,`status`) VALUES (2,1348.99,'2015-12-31 19:37:16',1,2,2,1);
+INSERT INTO `requisition` (`id`,`total`,`date`,`summary_id`,`user_id`,`office_id`,`status`) VALUES (3,618.00,'2015-12-31 19:38:36',1,3,1,1);
+INSERT INTO `requisition` (`id`,`total`,`date`,`summary_id`,`user_id`,`office_id`,`status`) VALUES (4,3598.00,'2015-12-31 19:41:10',1,4,1,1);
+INSERT INTO `requisition` (`id`,`total`,`date`,`summary_id`,`user_id`,`office_id`,`status`) VALUES (5,978.90,'2015-12-31 19:41:25',1,4,2,1);
+INSERT INTO `requisition` (`id`,`total`,`date`,`summary_id`,`user_id`,`office_id`,`status`) VALUES (6,1799.99,'2015-12-31 19:42:02',1,5,1,1);
+INSERT INTO `requisition` (`id`,`total`,`date`,`summary_id`,`user_id`,`office_id`,`status`) VALUES (7,2371.99,'2015-12-31 19:44:57',1,6,1,1);
+INSERT INTO `requisition` (`id`,`total`,`date`,`summary_id`,`user_id`,`office_id`,`status`) VALUES (8,2478.99,'2015-12-31 19:45:36',1,7,2,1);
+INSERT INTO `requisition` (`id`,`total`,`date`,`summary_id`,`user_id`,`office_id`,`status`) VALUES (9,2127.99,'2015-12-31 19:59:01',1,8,1,1);
+INSERT INTO `requisition` (`id`,`total`,`date`,`summary_id`,`user_id`,`office_id`,`status`) VALUES (10,771.90,'2015-12-31 19:59:18',1,8,2,1);
+INSERT INTO `requisition` (`id`,`total`,`date`,`summary_id`,`user_id`,`office_id`,`status`) VALUES (11,1548.89,'2015-12-31 19:59:53',1,9,2,1);
+INSERT INTO `requisition` (`id`,`total`,`date`,`summary_id`,`user_id`,`office_id`,`status`) VALUES (12,2735.99,'2015-12-31 20:00:48',1,10,2,1);
+INSERT INTO `requisition` (`id`,`total`,`date`,`summary_id`,`user_id`,`office_id`,`status`) VALUES (13,2362.79,'2015-12-31 20:01:25',1,11,2,1);
+INSERT INTO `requisition` (`id`,`total`,`date`,`summary_id`,`user_id`,`office_id`,`status`) VALUES (14,1578.89,'2015-12-31 20:01:41',1,11,2,1);
+INSERT INTO `requisition` (`id`,`total`,`date`,`summary_id`,`user_id`,`office_id`,`status`) VALUES (15,999.99,'2015-12-31 20:02:46',1,2,2,1);
+COMMIT;
+
+
+ 
+START TRANSACTION;
+USE `proyecto_final`;
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (1,14,1);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (2,25,1);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (3,17,1);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (4,12,2);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (5,15,2);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (6,13,3);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (7,26,3);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (8,10,4);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (9,8,4);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (10,11,4);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (11,17,5);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (12,9,5);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (13,14,6);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (14,15,6);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (15,15,7);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (16,5,7);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (17,14,7);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (18,15,8);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (19,21,8);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (20,17,8);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (21,15,9);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (22,17,9);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (23,12,9);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (24,9,10);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (25,5,10);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (26,9,11);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (27,15,11);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (28,25,11);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (29,15,12);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (30,23,12);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (31,12,12);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (32,13,12);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (33,17,12);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (34,15,13);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (35,3,13);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (36,7,13);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (37,7,14);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (38,9,14);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (39,15,14);
+INSERT INTO `book_has_requisition` (`id`,`book_id`,`requisition_id`) VALUES (40,15,15);
+COMMIT;
